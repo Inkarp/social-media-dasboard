@@ -1,0 +1,431 @@
+{
+  "$comment": "Source: Inkarp SEO tracking sheet (gid 1203992118), read 2026-08-17. Principals, groups, managers and countries are real. Brand colours are generated identifiers — see scripts/seed.ts. Emails are unknown and left null.",
+  "product_managers": [
+    {
+      "name": "Anantha Chakravarthi",
+      "email": null
+    },
+    {
+      "name": "B Krishna",
+      "email": null
+    },
+    {
+      "name": "Durga Prasad",
+      "email": null
+    },
+    {
+      "name": "K Natesh",
+      "email": null
+    },
+    {
+      "name": "K Pavan Kumar",
+      "email": null
+    },
+    {
+      "name": "K Sreedhar",
+      "email": null
+    },
+    {
+      "name": "M S Reddy",
+      "email": null
+    },
+    {
+      "name": "Madhusudhan",
+      "email": null
+    },
+    {
+      "name": "Praveen Reddy",
+      "email": null
+    },
+    {
+      "name": "R LakshmiNarayanan",
+      "email": null
+    },
+    {
+      "name": "Saravanan Natarajan",
+      "email": null
+    },
+    {
+      "name": "Sivakumar Ganapathy",
+      "email": null
+    },
+    {
+      "name": "Stanley Thomas",
+      "email": null
+    },
+    {
+      "name": "Varun Bajpai",
+      "email": null
+    }
+  ],
+  "principals": [
+    {
+      "name": "Advion Interchim Scientific",
+      "group_name": "Group 1",
+      "product_manager": "K Natesh",
+      "country": "United States of America & France",
+      "brand_color": "#B6542B",
+      "is_active": true
+    },
+    {
+      "name": "Bruker",
+      "group_name": "Group 1",
+      "product_manager": "B Krishna",
+      "country": "Germany",
+      "brand_color": "#2A7959",
+      "is_active": true
+    },
+    {
+      "name": "Heidolph",
+      "group_name": "Group 1",
+      "product_manager": "Praveen Reddy",
+      "country": "Germany",
+      "brand_color": "#C938DC",
+      "is_active": true
+    },
+    {
+      "name": "Polyscience",
+      "group_name": "Group 1",
+      "product_manager": "Praveen Reddy",
+      "country": "United States of America",
+      "brand_color": "#9DB62B",
+      "is_active": true
+    },
+    {
+      "name": "Radleys",
+      "group_name": "Group 1",
+      "product_manager": "Praveen Reddy",
+      "country": "United Kingdom",
+      "brand_color": "#2A5479",
+      "is_active": true
+    },
+    {
+      "name": "Rotzmeier",
+      "group_name": "Group 1",
+      "product_manager": "Praveen Reddy",
+      "country": "Germany",
+      "brand_color": "#DC5238",
+      "is_active": true
+    },
+    {
+      "name": "Sp Genevac",
+      "group_name": "Group 1",
+      "product_manager": "K Sreedhar",
+      "country": "United Kingdom",
+      "brand_color": "#2BB632",
+      "is_active": true
+    },
+    {
+      "name": "ThalesNano",
+      "group_name": "Group 1",
+      "product_manager": "K Sreedhar",
+      "country": "Hungary",
+      "brand_color": "#452A79",
+      "is_active": true
+    },
+    {
+      "name": "Vacuubrand",
+      "group_name": "Group 1",
+      "product_manager": "Praveen Reddy",
+      "country": "Germany",
+      "brand_color": "#DCA038",
+      "is_active": true
+    },
+    {
+      "name": "Ametek Brookfield",
+      "group_name": "Group 2",
+      "product_manager": "Varun Bajpai",
+      "country": "United States of America",
+      "brand_color": "#2BB6AB",
+      "is_active": true
+    },
+    {
+      "name": "ECOM",
+      "group_name": "Group 2",
+      "product_manager": "Madhusudhan",
+      "country": "Czech Republic",
+      "brand_color": "#792A68",
+      "is_active": true
+    },
+    {
+      "name": "Labomatic",
+      "group_name": "Group 2",
+      "product_manager": "Madhusudhan",
+      "country": "Switzerland",
+      "brand_color": "#88DC38",
+      "is_active": true
+    },
+    {
+      "name": "Nanalysis",
+      "group_name": "Group 2",
+      "product_manager": "Madhusudhan",
+      "country": "Canada",
+      "brand_color": "#2B46B6",
+      "is_active": true
+    },
+    {
+      "name": "FOM Technologies",
+      "group_name": "Group 3",
+      "product_manager": "K Sreedhar",
+      "country": "Denmark",
+      "brand_color": "#79512A",
+      "is_active": true
+    },
+    {
+      "name": "Hohsen Corp",
+      "group_name": "Group 3",
+      "product_manager": "K Sreedhar",
+      "country": "Japan",
+      "brand_color": "#38DC77",
+      "is_active": true
+    },
+    {
+      "name": "Labstation i",
+      "group_name": "Group 3",
+      "product_manager": "K Natesh",
+      "country": "India",
+      "brand_color": "#892BB6",
+      "is_active": true
+    },
+    {
+      "name": "Maccor",
+      "group_name": "Group 3",
+      "product_manager": "K Sreedhar",
+      "country": "United States of America",
+      "brand_color": "#79762A",
+      "is_active": true
+    },
+    {
+      "name": "Bandelin",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "Germany",
+      "brand_color": "#38B1DC",
+      "is_active": true
+    },
+    {
+      "name": "Dara-Lyo",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "Spain",
+      "brand_color": "#B62B69",
+      "is_active": true
+    },
+    {
+      "name": "Jeio Tech",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "South Korea",
+      "brand_color": "#37792A",
+      "is_active": true
+    },
+    {
+      "name": "Kubota",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "Japan",
+      "brand_color": "#4E38DC",
+      "is_active": true
+    },
+    {
+      "name": "Luzchem",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "Canada",
+      "brand_color": "#B6662B",
+      "is_active": true
+    },
+    {
+      "name": "Robot Coupe",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "France",
+      "brand_color": "#2A7963",
+      "is_active": true
+    },
+    {
+      "name": "Sonics & Materials",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "United States of America",
+      "brand_color": "#DC38DA",
+      "is_active": true
+    },
+    {
+      "name": "Zeiss",
+      "group_name": "Group 4",
+      "product_manager": "K Pavan Kumar",
+      "country": "Germany",
+      "brand_color": "#8CB62B",
+      "is_active": true
+    },
+    {
+      "name": "Affinite Instruments",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Canada",
+      "brand_color": "#2A4A79",
+      "is_active": true
+    },
+    {
+      "name": "BWB Technologies",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "United Kingdom",
+      "brand_color": "#DC6738",
+      "is_active": true
+    },
+    {
+      "name": "Implen",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Germany",
+      "brand_color": "#2BB643",
+      "is_active": true
+    },
+    {
+      "name": "Lumicks",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Netherlands",
+      "brand_color": "#4F2A79",
+      "is_active": true
+    },
+    {
+      "name": "Nanosurf",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Switzerland",
+      "brand_color": "#DCB538",
+      "is_active": true
+    },
+    {
+      "name": "NenoVision s.r.o.",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Czech Republic",
+      "brand_color": "#2BAEB6",
+      "is_active": true
+    },
+    {
+      "name": "Photon ETC",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Canada",
+      "brand_color": "#792A5E",
+      "is_active": true
+    },
+    {
+      "name": "Reichert Technologies",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "United States of America",
+      "brand_color": "#73DC38",
+      "is_active": true
+    },
+    {
+      "name": "SBT Instruments",
+      "group_name": "Group 5",
+      "product_manager": "R LakshmiNarayanan",
+      "country": "Denmark",
+      "brand_color": "#2B34B6",
+      "is_active": true
+    },
+    {
+      "name": "Evonik",
+      "group_name": "Group 6",
+      "product_manager": "M S Reddy",
+      "country": "Canada",
+      "brand_color": "#793C2A",
+      "is_active": true
+    },
+    {
+      "name": "Gea",
+      "group_name": "Group 6",
+      "product_manager": "M S Reddy",
+      "country": "Italy",
+      "brand_color": "#38DC8C",
+      "is_active": true
+    },
+    {
+      "name": "Hitachi",
+      "group_name": "Group 6",
+      "product_manager": "Sivakumar Ganapathy",
+      "country": "Japan",
+      "brand_color": "#9B2BB6",
+      "is_active": true
+    },
+    {
+      "name": "ProScientific",
+      "group_name": "Group 6",
+      "product_manager": "M S Reddy",
+      "country": "United States of America",
+      "brand_color": "#71792A",
+      "is_active": true
+    },
+    {
+      "name": "ThermoFisher Scientific",
+      "group_name": "Group 6",
+      "product_manager": "Sivakumar Ganapathy",
+      "country": "Germany",
+      "brand_color": "#389CDC",
+      "is_active": true
+    },
+    {
+      "name": "Chemspeed",
+      "group_name": "Group 7",
+      "product_manager": "Stanley Thomas",
+      "country": "Switzerland",
+      "brand_color": "#B62B57",
+      "is_active": true
+    },
+    {
+      "name": "Buchi",
+      "group_name": "Group 8",
+      "product_manager": "Anantha Chakravarthi",
+      "country": "Switzerland",
+      "brand_color": "#2D792A",
+      "is_active": true
+    },
+    {
+      "name": "DLAB",
+      "group_name": "Group 8",
+      "product_manager": "Anantha Chakravarthi",
+      "country": "China",
+      "brand_color": "#6338DC",
+      "is_active": true
+    },
+    {
+      "name": "Inkarp USB",
+      "group_name": "Group 8",
+      "product_manager": "Saravanan Natarajan",
+      "country": "India",
+      "brand_color": "#B6782B",
+      "is_active": true
+    },
+    {
+      "name": "Mettler Toledo",
+      "group_name": "Group 8",
+      "product_manager": "Durga Prasad",
+      "country": "Switzerland",
+      "brand_color": "#2A796D",
+      "is_active": true
+    },
+    {
+      "name": "Sartorius",
+      "group_name": "Group 8",
+      "product_manager": "Anantha Chakravarthi",
+      "country": "Germany",
+      "brand_color": "#DC38C5",
+      "is_active": true
+    },
+    {
+      "name": "Waters",
+      "group_name": "Group 8",
+      "product_manager": "Anantha Chakravarthi",
+      "country": "United States of America",
+      "brand_color": "#7AB62B",
+      "is_active": true
+    }
+  ]
+}

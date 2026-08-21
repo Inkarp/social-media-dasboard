@@ -1,0 +1,251 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Inkarp design tokens.
+
+   The palette is deliberately closed. `--color-*: initial` wipes Tailwind's
+   default colour ramps so that `bg-blue-500` or `text-emerald-600` resolve to
+   nothing at all — an accidental non-brand colour shows up as unstyled markup
+   in review rather than shipping quietly. Same trick on type sizes, radii and
+   shadows: if it isn't in the system, it doesn't exist.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* -- Colour ------------------------------------------------------------ */
+  --color-*: initial;
+
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-inherit: inherit;
+
+  /* The four. No others. */
+  --color-ink-red: #be0010;
+  --color-ink-black: #000000;
+  --color-ink-white: #ffffff;
+  --color-ink-grey: #7d7d7d;
+
+  /* Red at fixed opacities — status weight, not new hues. */
+  --color-ink-red-40: rgba(190, 0, 16, 0.4);
+  --color-ink-red-12: rgba(190, 0, 16, 0.12);
+  --color-ink-red-06: rgba(190, 0, 16, 0.06);
+
+  /* Neutrals derived only as opacity steps of black. */
+  --color-page: #fafafa;
+  --color-hairline: rgba(0, 0, 0, 0.06);
+  --color-hairline-soft: rgba(0, 0, 0, 0.04);
+  --color-zebra: rgba(0, 0, 0, 0.02);
+  --color-hover: rgba(0, 0, 0, 0.03);
+  --color-track: rgba(0, 0, 0, 0.06);
+  --color-tick: rgba(0, 0, 0, 0.14);
+  --color-scrim: rgba(0, 0, 0, 0.4);
+
+  /* Sidebar is black; its own hairlines step off white. */
+  --color-sidebar-hairline: rgba(255, 255, 255, 0.1);
+  --color-sidebar-hover: rgba(255, 255, 255, 0.06);
+  --color-sidebar-muted: rgba(255, 255, 255, 0.55);
+
+  /* -- Type -------------------------------------------------------------- */
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Scale: 12 / 13 / 14 / 16 / 20 / 28 / 40. Nothing between, nothing beyond. */
+  --text-*: initial;
+
+  --text-xs: 0.75rem; /* 12 — labels, column headers, chips */
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.8125rem; /* 13 — dense table text, helper copy */
+  --text-sm--line-height: 1.125rem;
+  --text-base: 0.875rem; /* 14 — body */
+  --text-base--line-height: 1.375rem;
+  --text-md: 1rem; /* 16 — card titles, section heads */
+  --text-md--line-height: 1.5rem;
+  --text-lg: 1.25rem; /* 20 — page titles */
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.75rem; /* 28 — secondary figures */
+  --text-xl--line-height: 2rem;
+  --text-2xl: 2.5rem; /* 40 — hero figures on dashboard cards */
+  --text-2xl--line-height: 1;
+
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* -- Radius ------------------------------------------------------------ */
+  --radius-*: initial;
+  --radius-chip: 4px;
+  --radius-control: 6px;
+  --radius-card: 8px;
+  --radius-full: 9999px; /* status dots only — never pills */
+
+  /* -- Elevation --------------------------------------------------------- */
+  /* Cards are flat by decree. Only detached layers get any lift. */
+  --shadow-*: initial;
+  --shadow-overlay: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+  /* -- Motion ------------------------------------------------------------ */
+  --ease-instrument: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-hover: 120ms;
+  --duration-count: 400ms;
+  --duration-gauge: 600ms;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-hairline);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-page);
+    color: var(--color-ink-black);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /* Headings never exceed 600 — heaviness reads as shouting next to the red. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.01em;
+  }
+
+  /* Every figure in every table and card aligns on the digit. */
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Uppercase micro-label used for card labels and column headers. */
+  .label {
+    font-size: var(--text-xs);
+    line-height: var(--text-xs--line-height);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-grey);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Focus is always red, always visible, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink-red);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* On black surfaces the red ring needs a white companion to stay legible. */
+  .on-black :focus-visible {
+    outline-color: var(--color-ink-white);
+  }
+
+  ::selection {
+    background-color: var(--color-ink-red);
+    color: var(--color-ink-white);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+
+@utility card {
+  background-color: var(--color-ink-white);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-card);
+}
+
+/* Screen-reader-only, but focusable (skip link). */
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+
+  &:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion — restrained, functional, and fully switchable off.
+--------------------------------------------------------------------------- */
+
+@keyframes gauge-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print — the PDF path is this stylesheet plus window.print().
+--------------------------------------------------------------------------- */
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  [data-print='hide'] {
+    display: none !important;
+  }
+
+  .card {
+    border-color: rgba(0, 0, 0, 0.2);
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: '';
+  }
+}

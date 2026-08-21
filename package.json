@@ -1,0 +1,51 @@
+{
+  "name": "inkarp-social-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "seed": "tsx scripts/seed.ts",
+    "gen:types": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > src/lib/types.ts",
+    "verify:schema": "tsx scripts/verify-schema.ts",
+    "build:setup": "tsx scripts/build-setup-sql.ts",
+    "verify:lib": "tsx scripts/verify-lib.ts",
+    "verify": "npm run verify:lib && npm run verify:actions && npm run verify:schema",
+    "build:seed-sql": "tsx scripts/build-seed-sql.ts",
+    "verify:actions": "tsx scripts/verify-server-actions.ts",
+    "check:auth": "tsx scripts/check-auth.ts"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.31.0",
+    "next": "^15.5.23",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^3.6.0",
+    "xlsx": "^0.18.5",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.5",
+    "@eslint/eslintrc": "^3.3.6",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.23",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
+    "typescript": "5.9"
+  }
+}
