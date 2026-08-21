@@ -295,7 +295,7 @@ export async function importPostsAction(formData: FormData): Promise<ImportResul
 /** Same purpose as the twin in principals/actions.ts: turn a raw Postgres error into something worth reading. */
 function describe(message: string): string {
   if (/row-level security/i.test(message)) {
-    return 'Your session is not signed in as an editor. Sign in again and retry.'
+    return 'Your account is not authorised to make changes. Ask an administrator for access.'
   }
   if (/violates foreign key/i.test(message)) {
     return 'That brand no longer exists. Reload the page and pick again.'

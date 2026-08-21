@@ -238,7 +238,7 @@ function describe(message: string, subject?: string): string {
       : 'That already exists.'
   }
   if (/row-level security/i.test(message)) {
-    return 'Your session is not signed in as an editor. Sign in again and retry.'
+    return 'Your account is not authorised to make changes. Ask an administrator for access.'
   }
   if (/violates foreign key/i.test(message)) {
     return 'That product manager no longer exists. Reload the page and pick again.'

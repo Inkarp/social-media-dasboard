@@ -47,6 +47,37 @@ export default async function SignInPage({
     )
   }
 
+  // A valid session that isn't an admin. Distinct from never having signed in
+  // at all — showing the sign-in form again here would read as "that didn't
+  // work", when the credentials were fine and the account simply isn't
+  // authorised to edit yet.
+  if (viewer.hasSession) {
+    return (
+      <div className="max-w-xl">
+        <PageHeader
+          title="Signed in, not authorised to edit"
+          description="This account can view everything but cannot add, edit or delete anything yet."
+        />
+        <Card>
+          <div className="flex items-center justify-between gap-4">
+            <ModeBadge tone="dark" />
+            {viewer.email && <span className="num text-sm text-ink-grey">{viewer.email}</span>}
+          </div>
+          <p className="mt-6 text-base text-ink-grey">
+            Ask whoever administers the Supabase project to add this account to{' '}
+            <span className="num text-ink-black">admin_users</span>.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link href="/" className={buttonClasses()}>
+              Go to the dashboard
+            </Link>
+            <SignOutButton />
+          </div>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className="max-w-xl">
       <PageHeader

@@ -9,14 +9,20 @@
 
 export type Viewer = {
   /**
-   * True when the request carries a valid Supabase session.
-   *
-   * "Editor" means nothing more than "logged in", because that is exactly what
-   * the row-level security policies check. There is no second permission model
-   * to drift out of step with the database: if this is true, writes will
-   * succeed; if it is false, they would be refused, so the controls are hidden.
+   * True when the session belongs to a user listed in `admin_users` — see
+   * `is_admin()` in migration 0005. Being signed in is not sufficient on its
+   * own; there is no other write role yet, so this is a plain admin check, not
+   * a permissions model to keep in sync. If this is true, writes will succeed;
+   * if it is false, they would be refused by RLS, so the controls are hidden.
    */
   isEditor: boolean
+  /**
+   * True whenever there is a valid Supabase session, admin or not. Now that
+   * `isEditor` can be false for a signed-in non-admin, the sign-in page needs
+   * this to tell "not signed in" apart from "signed in, not authorised" —
+   * otherwise the latter looks identical to never having signed in at all.
+   */
+  hasSession: boolean
   email: string | null
   /** False when no Supabase project is attached — signing in is impossible. */
   canSignIn: boolean
@@ -24,6 +30,7 @@ export type Viewer = {
 
 export const ANONYMOUS_VIEWER: Viewer = {
   isEditor: false,
+  hasSession: false,
   email: null,
   canSignIn: false,
 }

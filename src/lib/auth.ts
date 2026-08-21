@@ -17,6 +17,11 @@ export { ANONYMOUS_VIEWER }
  * many components ask. `getUser()` is a network round trip to Supabase, and both
  * the root layout and every <EditorOnly> on the page need the answer — without
  * memoisation a page with six editor-gated controls would make seven calls.
+ *
+ * `isEditor` means "signed in AND listed in admin_users" — being signed in on
+ * its own is no longer enough, matching the `is_admin()` check that every write
+ * RLS policy defers to (see migration 0005). There is only one write role right
+ * now; if a scoped role is added later, this is the type that will carry it.
  */
 export const getViewer = cache(async (): Promise<Viewer> => {
   const supabase = await createClient()
@@ -30,8 +35,13 @@ export const getViewer = cache(async (): Promise<Viewer> => {
       data: { user },
     } = await supabase.auth.getUser()
 
+    // Skip the extra round trip for the common case: no session, no need to
+    // ask whether a nonexistent user is an admin.
+    const isEditor = user !== null && (await supabase.rpc('is_admin')).data === true
+
     return {
-      isEditor: user !== null,
+      isEditor,
+      hasSession: user !== null,
       email: user?.email ?? null,
       canSignIn: true,
     }
@@ -47,6 +57,6 @@ export const getViewer = cache(async (): Promise<Viewer> => {
     // security would refuse a write regardless of what this returned.
     console.warn('[auth] could not read the session, treating as a viewer:', error)
 
-    return { isEditor: false, email: null, canSignIn: true }
+    return { isEditor: false, hasSession: false, email: null, canSignIn: true }
   }
 })

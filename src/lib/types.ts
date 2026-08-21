@@ -210,6 +210,22 @@ export type Database = {
           },
         ]
       }
+
+      admin_users: {
+        Row: {
+          user_id: string
+          created_at: string
+        }
+        Insert: {
+          user_id: string
+          created_at?: string
+        }
+        Update: {
+          user_id?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
 
     Views: Record<never, never>
@@ -234,6 +250,10 @@ export type Database = {
           implemented: number
           pending: number
         }[]
+      }
+      is_admin: {
+        Args: Record<string, never>
+        Returns: boolean
       }
     }
 

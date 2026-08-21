@@ -59,6 +59,7 @@ async function main(): Promise<void> {
 
   await db.exec(`
     create schema if not exists auth;
+    create table auth.users (id uuid primary key default gen_random_uuid());
     create role anon;
     create role authenticated;
     -- Supabase derives this from the request JWT. Here it follows the session
@@ -66,7 +67,13 @@ async function main(): Promise<void> {
     create or replace function auth.role() returns text language sql stable as $fn$
       select current_setting('role', true);
     $fn$;
+    -- Real Supabase reads this out of the JWT too. The stand-in reads a plain
+    -- session setting, set per-test with select set_config(...) below.
+    create or replace function auth.uid() returns uuid language sql stable as $fn$
+      select nullif(current_setting('app.current_user_id', true), '')::uuid;
+    $fn$;
     grant usage on schema auth to anon, authenticated;
+    grant select on auth.users to anon, authenticated;
   `)
 
   /* ---------------------------------------------------------------------- */
@@ -74,7 +81,12 @@ async function main(): Promise<void> {
   /* ---------------------------------------------------------------------- */
 
   console.log('\nMigrations')
-  for (const file of ['0001_core_schema.sql', '0002_row_level_security.sql', '0003_dashboard_rollup.sql']) {
+  for (const file of [
+    '0001_core_schema.sql',
+    '0002_row_level_security.sql',
+    '0003_dashboard_rollup.sql',
+    '0005_admin_only_writes.sql',
+  ]) {
     await db.exec(migration(file))
     console.log(`  ok    ${file} applied`)
     checks++
@@ -606,19 +618,74 @@ async function main(): Promise<void> {
     checkThrows(attempt.description, ran, message)
   }
 
-  await db.exec(`reset role; set role authenticated`)
+  // Being signed in used to be sufficient on its own (auth.role() =
+  // 'authenticated'). Migration 0005 replaces that with is_admin(), so the
+  // core guarantee to prove here is that a signed-in NON-admin is refused
+  // exactly like anon, and only a row actually present in admin_users unlocks
+  // writes — reset role while still the table owner, so this insert into
+  // admin_users bypasses its own (unforced) RLS.
+  await db.exec(`reset role`)
+  await db.exec(
+    `insert into auth.users (id) values ('99999999-9999-9999-9999-999999999999')`,
+  )
+  await db.exec(
+    `insert into admin_users (user_id) values ('99999999-9999-9999-9999-999999999999')`,
+  )
 
-  let editorWrote = false
+  await db.exec(`set role authenticated`)
+  await db.exec(
+    `select set_config('app.current_user_id', '88888888-8888-8888-8888-888888888888', false)`,
+  )
+
+  let nonAdminWrote = false
+  let nonAdminMessage: string | undefined
   try {
     await db.exec(
       `insert into posts (name, principal_id, post_date, status)
-       values ('editor post', 'aaaaaaaa-0000-0000-0000-000000000001', '2025-05-02', 'planned')`,
+       values ('non-admin post', 'aaaaaaaa-0000-0000-0000-000000000001', '2025-05-02', 'planned')`,
     )
-    editorWrote = true
+    nonAdminWrote = true
+  } catch (error) {
+    nonAdminMessage = error instanceof Error ? error.message : String(error)
+  }
+  checkThrows('a signed-in non-admin cannot insert a post', nonAdminWrote, nonAdminMessage)
+
+  await db.exec(
+    `select set_config('app.current_user_id', '99999999-9999-9999-9999-999999999999', false)`,
+  )
+
+  let adminInserted = false
+  let adminPostId: string | undefined
+  try {
+    const result = await db.query<{ id: string }>(
+      `insert into posts (name, principal_id, post_date, status)
+       values ('admin post', 'aaaaaaaa-0000-0000-0000-000000000001', '2025-05-02', 'planned')
+       returning id`,
+    )
+    adminPostId = result.rows[0]?.id
+    adminInserted = true
   } catch (error) {
     console.log(`          ${error instanceof Error ? error.message : String(error)}`)
   }
-  check('an authenticated editor can insert a post', editorWrote, true)
+  check('an admin (listed in admin_users) can insert a post', adminInserted, true)
+
+  let adminUpdated = false
+  try {
+    await db.exec(`update posts set status = 'published' where id = '${adminPostId}'`)
+    adminUpdated = true
+  } catch (error) {
+    console.log(`          ${error instanceof Error ? error.message : String(error)}`)
+  }
+  check('an admin can update a post', adminUpdated, true)
+
+  let adminDeleted = false
+  try {
+    await db.exec(`delete from posts where id = '${adminPostId}'`)
+    adminDeleted = true
+  } catch (error) {
+    console.log(`          ${error instanceof Error ? error.message : String(error)}`)
+  }
+  check('an admin can delete a post', adminDeleted, true)
 
   await db.exec(`reset role`)
   await db.close()
@@ -648,12 +715,17 @@ async function main(): Promise<void> {
   const fresh = new PGlite()
   await fresh.exec(`
     create schema if not exists auth;
+    create table auth.users (id uuid primary key default gen_random_uuid());
     create role anon;
     create role authenticated;
     create or replace function auth.role() returns text language sql stable as $fn$
       select current_setting('role', true);
     $fn$;
+    create or replace function auth.uid() returns uuid language sql stable as $fn$
+      select nullif(current_setting('app.current_user_id', true), '')::uuid;
+    $fn$;
     grant usage on schema auth to anon, authenticated;
+    grant select on auth.users to anon, authenticated;
   `)
 
   let applied = false
@@ -678,28 +750,44 @@ async function main(): Promise<void> {
     `select tablename from pg_tables where schemaname = 'public' order by tablename`,
   )
   check(
-    'creates all five tables',
+    'creates all six tables',
     tables.rows.map((r) => r.tablename),
-    ['financial_years', 'posts', 'principals', 'product_managers', 'targets'],
+    ['admin_users', 'financial_years', 'posts', 'principals', 'product_managers', 'targets'],
   )
 
   const policies = await fresh.query<{ count: number }>(
     `select count(*)::int as count from pg_policies where schemaname = 'public'`,
   )
-  check('creates two policies per table', policies.rows[0]?.count, 10)
+  check('creates two policies per data table, none on admin_users', policies.rows[0]?.count, 10)
 
   const secured = await fresh.query<{ n: number }>(
     `select count(*)::int as n from pg_class
      where relname in ('posts','principals','targets','product_managers','financial_years')
        and relrowsecurity and relforcerowsecurity`,
   )
-  check('enables and forces RLS on all five tables', secured.rows[0]?.n, 5)
+  check('enables and forces RLS on all five data tables', secured.rows[0]?.n, 5)
+
+  const adminUsersRls = await fresh.query<{ enabled: boolean; forced: boolean }>(
+    `select relrowsecurity as enabled, relforcerowsecurity as forced
+     from pg_class where relname = 'admin_users'`,
+  )
+  check(
+    'admin_users has RLS enabled but NOT forced (so is_admin() can read it as owner)',
+    adminUsersRls.rows[0],
+    { enabled: true, forced: false },
+  )
 
   const fn = await fresh.query<{ proname: string }>(
     `select p.proname from pg_proc p join pg_namespace n on n.oid = p.pronamespace
      where n.nspname = 'public' and p.proname = 'dashboard_rollup'`,
   )
   check('creates dashboard_rollup', fn.rows.length, 1)
+
+  const isAdminFn = await fresh.query<{ proname: string }>(
+    `select p.proname from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+     where n.nspname = 'public' and p.proname = 'is_admin'`,
+  )
+  check('creates is_admin', isAdminFn.rows.length, 1)
 
   /* ---------------------------------------------------------------------- */
   /* supabase/seed.sql — the no-secret-key path to loading the seed data     */
