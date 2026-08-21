@@ -19,3 +19,12 @@ export const ACTION_IDLE: ActionResult | null = null
 export function isFailure(result: ActionResult | null): result is { ok: false; error: string } {
   return result !== null && !result.ok
 }
+
+/**
+ * The result of a bulk import. Richer than `ActionResult` because a spreadsheet
+ * of fifty rows failing on one bad brand name is not the same event as the
+ * whole import failing — the caller needs to know what landed and what to fix.
+ */
+export type ImportResult =
+  | { ok: true; inserted: number; skipped: { row: number; reason: string }[] }
+  | { ok: false; error: string }

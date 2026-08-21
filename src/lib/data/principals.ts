@@ -165,6 +165,53 @@ export async function getPrincipals(query: PrincipalsQuery): Promise<PrincipalsD
   return { rows: filtered, managers, groups, offline: false }
 }
 
+export type PrincipalIndexEntry = {
+  name: string
+  groupName: string
+  managerName: string | null
+  brandColor: string | null
+  isActive: boolean
+}
+
+/**
+ * Every brand — active and retired — keyed by id. Posts, Calendar and Board all
+ * need to label a post with its brand's name, group, manager and colour, and a
+ * post against a retired brand must keep displaying correctly (the brief
+ * requires posts to survive their brand's removal). `getActivePrincipalOptions`
+ * below deliberately excludes retired brands because it feeds pickers where a
+ * retired brand should not be selectable; this is the un-filtered counterpart
+ * for display.
+ */
+export async function getPrincipalIndex(): Promise<Map<string, PrincipalIndexEntry>> {
+  const supabase = await createClient()
+  if (!supabase) return new Map()
+
+  const [principals, managers] = await Promise.all([
+    supabase
+      .from('principals')
+      .select('id, name, group_name, brand_color, is_active, product_manager_id'),
+    supabase.from('product_managers').select('id, name'),
+  ])
+
+  if (principals.error) throw new Error(principals.error.message)
+  if (managers.error) throw new Error(managers.error.message)
+
+  const managerNames = new Map((managers.data ?? []).map((m) => [m.id, m.name]))
+
+  return new Map(
+    (principals.data ?? []).map((p) => [
+      p.id,
+      {
+        name: p.name,
+        groupName: p.group_name,
+        managerName: p.product_manager_id ? (managerNames.get(p.product_manager_id) ?? null) : null,
+        brandColor: p.brand_color,
+        isActive: p.is_active,
+      },
+    ]),
+  )
+}
+
 /** Active brands only, for the pickers on the post form. */
 export async function getActivePrincipalOptions(): Promise<
   { id: string; name: string; groupName: string; brandColor: string | null; managerName: string | null }[]

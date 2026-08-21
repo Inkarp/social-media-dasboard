@@ -1,123 +1,95 @@
+import type { Metadata } from 'next'
 import { EditorOnly } from '@/components/auth/editor-only'
-import { Button } from '@/components/ui/button'
-import { CalibratedBar } from '@/components/ui/calibrated-bar'
-import { Card, CardHeader } from '@/components/ui/card'
+import { BreakdownTable } from '@/components/dashboard/breakdown-table'
+import { DashboardFilters } from '@/components/dashboard/dashboard-filters'
+import { DateRangeReport } from '@/components/dashboard/date-range-report'
+import { ExportButtons } from '@/components/dashboard/export-buttons'
+import { SummaryCards } from '@/components/dashboard/summary-cards'
+import { TimeSelector } from '@/components/dashboard/time-selector'
+import { PostFormDialog } from '@/components/posts/post-form-dialog'
+import { EmptyState } from '@/components/ui/empty-state'
 import { PageHeader } from '@/components/ui/page-header'
-import { StatusBadge } from '@/components/ui/status-badge'
-import { POST_STATUSES } from '@/lib/status'
+import { getDashboardData } from '@/lib/data/dashboard'
+import { getActivePrincipalOptions } from '@/lib/data/principals'
+import { currentFy, fyLabel, isQuarter, parseDateOnly, quarterFullLabel } from '@/lib/fy'
+import { firstParam, intParam } from '@/lib/search-params'
+import { isPostStatus } from '@/lib/status'
 
-/**
- * Phase 1 placeholder. This page exists to make the design system judgeable
- * before five real pages are built on top of it: every figure below is
- * hard-coded and there is no data source yet.
- */
+export const metadata: Metadata = { title: 'Overview' }
 
-const PREVIEW_CARDS = [
-  { label: 'Planned', figure: 612, bar: null },
-  { label: 'Implemented', figure: 388, bar: { implemented: 388, planned: 612 } },
-  { label: 'Pending', figure: 224, bar: null },
-  { label: 'On target', figure: 19, bar: { implemented: 19, planned: 48 } },
-  { label: 'Completion', figure: '63%', bar: { implemented: 388, planned: 612 } },
-] as const
+export default async function DashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
+  const params = await searchParams
 
-const PREVIEW_GAUGES = [
-  { brand: 'Under target', implemented: 7, planned: 24 },
-  { brand: 'Approaching', implemented: 19, planned: 24 },
-  { brand: 'On target', implemented: 24, planned: 24 },
-  { brand: 'Overshot', implemented: 36, planned: 24 },
-  { brand: 'No plan set', implemented: 3, planned: 0 },
-] as const
+  const fy = intParam(params, 'fy') ?? currentFy()
+  const rawPeriod = intParam(params, 'period')
+  const quarter = isQuarter(rawPeriod) ? rawPeriod : null
 
-export default function DashboardPage() {
+  const group = firstParam(params, 'group')
+  const managerId = firstParam(params, 'pm')
+  const rawStatus = firstParam(params, 'status')
+  const status = isPostStatus(rawStatus) ? rawStatus : undefined
+
+  const rawFrom = firstParam(params, 'from')
+  const rawTo = firstParam(params, 'to')
+  const from = rawFrom && rawTo ? parseDateOnly(rawFrom) : undefined
+  const to = rawFrom && rawTo ? parseDateOnly(rawTo) : undefined
+
+  const [{ rows, groups, managers, offline }, principals] = await Promise.all([
+    getDashboardData({ fy, quarter, group, managerId, status, from, to }),
+    getActivePrincipalOptions(),
+  ])
+
+  const principalRows = rows.filter((row) => row.dimension === 'principal')
+  const groupRows = rows.filter((row) => row.dimension === 'group')
+  const managerRows = rows.filter((row) => row.dimension === 'manager')
+  const productRows = rows.filter((row) => row.dimension === 'product')
+  const campaignRows = rows.filter((row) => row.dimension === 'campaign')
+
+  const periodLabel = quarter ? `${fyLabel(fy)} · ${quarterFullLabel(quarter)}` : fyLabel(fy)
+  const filename = `inkarp-dashboard-${fyLabel(fy)}${quarter ? `-Q${quarter}` : ''}`
+
   return (
     <>
       <PageHeader
         title="Overview"
-        description="Planned against published activity across every principal, for the selected financial year."
+        description={`Planned against published activity across every principal, for ${periodLabel}.`}
         actions={
-          <EditorOnly
-            fallback={
-              <span className="text-sm text-ink-grey">
-                Sign in to edit — viewing needs no account.
-              </span>
-            }
-          >
-            <Button variant="secondary">Export report</Button>
-            <Button>Add post</Button>
-          </EditorOnly>
+          <>
+            <ExportButtons rows={rows} filename={filename} />
+            <EditorOnly>
+              <PostFormDialog principals={principals} />
+            </EditorOnly>
+          </>
         }
       />
 
-      <div
-        role="note"
-        className="mb-8 flex items-start gap-3 rounded-card border border-ink-red-12 bg-ink-red-06 px-6 py-4"
-      >
-        <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-ink-red" />
-        <p className="text-base text-ink-black">
-          <span className="font-medium">Design preview.</span>{' '}
-          <span className="text-ink-grey">
-            Every figure on this page is hard-coded. The database, the roll-up query and the real
-            summary cards arrive in later phases.
-          </span>
-        </p>
-      </div>
-
-      <section aria-label="Summary" className="mb-8">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
-          {PREVIEW_CARDS.map((card) => (
-            <div key={card.label} className="card flex flex-col gap-4 p-6">
-              <div>
-                <p className="num text-2xl font-medium text-ink-black">{card.figure}</p>
-                <p className="label mt-2">{card.label}</p>
-              </div>
-              {card.bar && (
-                <CalibratedBar
-                  implemented={card.bar.implemented}
-                  planned={card.bar.planned}
-                  showPercentage={false}
-                  label={`${card.label}: ${card.bar.implemented} of ${card.bar.planned}`}
-                />
-              )}
+      {offline ? (
+        <EmptyState title="No database is connected yet. Add your Supabase URL and key to .env.local, then restart the dev server." />
+      ) : (
+        <>
+          <div className="mb-6 flex flex-col gap-4">
+            <div className="flex flex-wrap items-center gap-4">
+              <TimeSelector quarter={quarter} />
+              <DateRangeReport from={rawFrom ?? null} to={rawTo ?? null} preset={firstParam(params, 'preset') ?? null} />
             </div>
-          ))}
-        </div>
-      </section>
+            <DashboardFilters groups={groups} managers={managers} />
+          </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card>
-          <CardHeader
-            title="Calibrated gauge"
-            hint="One component, every progress reading in the app. Ticks at 25/50/75; the black marker is the target."
-          />
-          <dl className="mt-6 flex flex-col gap-4">
-            {PREVIEW_GAUGES.map((row) => (
-              <div key={row.brand} className="flex items-center gap-4">
-                <dt className="w-32 shrink-0 text-sm text-ink-grey">{row.brand}</dt>
-                <dd className="flex-1">
-                  <CalibratedBar implemented={row.implemented} planned={row.planned} />
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Card>
+          <SummaryCards principalRows={principalRows} />
 
-        <Card>
-          <CardHeader
-            title="Status treatments"
-            hint="Weight and fill carry the difference, never hue. The label is always present."
-          />
-          <ul className="mt-6 flex flex-col gap-4">
-            {POST_STATUSES.map((status) => (
-              <li key={status} className="flex items-center justify-between gap-4 border-b border-hairline-soft pb-4 last:border-0 last:pb-0">
-                <StatusBadge status={status} />
-                <span className="num text-xs text-ink-grey">
-                  {status === 'published' ? 'counts as implemented' : 'counts as pending'}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-      </div>
+          <div className="flex flex-col gap-6">
+            <BreakdownTable title="By Principal" rows={principalRows} showAccent />
+            <BreakdownTable title="By Group" rows={groupRows} searchable={false} />
+            <BreakdownTable title="By Product Manager" rows={managerRows} searchable={false} />
+            <BreakdownTable title="By Product" rows={productRows} />
+            <BreakdownTable title="By Campaign" rows={campaignRows} />
+          </div>
+        </>
+      )}
     </>
   )
 }
