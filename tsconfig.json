@@ -6,7 +6,8 @@
       "dom.iterable",
       "ES2022"
     ],
-    "allowJs": false,
+    "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
@@ -30,8 +31,8 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
     ".next/types/**/*.ts",
     "next-env.d.ts",
     ".next-verify/types/**/*.ts"

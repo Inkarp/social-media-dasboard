@@ -8,15 +8,14 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx scripts/seed.ts",
-    "gen:types": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID --schema public > src/lib/types.ts",
-    "verify:schema": "tsx scripts/verify-schema.ts",
-    "build:setup": "tsx scripts/build-setup-sql.ts",
-    "verify:lib": "tsx scripts/verify-lib.ts",
+    "seed": "tsx scripts/seed.js",
+    "verify:schema": "tsx scripts/verify-schema.js",
+    "build:setup": "tsx scripts/build-setup-sql.js",
+    "verify:lib": "tsx scripts/verify-lib.js",
     "verify": "npm run verify:lib && npm run verify:actions && npm run verify:schema",
-    "build:seed-sql": "tsx scripts/build-seed-sql.ts",
-    "verify:actions": "tsx scripts/verify-server-actions.ts",
-    "check:auth": "tsx scripts/check-auth.ts"
+    "build:seed-sql": "tsx scripts/build-seed-sql.js",
+    "verify:actions": "tsx scripts/verify-server-actions.js",
+    "check:auth": "tsx scripts/check-auth.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
