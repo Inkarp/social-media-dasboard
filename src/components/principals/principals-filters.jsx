@@ -4,6 +4,7 @@ import { ChevronDown, Search, X } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState, useTransition } from 'react'
 import { selectClasses } from '@/components/ui/field'
+import { useRoutePending } from '@/components/shell/route-progress'
 import { cn } from '@/lib/cn'
 import { compareGroups } from '@/lib/groups'
 import { hrefWith } from '@/lib/search-params'
@@ -26,6 +27,7 @@ export function PrincipalsFilters({ managers, groups }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  useRoutePending(isPending)
 
   const currentSearch = searchParams.get('q') ?? ''
   const [search, setSearch] = useState(currentSearch)

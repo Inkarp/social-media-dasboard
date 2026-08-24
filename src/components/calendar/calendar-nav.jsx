@@ -4,6 +4,7 @@ import { format, parse } from 'date-fns'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
+import { useRoutePending } from '@/components/shell/route-progress'
 import { cn } from '@/lib/cn'
 import { toDateOnly } from '@/lib/fy'
 import { hrefWith } from '@/lib/search-params'
@@ -17,6 +18,7 @@ export function CalendarNav({ month }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  useRoutePending(isPending)
 
   /** @param {Date} next */
   function go(next) {

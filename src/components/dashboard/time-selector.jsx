@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
+import { useRoutePending } from '@/components/shell/route-progress'
 import { cn } from '@/lib/cn'
 import { QUARTERS, quarterLabel } from '@/lib/fy'
 import { hrefWith } from '@/lib/search-params'
@@ -21,6 +22,7 @@ export function TimeSelector({ quarter }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  useRoutePending(isPending)
 
   /** @param {Quarter | null} next */
   function select(next) {

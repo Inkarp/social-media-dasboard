@@ -4,6 +4,7 @@ import { CalendarRange, X } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { inputClasses } from '@/components/ui/field'
+import { useRoutePending } from '@/components/shell/route-progress'
 import { cn } from '@/lib/cn'
 import { toDateOnly } from '@/lib/fy'
 import { REPORT_PRESETS } from '@/lib/report-presets'
@@ -22,6 +23,7 @@ export function DateRangeReport({ from, to, preset }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  useRoutePending(isPending)
   const [expanded, setExpanded] = useState(Boolean(from || to))
 
   /** @param {{ from: string | null, to: string | null, preset: string | null }} patch */

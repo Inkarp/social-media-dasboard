@@ -2,6 +2,7 @@ import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import { EditorProvider } from '@/components/auth/editor-provider'
 import { RealtimeRefresh } from '@/components/realtime/realtime-refresh'
 import { AppShell } from '@/components/shell/app-shell'
+import { RouteProgressProvider } from '@/components/shell/route-progress'
 import { getViewer } from '@/lib/auth'
 import './globals.css'
 
@@ -58,10 +59,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en-IN" className={`${interTight.variable} ${jetBrainsMono.variable}`}>
       <body>
-        <EditorProvider viewer={viewer}>
-          <RealtimeRefresh />
-          <AppShell viewer={viewer}>{children}</AppShell>
-        </EditorProvider>
+        <RouteProgressProvider>
+          <EditorProvider viewer={viewer}>
+            <RealtimeRefresh />
+            <AppShell viewer={viewer}>{children}</AppShell>
+          </EditorProvider>
+        </RouteProgressProvider>
       </body>
     </html>
   )

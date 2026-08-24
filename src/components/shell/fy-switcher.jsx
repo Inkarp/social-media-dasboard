@@ -3,6 +3,7 @@
 import { ChevronDown } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
+import { useRoutePending } from '@/components/shell/route-progress'
 import { cn } from '@/lib/cn'
 import { fyLabel } from '@/lib/fy'
 import { hrefWith } from '@/lib/search-params'
@@ -24,6 +25,7 @@ export function FySwitcher({ options, currentFy }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isPending, startTransition] = useTransition()
+  useRoutePending(isPending)
 
   const requested = Number.parseInt(searchParams.get('fy') ?? '', 10)
   const selected = options.includes(requested) ? requested : currentFy
