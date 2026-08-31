@@ -20,7 +20,7 @@ export function AppShell({ viewer, children }) {
 
       <Sidebar viewer={viewer} />
 
-      <div className="flex min-h-dvh flex-col md:pl-60">
+      <div className="flex min-h-dvh flex-col md:pl-64">
         <Header viewer={viewer} />
 
         <main id="main" className="flex-1 px-4 pb-24 pt-6 md:px-8 md:pb-12 md:pt-8">

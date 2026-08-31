@@ -40,7 +40,7 @@ export function PrincipalRow({ row, fy, managers, index }) {
   return (
     <li
       className={cn(
-        'relative border-b border-hairline-soft last:border-0',
+        'relative border-b border-hairline-soft transition-colors duration-[120ms] ease-standard last:border-0 hover:bg-hover',
         index % 2 === 1 && 'bg-zebra',
         !row.isActive && 'opacity-60',
       )}

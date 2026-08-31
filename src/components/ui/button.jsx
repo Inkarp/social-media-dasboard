@@ -14,10 +14,10 @@ import { cn } from '@/lib/cn'
 
 /** @type {Record<ButtonVariant, string>} */
 const VARIANTS = {
-  primary: 'bg-forest text-on-accent hover:bg-forest-hover',
-  secondary: 'border border-hairline bg-surface text-ink hover:bg-hover',
+  primary: 'bg-forest text-on-accent shadow-[0_0_24px_rgba(32,227,162,0.28)] hover:bg-forest-hover',
+  secondary: 'border border-hairline bg-raised text-ink hover:border-teal hover:bg-hover',
   ghost: 'text-muted hover:bg-hover hover:text-ink',
-  danger: 'border border-danger bg-transparent text-danger hover:bg-danger hover:text-on-accent',
+  danger: 'border border-danger bg-danger-06 text-danger hover:bg-danger hover:text-on-accent',
 }
 
 /** @type {Record<ButtonSize, string>} */
@@ -33,7 +33,7 @@ const SIZES = {
 export function buttonClasses({ variant = 'primary', size = 'md', className } = {}) {
   return cn(
     'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-control font-medium',
-    'transition-colors duration-[120ms] ease-standard',
+    'transition-all duration-[120ms] ease-standard',
     'disabled:pointer-events-none disabled:opacity-50',
     VARIANTS[variant],
     SIZES[size],

@@ -36,7 +36,7 @@ export function CalendarNav({ month }) {
         type="button"
         onClick={() => go(previous)}
         aria-label="Previous month"
-        className="rounded-control border border-hairline p-2 text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
+        className="rounded-control border border-hairline bg-surface/85 p-2 text-muted transition-colors duration-[120ms] ease-standard hover:border-wine hover:text-ink"
       >
         <ChevronLeft aria-hidden strokeWidth={1.75} className="size-4" />
       </button>
@@ -49,7 +49,7 @@ export function CalendarNav({ month }) {
         type="button"
         onClick={() => go(next)}
         aria-label="Next month"
-        className="rounded-control border border-hairline p-2 text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
+        className="rounded-control border border-hairline bg-surface/85 p-2 text-muted transition-colors duration-[120ms] ease-standard hover:border-wine hover:text-ink"
       >
         <ChevronRight aria-hidden strokeWidth={1.75} className="size-4" />
       </button>
@@ -57,7 +57,7 @@ export function CalendarNav({ month }) {
       <button
         type="button"
         onClick={() => go(parse(toDateOnly(new Date()), 'yyyy-MM-dd', new Date()))}
-        className="ml-2 rounded-control border border-hairline px-3 py-2 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
+        className="ml-2 rounded-control border border-hairline bg-surface/85 px-3 py-2 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-wine hover:text-ink"
       >
         Today
       </button>

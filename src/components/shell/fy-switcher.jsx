@@ -48,10 +48,10 @@ export function FySwitcher({ options, currentFy }) {
             })
           }}
           className={cn(
-            'num appearance-none rounded-control border border-hairline bg-surface',
+            'num appearance-none rounded-control border border-hairline bg-surface/85',
             'py-2 pl-3 pr-9 text-base font-medium text-ink',
             'transition-colors duration-[120ms] ease-standard',
-            'hover:border-muted disabled:opacity-60',
+            'hover:border-teal disabled:opacity-60',
           )}
         >
           {options.map((fy) => (

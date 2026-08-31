@@ -27,7 +27,7 @@ export function SidebarNav() {
   const fy = searchParams.get('fy')
 
   return (
-    <nav aria-label="Sections" className="flex flex-col gap-1 px-3 py-4">
+    <nav aria-label="Sections" className="flex flex-col gap-2 px-3 py-4">
       {NAV_ITEMS.map((item, index) => {
         const active = isNavActive(pathname, item.href)
         const href = fy ? `${item.href}?fy=${fy}` : item.href
@@ -39,29 +39,27 @@ export function SidebarNav() {
             href={href}
             aria-current={active ? 'page' : undefined}
             className={cn(
-              'group relative flex items-center gap-3 rounded-control py-2.5 pl-2.5 pr-4',
-              'text-base transition-colors duration-[120ms] ease-standard',
+              'group relative flex items-center gap-3 rounded-control border py-3 pl-2.5 pr-4',
+              'text-base transition-all duration-[120ms] ease-standard',
               active
-                ? cn('font-semibold', ACCENT_TEXT[item.accent], ACCENT_WASH_STRONG[item.accent])
-                : 'text-muted hover:bg-hover hover:text-ink',
+                ? cn('border-current bg-surface font-semibold text-ink shadow-card', ACCENT_TEXT[item.accent])
+                : 'border-transparent text-muted hover:border-hairline hover:bg-hover hover:text-ink',
             )}
           >
             <span
               aria-hidden
               className={cn(
-                'num flex size-7 shrink-0 items-center justify-center rounded-chip text-xs transition-colors duration-[120ms] ease-standard',
+                'num flex size-8 shrink-0 items-center justify-center rounded-chip text-xs transition-colors duration-[120ms] ease-standard',
                 active
                   ? cn(ACCENT_BG[item.accent], 'text-on-accent')
-                  : 'border border-hairline text-faint group-hover:border-muted group-hover:text-muted',
+                  : 'border border-hairline bg-surface/60 text-faint group-hover:border-muted group-hover:text-muted',
               )}
             >
               {number}
             </span>
             <item.icon aria-hidden strokeWidth={active ? 2 : 1.5} className="size-4 shrink-0" />
             {item.label}
-            {active && (
-              <span aria-hidden className={cn('absolute inset-y-1 right-0 w-1.5 rounded-l-chip', ACCENT_BG[item.accent])} />
-            )}
+            {active && <span aria-hidden className={cn('absolute inset-y-2 right-2 w-1 rounded-full', ACCENT_BG[item.accent])} />}
           </Link>
         )
       })}

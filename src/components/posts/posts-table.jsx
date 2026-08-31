@@ -77,7 +77,7 @@ export function PostsTable({ principals }) {
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-hairline bg-ochre-ink/10">
+            <tr className="border-b border-hairline bg-ochre-ink/12">
               {isEditor && (
                 <th className="w-10 px-4 py-3">
                   <input
@@ -110,6 +110,7 @@ export function PostsTable({ principals }) {
                   'border-b border-hairline-soft last:border-0',
                   index % 2 === 1 && 'bg-zebra',
                   selected.has(row.id) && 'bg-forest-06',
+                  'transition-colors duration-[120ms] ease-standard hover:bg-hover',
                 )}
               >
                 {isEditor && (

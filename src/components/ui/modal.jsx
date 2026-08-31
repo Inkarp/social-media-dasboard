@@ -59,9 +59,9 @@ export function Modal({
         'open:animate-none',
       )}
     >
-      <div className="flex items-start justify-between gap-4 border-b border-hairline px-6 py-4">
+      <div className="flex items-start justify-between gap-4 border-b border-hairline bg-forest/10 px-6 py-4">
         <div className="min-w-0">
-          <h2 id={labelledBy} className="text-md text-ink">
+          <h2 id={labelledBy} className="text-md text-forest">
             {title}
           </h2>
           {description && <p className="mt-1 text-sm text-muted">{description}</p>}

@@ -81,18 +81,18 @@ export default async function PrincipalsPage({ searchParams }) {
             <EmptyState title="No brands match these filters. Clear them to see the full directory." />
           ) : (
             <>
-              <div className="card mb-6 flex flex-wrap items-center gap-6 border-t-4 border-t-slate p-6">
+              <div className="card mb-6 flex flex-wrap items-center gap-6 border-t-4 border-t-slate bg-slate/10 p-6">
                 <div>
-                  <p className="num text-xl font-medium text-ink">{rows.length}</p>
-                  <p className="label mt-1">Brands</p>
+                  <p className="num text-xl font-semibold text-ink">{rows.length}</p>
+                  <p className="label mt-1 text-slate">Brands</p>
                 </div>
                 <div>
-                  <p className="num text-xl font-medium text-ink">{totalPlanned}</p>
-                  <p className="label mt-1">Target</p>
+                  <p className="num text-xl font-semibold text-ink">{totalPlanned}</p>
+                  <p className="label mt-1 text-slate">Target</p>
                 </div>
                 <div>
-                  <p className="num text-xl font-medium text-ink">{totalImplemented}</p>
-                  <p className="label mt-1">Published</p>
+                  <p className="num text-xl font-semibold text-ink">{totalImplemented}</p>
+                  <p className="label mt-1 text-slate">Published</p>
                 </div>
                 <div className="min-w-48 flex-1">
                   <CalibratedBar

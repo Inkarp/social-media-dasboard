@@ -50,7 +50,7 @@ export function DateRangeReport({ from, to, preset }) {
         onClick={() => setExpanded((v) => !v)}
         className={cn(
           'inline-flex items-center gap-2 self-start rounded-control border border-hairline px-3 py-2 text-sm',
-          'transition-colors duration-[120ms] ease-standard hover:border-muted',
+          'bg-surface/85 shadow-card transition-colors duration-[120ms] ease-standard hover:border-teal',
           hasRange ? 'border-forest text-forest' : 'text-muted hover:text-ink',
         )}
       >
@@ -59,7 +59,7 @@ export function DateRangeReport({ from, to, preset }) {
       </button>
 
       {expanded && (
-        <div className={cn('flex flex-wrap items-end gap-4 rounded-card border border-hairline bg-surface p-4', isPending && 'opacity-60')}>
+        <div className={cn('card flex flex-wrap items-end gap-4 border-teal/40 bg-teal/10 p-4', isPending && 'opacity-60')}>
           <div className="flex flex-wrap gap-2">
             {REPORT_PRESETS.map((option) => (
               <button
@@ -70,7 +70,7 @@ export function DateRangeReport({ from, to, preset }) {
                   'rounded-control border px-3 py-1.5 text-sm transition-colors duration-[120ms] ease-standard',
                   preset === option.id
                     ? 'border-forest bg-forest-06 text-forest'
-                    : 'border-hairline text-muted hover:border-muted hover:text-ink',
+                    : 'border-hairline bg-bg/30 text-muted hover:border-teal hover:text-ink',
                 )}
               >
                 {option.label}

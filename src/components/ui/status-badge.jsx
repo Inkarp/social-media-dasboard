@@ -12,7 +12,7 @@ import { STATUS_LABELS, STATUS_SWATCH } from '@/lib/status'
  */
 export function StatusBadge({ status, className }) {
   return (
-    <span className={cn('inline-flex items-center gap-2 whitespace-nowrap', className)}>
+    <span className={cn('inline-flex items-center gap-2 whitespace-nowrap rounded-chip border border-hairline bg-bg/40 px-2 py-1', className)}>
       <span aria-hidden className={cn('size-2 shrink-0 rounded-chip', STATUS_SWATCH[status])} />
       <span className="text-sm text-ink">{STATUS_LABELS[status]}</span>
     </span>

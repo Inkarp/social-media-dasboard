@@ -45,12 +45,12 @@ export function CalibratedBar({ implemented, planned, showPercentage = true, lab
         aria-valuemax={100}
         aria-valuetext={description}
         aria-label={description}
-        className="relative h-1.5 min-w-16 flex-1 overflow-hidden bg-track"
+        className="relative h-2.5 min-w-16 flex-1 overflow-hidden rounded-chip bg-track"
       >
         {/* Fill. Animated with scaleX so a server component can carry the
             motion without shipping any JavaScript to do it. */}
         <div
-          className="absolute inset-y-0 left-0 origin-left bg-forest motion-safe:[animation:gauge-fill_var(--duration-fill)_var(--ease-standard)_both]"
+          className="absolute inset-y-0 left-0 origin-left bg-forest shadow-[0_0_18px_rgba(32,227,162,0.45)] motion-safe:[animation:gauge-fill_var(--duration-fill)_var(--ease-standard)_both]"
           style={{ width: `${fillPct}%` }}
         />
 
@@ -77,7 +77,7 @@ export function CalibratedBar({ implemented, planned, showPercentage = true, lab
       </div>
 
       {showPercentage && (
-        <span className="num w-10 shrink-0 text-right text-xs text-ink">{percentage}%</span>
+        <span className="num w-10 shrink-0 text-right text-xs font-semibold text-ink">{percentage}%</span>
       )}
     </div>
   )

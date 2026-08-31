@@ -31,8 +31,8 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
 
   return (
     <div className="card overflow-hidden border-t-4 border-t-forest">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-hairline px-6 py-4">
-        <h2 className="text-md text-ink">{title}</h2>
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-hairline bg-surface/70 px-6 py-4">
+        <h2 className="text-md text-forest">{title}</h2>
         {searchable && rows.length > 0 && (
           <div className="relative">
             <Search
@@ -46,7 +46,7 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search"
               aria-label={`Search ${title}`}
-              className="w-44 rounded-control border border-hairline bg-surface py-1.5 pl-8 pr-3 text-sm text-ink placeholder:text-muted transition-colors duration-[120ms] ease-standard hover:border-muted focus:border-forest"
+              className="w-44 rounded-control border border-hairline bg-bg/50 py-1.5 pl-8 pr-3 text-sm text-ink placeholder:text-muted transition-colors duration-[120ms] ease-standard hover:border-teal focus:border-forest"
             />
           </div>
         )}
@@ -60,7 +60,7 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-left">
             <thead>
-              <tr className="border-b border-hairline bg-forest/10">
+              <tr className="border-b border-hairline bg-forest/12">
                 <th className="label px-6 py-3">Name</th>
                 <th className="label px-4 py-3 text-right">Target</th>
                 <th className="label px-4 py-3 text-right">Implemented</th>
@@ -72,7 +72,10 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
               {filtered.map((row, index) => (
                 <tr
                   key={row.key}
-                  className={cn('border-b border-hairline-soft last:border-0', index % 2 === 1 && 'bg-zebra')}
+                  className={cn(
+                    'border-b border-hairline-soft transition-colors duration-[120ms] ease-standard last:border-0 hover:bg-hover',
+                    index % 2 === 1 && 'bg-zebra',
+                  )}
                 >
                   <td className="px-6 py-3 text-base text-ink">
                     <span className="flex items-center gap-2">

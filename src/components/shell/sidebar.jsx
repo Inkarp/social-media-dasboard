@@ -15,7 +15,7 @@ export function Sidebar({ viewer }) {
   return (
     <aside
       data-print="hide"
-      className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-hairline bg-surface md:flex"
+      className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-hairline bg-bg/80 shadow-overlay backdrop-blur-xl md:flex"
     >
       <div className="border-b border-hairline px-6 py-6">
         <InkarpLogo />
@@ -25,7 +25,7 @@ export function Sidebar({ viewer }) {
         <SidebarNav />
       </div>
 
-      <div className="border-t border-hairline px-6 py-4">
+      <div className="border-t border-hairline bg-surface/60 px-6 py-4">
         <ModeBadge editing={viewer.isEditor} />
         {viewer.email && (
           <p className="mt-2 truncate text-xs text-muted" title={viewer.email}>

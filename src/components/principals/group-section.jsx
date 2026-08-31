@@ -35,7 +35,7 @@ export function GroupSection({ group, rows, fy, managers, defaultOpen = true }) 
           onClick={() => setOpen((value) => !value)}
           aria-expanded={open}
           className={cn(
-            'flex w-full items-center gap-4 px-4 py-4 text-left',
+            'flex w-full items-center gap-4 bg-slate/10 px-4 py-4 text-left',
             'transition-colors duration-[120ms] ease-standard hover:bg-hover',
           )}
         >
@@ -48,7 +48,7 @@ export function GroupSection({ group, rows, fy, managers, defaultOpen = true }) 
             )}
           />
 
-          <span className="flex-1 text-md font-medium text-ink">{group}</span>
+          <span className="flex-1 text-md font-semibold text-slate">{group}</span>
 
           <span className="num hidden text-xs text-muted sm:block">
             {rows.length} {rows.length === 1 ? 'brand' : 'brands'}
@@ -72,7 +72,7 @@ export function GroupSection({ group, rows, fy, managers, defaultOpen = true }) 
         <div className="border-t border-hairline">
           <div
             aria-hidden
-            className="hidden border-b border-hairline bg-slate/10 pl-4 pr-4 md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)_minmax(0,1fr)_7rem_3rem_minmax(0,1.4fr)_8.5rem] md:items-center md:gap-4 md:py-2"
+            className="hidden border-b border-hairline bg-slate/12 pl-4 pr-4 md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)_minmax(0,1fr)_7rem_3rem_minmax(0,1.4fr)_8.5rem] md:items-center md:gap-4 md:py-2"
           >
             <span className="label pl-6">Brand</span>
             <span className="label">Manager</span>

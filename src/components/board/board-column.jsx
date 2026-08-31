@@ -20,18 +20,18 @@ export function BoardColumn({ status, posts, draggable, onCardClick }) {
   const { setNodeRef, isOver } = useDroppable({ id: status })
 
   return (
-    <div className="flex min-w-0 flex-col gap-3">
-      <div className="flex items-center justify-between border-b-2 border-b-teal px-1 pb-2">
-        <h3 className="text-base font-medium text-ink">{STATUS_LABELS[status]}</h3>
-        <span className="num text-xs text-muted">{posts.length}</span>
+    <div className="card flex min-w-0 flex-col gap-3 border-t-4 border-t-teal p-3">
+      <div className="flex items-center justify-between border-b border-hairline px-1 pb-3">
+        <h3 className="text-base font-semibold text-teal">{STATUS_LABELS[status]}</h3>
+        <span className="num rounded-chip bg-teal/10 px-2 py-1 text-xs font-semibold text-teal">{posts.length}</span>
       </div>
 
       <div
         ref={setNodeRef}
         className={cn(
-          'flex min-h-32 flex-1 flex-col gap-2 rounded-card border border-dashed border-hairline p-2',
+          'flex min-h-32 flex-1 flex-col gap-2 rounded-card border border-dashed border-hairline bg-bg/30 p-2',
           'transition-colors duration-[120ms] ease-standard',
-          isOver && 'border-teal bg-teal/10',
+          isOver && 'border-teal bg-teal/12',
         )}
       >
         {posts.map((post) => (

@@ -293,7 +293,7 @@ export function PostFormDialog({
                   key={preset.id}
                   type="button"
                   onClick={() => setChannels([...preset.channels])}
-                  className="rounded-control border border-hairline px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
+                  className="rounded-control border border-hairline bg-bg/30 px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-teal hover:text-ink"
                 >
                   {preset.label}
                 </button>
@@ -303,7 +303,7 @@ export function PostFormDialog({
                   key={channel}
                   type="button"
                   onClick={() => setChannels([channel])}
-                  className="rounded-control border border-hairline px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
+                  className="rounded-control border border-hairline bg-bg/30 px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-teal hover:text-ink"
                 >
                   {CHANNEL_LABELS[channel]} only
                 </button>

@@ -14,8 +14,8 @@ export function EmptyState({ title, action, className }) {
   return (
     <div
       className={cn(
-        'flex flex-col items-start gap-4 border border-dashed border-hairline px-6 py-12',
-        'rounded-card bg-surface',
+        'card flex flex-col items-start gap-4 border border-dashed border-teal px-6 py-12',
+        'bg-teal/10',
         className,
       )}
     >

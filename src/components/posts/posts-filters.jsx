@@ -74,9 +74,9 @@ export function PostsFilters() {
             placeholder="Post, brand or product"
             onChange={(event) => setSearch(event.target.value)}
             className={cn(
-              'w-full rounded-control border border-hairline bg-surface py-2 pl-9 pr-3',
+              'w-full rounded-control border border-hairline bg-bg/50 py-2 pl-9 pr-3',
               'text-base text-ink placeholder:text-muted',
-              'transition-colors duration-[120ms] ease-standard hover:border-muted focus:border-forest',
+              'transition-colors duration-[120ms] ease-standard hover:border-teal focus:border-forest',
             )}
           />
         </div>

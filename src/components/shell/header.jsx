@@ -23,7 +23,7 @@ export function Header({ viewer }) {
   return (
     <header
       data-print="hide"
-      className="sticky top-0 z-20 border-b border-hairline bg-surface/95 backdrop-blur-sm"
+      className="sticky top-0 z-20 border-b border-hairline bg-bg/75 backdrop-blur-xl"
     >
       <div className="flex items-center justify-between px-4 pt-4 md:hidden">
         <InkarpLogo />
@@ -33,7 +33,7 @@ export function Header({ viewer }) {
       <div className="flex flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
         <div className="min-w-0">
           <h1 className="text-lg text-ink">{greetingFor(now)}</h1>
-          <p className="mt-1 text-sm text-muted">{longDate(now)}</p>
+          <p className="mt-1 text-sm font-medium text-teal">{longDate(now)}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-4">

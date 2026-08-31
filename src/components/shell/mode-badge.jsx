@@ -12,7 +12,7 @@ export function ModeBadge({ editing = false, className }) {
   return (
     <span
       className={cn(
-        'flex items-center gap-2 text-xs uppercase tracking-[0.08em]',
+        'flex items-center gap-2 text-xs font-semibold uppercase',
         editing ? 'text-ink' : 'text-muted',
         className,
       )}

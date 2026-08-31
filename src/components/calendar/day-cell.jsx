@@ -34,7 +34,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
   return (
     <div
       className={cn(
-        'flex min-h-24 flex-col gap-1 border-b border-r border-hairline-soft p-2',
+        'flex min-h-24 flex-col gap-1 border-b border-r border-hairline-soft p-2 transition-colors duration-[120ms] ease-standard hover:bg-hover',
         !inCurrentMonth && 'bg-zebra',
       )}
     >
@@ -42,7 +42,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
         <span
           className={cn(
             'num flex size-6 items-center justify-center rounded-full text-sm',
-            isToday ? 'bg-wine text-on-accent' : inCurrentMonth ? 'text-ink' : 'text-muted',
+            isToday ? 'bg-wine text-on-accent shadow-[0_0_18px_rgba(255,79,216,0.45)]' : inCurrentMonth ? 'text-ink' : 'text-muted',
           )}
         >
           {dayNumber}
@@ -52,7 +52,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
             type="button"
             onClick={() => setAddOpen(true)}
             aria-label={`Add a post on ${date}`}
-            className="rounded-control px-1.5 text-sm leading-none text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
+            className="rounded-control px-1.5 text-sm leading-none text-teal transition-colors duration-[120ms] ease-standard hover:bg-teal/10 hover:text-ink"
           >
             +
           </button>
@@ -65,7 +65,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
             key={post.id}
             type="button"
             onClick={() => setSelected(post)}
-            className="flex items-center gap-1.5 truncate rounded-control px-1.5 py-1 text-left text-xs transition-colors duration-[120ms] ease-standard hover:bg-hover"
+            className="flex items-center gap-1.5 truncate rounded-control border border-transparent bg-bg/35 px-1.5 py-1 text-left text-xs transition-colors duration-[120ms] ease-standard hover:border-hairline hover:bg-hover"
             title={post.name}
           >
             <span

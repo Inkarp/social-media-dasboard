@@ -24,10 +24,10 @@ import { deriveQuarterTargets, QUARTERS, quarterMonths } from '@/lib/fy'
 /** @typedef {import('@/lib/fy').Quarter} QuarterKey */
 
 const numberField = cn(
-  'num rounded-control border border-hairline bg-surface px-2 py-1.5 text-right',
+  'num rounded-control border border-hairline bg-bg/50 px-2 py-1.5 text-right',
   'text-base tabular-nums text-ink',
   'transition-colors duration-[120ms] ease-standard',
-  'hover:border-muted focus:border-forest',
+  'hover:border-teal focus:border-forest',
   'disabled:opacity-50',
 )
 

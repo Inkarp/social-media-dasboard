@@ -28,15 +28,15 @@ export function BoardCard({ post, draggable, onClick }) {
       onClick={onClick}
       style={transform ? { transform: CSS.Translate.toString(transform) } : undefined}
       className={cn(
-        'card relative flex cursor-pointer flex-col gap-2 p-3 text-left',
-        'transition-colors duration-[120ms] ease-standard hover:border-muted',
+        'relative flex cursor-pointer flex-col gap-2 rounded-card border border-hairline bg-surface/85 p-3 text-left shadow-card',
+        'transition-all duration-[120ms] ease-standard hover:border-teal hover:bg-hover',
         draggable && 'touch-none',
         isDragging && 'opacity-40',
       )}
     >
       <span
         aria-hidden
-        className="absolute inset-y-0 left-0 w-[3px]"
+        className="absolute inset-y-2 left-0 w-1 rounded-r-full"
         style={{ backgroundColor: post.brandColor ?? 'transparent' }}
       />
       <p className="truncate pl-2 text-sm font-medium text-ink">{post.name}</p>

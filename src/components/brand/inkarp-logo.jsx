@@ -46,7 +46,7 @@ export function InkarpLogo({ className }) {
         />
         <path fill="#be0010" d="M33.9,12.19h2v6.19h-2v-6.19Z" />
       </svg>
-      <span className="text-xs uppercase leading-none tracking-[0.1em] text-muted">Social Dashboard</span>
+      <span className="text-xs uppercase leading-none text-teal">Social Dashboard</span>
     </span>
   )
 }

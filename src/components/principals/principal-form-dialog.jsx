@@ -178,7 +178,7 @@ export function PrincipalFormDialog({ managers, principal, trigger }) {
                 type="color"
                 value={colour}
                 onChange={(event) => setColour(event.target.value.toUpperCase())}
-                className="size-10 shrink-0 cursor-pointer rounded-control border border-hairline bg-surface p-1"
+                className="size-10 shrink-0 cursor-pointer rounded-control border border-hairline bg-bg/50 p-1"
               />
               <input
                 aria-label="Brand colour hex value"

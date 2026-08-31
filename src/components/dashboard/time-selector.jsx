@@ -50,7 +50,7 @@ export function TimeSelector({ quarter }) {
       role="tablist"
       aria-label="Time period"
       className={cn(
-        'inline-flex items-center gap-0.5 rounded-control border border-hairline bg-surface p-1',
+        'inline-flex items-center gap-0.5 rounded-control border border-hairline bg-surface/85 p-1 shadow-card',
         isPending && 'opacity-60',
       )}
     >
@@ -64,8 +64,8 @@ export function TimeSelector({ quarter }) {
             aria-selected={active}
             onClick={() => select(option.value)}
             className={cn(
-              'rounded-chip px-3 py-1.5 text-sm transition-colors duration-[120ms] ease-standard',
-              active ? 'bg-ink text-surface' : 'text-muted hover:text-ink',
+              'rounded-chip px-3 py-1.5 text-sm font-medium transition-colors duration-[120ms] ease-standard',
+              active ? 'bg-forest text-on-accent' : 'text-muted hover:bg-hover hover:text-ink',
             )}
           >
             {option.label}

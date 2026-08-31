@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn'
-import { ACCENT_BORDER, ACCENT_WASH } from '@/lib/nav'
+import { ACCENT_BORDER, ACCENT_TEXT, ACCENT_WASH } from '@/lib/nav'
 
 /**
  * The masthead. When a section accent is given it bleeds full-width, edge to
@@ -21,15 +21,15 @@ export function PageHeader({ title, description, actions, accent }) {
         'mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between',
         accent &&
           cn(
-            '-mx-4 -mt-6 border-b-4 px-4 pb-5 pt-6 md:-mx-8 md:-mt-8 md:px-8 md:pb-6 md:pt-8',
+            '-mx-4 -mt-6 border-b px-4 pb-6 pt-7 md:-mx-8 md:-mt-8 md:px-8 md:pb-7 md:pt-9',
             ACCENT_BORDER[accent],
             ACCENT_WASH[accent],
           ),
       )}
     >
       <div className="min-w-0">
-        <h2 className="text-lg text-ink">{title}</h2>
-        {description && <p className="mt-1 max-w-2xl text-base text-muted">{description}</p>}
+        <h2 className={cn('text-xl text-ink', accent && ACCENT_TEXT[accent])}>{title}</h2>
+        {description && <p className="mt-2 max-w-2xl text-base font-medium text-ink">{description}</p>}
       </div>
       {actions && <div className="flex shrink-0 flex-wrap items-center gap-3">{actions}</div>}
     </div>

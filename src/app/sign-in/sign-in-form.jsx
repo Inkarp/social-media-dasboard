@@ -8,9 +8,9 @@ import { buttonClasses } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
 
 const fieldClasses = cn(
-  'w-full rounded-control border border-hairline bg-surface px-3 py-2',
+  'w-full rounded-control border border-hairline bg-bg/50 px-3 py-2',
   'text-base text-ink placeholder:text-muted',
-  'transition-colors duration-[120ms] ease-standard hover:border-muted',
+  'transition-colors duration-[120ms] ease-standard hover:border-teal',
 )
 
 /** @param {{ next: string }} props */
