@@ -11,6 +11,7 @@ const ROWS = [
   { brand: 'Radleys', manager: 'Praveen Reddy', target: 6, published: 6, planned: 0, pending: 0 },
 ]
 
+/** @param {{ target: number, published: number, planned: number, pending: number }} props */
 function Strip({ target, published, planned, pending }) {
   const pub = (published / target) * 100
   const pl = (planned / target) * 100

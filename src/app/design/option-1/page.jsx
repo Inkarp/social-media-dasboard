@@ -11,6 +11,7 @@ const ROWS = [
   { brand: 'Radleys', manager: 'Praveen Reddy', target: 6, published: 6, pct: 100 },
 ]
 
+/** @param {{ pct: number }} props */
 function Dial({ pct }) {
   const angle = -90 + (pct / 100) * 180
   return (

@@ -1,13 +1,24 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------------------
-   Inkarp design tokens.
+   Inkarp design tokens — Trade Ledger system.
 
-   The palette is deliberately closed. `--color-*: initial` wipes Tailwind's
-   default colour ramps so that `bg-blue-500` or `text-emerald-600` resolve to
-   nothing at all — an accidental non-brand colour shows up as unstyled markup
-   in review rather than shipping quietly. Same trick on type sizes, radii and
-   shadows: if it isn't in the system, it doesn't exist.
+   Same discipline as before, new palette: `--color-*: initial` wipes
+   Tailwind's default colour ramps so `bg-blue-500` resolves to nothing —
+   an off-system colour shows up as unstyled markup in review, not shipping
+   quietly. Same trick on type sizes, radii and shadows: if it isn't in the
+   system, it doesn't exist.
+
+   Light and dark share the same token names. Light values are the
+   defaults below; the dark block redefines the same custom properties
+   rather than introducing new ones, so every component that consumes a
+   token gets both modes for free. `[data-theme]` is the hook for an
+   explicit toggle (added in Phase 4); `prefers-color-scheme` covers the
+   no-toggle-yet default.
+
+   Every text/background pair below is WCAG AA verified (4.5:1 body text,
+   3:1 UI-boundary elements like input borders) — see the contrast check
+   run during Phase 3, not eyeballed.
 --------------------------------------------------------------------------- */
 
 @theme {
@@ -18,37 +29,39 @@
   --color-current: currentColor;
   --color-inherit: inherit;
 
-  /* The four. No others. */
-  --color-ink-red: #be0010;
-  --color-ink-black: #000000;
-  --color-ink-white: #ffffff;
-  --color-ink-grey: #7d7d7d;
+  /* Neutral ramp — paper fading to ink. Redefined under dark below. */
+  --color-bg: #f2f3ee; /* page */
+  --color-surface: #ffffff; /* card / sheet */
+  --color-zebra: #eef0e8; /* table stripe, hover fill */
+  --color-raised: #e4e6dc; /* floating layers (modal, dropdown) — paired with shadow-overlay */
+  --color-hairline: #dee1d5; /* decorative rule, not a UI boundary — no AA requirement */
+  --color-border: #8b9080; /* input borders, table header rule — verified 3:1 on surface */
+  --color-faint: #a6ab98; /* disabled text, placeholder icons */
+  --color-muted: #6b7161; /* secondary text — verified 4.5:1 on bg and surface */
+  --color-ink: #1f2a3a; /* primary text, headings — verified 12.9:1 / 14.5:1 */
 
-  /* Red at fixed opacities — status weight, not new hues. */
-  --color-ink-red-40: rgba(190, 0, 16, 0.4);
-  --color-ink-red-12: rgba(190, 0, 16, 0.12);
-  --color-ink-red-06: rgba(190, 0, 16, 0.06);
+  /* Accent — forest primary, ochre secondary, slate tertiary, danger for destructive/behind-plan. */
+  --color-forest: #2e6b4f;
+  --color-forest-hover: #24573f;
+  --color-ochre: #b98a2e; /* decorative use only (swatches, dots) — not verified as text */
+  --color-ochre-ink: #8c6a1f; /* text/icon-safe ochre — verified 5.0:1 on surface */
+  --color-slate: #3b5875; /* links, tertiary — verified 7.4:1 on surface */
+  --color-danger: #a8433c;
+  --color-danger-hover: #8a372f;
 
-  /* Neutrals derived only as opacity steps of black. */
-  --color-page: #fafafa;
-  --color-hairline: rgba(0, 0, 0, 0.06);
-  --color-hairline-soft: rgba(0, 0, 0, 0.04);
-  --color-zebra: rgba(0, 0, 0, 0.02);
-  --color-hover: rgba(0, 0, 0, 0.03);
-  --color-track: rgba(0, 0, 0, 0.06);
-  --color-tick: rgba(0, 0, 0, 0.14);
-  --color-scrim: rgba(0, 0, 0, 0.4);
+  /* Gauge/meter neutrals (calibrated-bar track, ticks). */
+  --color-track: #e4e6dc;
+  --color-tick: #c6cabb;
 
-  /* Sidebar is black; its own hairlines step off white. */
-  --color-sidebar-hairline: rgba(255, 255, 255, 0.1);
-  --color-sidebar-hover: rgba(255, 255, 255, 0.06);
-  --color-sidebar-muted: rgba(255, 255, 255, 0.55);
+  --color-scrim: rgba(31, 42, 58, 0.35);
+  --color-on-accent: #ffffff; /* text on forest/danger fills — verified */
 
   /* -- Type -------------------------------------------------------------- */
-  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* Scale: 12 / 13 / 14 / 16 / 20 / 28 / 40. Nothing between, nothing beyond. */
+  /* Scale unchanged from the audit: 12 / 13 / 14 / 16 / 20 / 28 / 40. */
   --text-*: initial;
 
   --text-xs: 0.75rem; /* 12 — labels, column headers, chips */
@@ -59,9 +72,9 @@
   --text-base--line-height: 1.375rem;
   --text-md: 1rem; /* 16 — card titles, section heads */
   --text-md--line-height: 1.5rem;
-  --text-lg: 1.25rem; /* 20 — page titles */
+  --text-lg: 1.25rem; /* 20 — page titles (sans weight) */
   --text-lg--line-height: 1.75rem;
-  --text-xl: 1.75rem; /* 28 — secondary figures */
+  --text-xl: 1.75rem; /* 28 — secondary figures, serif mast */
   --text-xl--line-height: 2rem;
   --text-2xl: 2.5rem; /* 40 — hero figures on dashboard cards */
   --text-2xl--line-height: 1;
@@ -72,22 +85,89 @@
   --font-weight-semibold: 600;
 
   /* -- Radius ------------------------------------------------------------ */
+  /* Near-square by decree — a ruled ledger, not a rounded SaaS card. */
   --radius-*: initial;
-  --radius-chip: 4px;
-  --radius-control: 6px;
-  --radius-card: 8px;
+  --radius-chip: 2px;
+  --radius-control: 2px;
+  --radius-card: 2px;
   --radius-full: 9999px; /* status dots only — never pills */
 
   /* -- Elevation --------------------------------------------------------- */
-  /* Cards are flat by decree. Only detached layers get any lift. */
+  /* Cards are flat, ruled by border. Only detached layers lift, and the
+     shadow is tinted with ink rather than pure black — paper lifted off
+     a table, not a UI panel with a drop shadow. */
   --shadow-*: initial;
-  --shadow-overlay: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-overlay: 0 12px 32px rgba(31, 42, 58, 0.16), 0 2px 8px rgba(31, 42, 58, 0.08);
 
   /* -- Motion ------------------------------------------------------------ */
-  --ease-instrument: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-hover: 120ms;
   --duration-count: 400ms;
-  --duration-gauge: 600ms;
+  --duration-fill: 600ms;
+}
+
+/* ---------------------------------------------------------------------------
+   Dark mode — same token names, redefined. `prefers-color-scheme` covers
+   the default; `[data-theme="dark"]` covers an explicit toggle once one
+   exists (Phase 4), and wins over the media query either direction.
+--------------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #14181a;
+    --color-surface: #1d2320;
+    --color-zebra: #242b26;
+    --color-raised: #333a33;
+    --color-hairline: rgba(255, 255, 255, 0.08);
+    --color-border: #565f54;
+    --color-faint: #6b7361;
+    --color-muted: #9aa28e;
+    --color-ink: #f2f3ed;
+
+    --color-forest: #4c9973;
+    --color-forest-hover: #63b389;
+    --color-ochre: #d9a94a;
+    --color-ochre-ink: #d9a94a; /* already verified 7.4:1 — no separate dim variant needed */
+    --color-slate: #6f93b5;
+    --color-danger: #d97870;
+    --color-danger-hover: #e5948d;
+
+    --color-track: #333a33;
+    --color-tick: #4a5248;
+
+    --color-scrim: rgba(0, 0, 0, 0.55);
+    --color-on-accent: #10140f; /* dark ink on bright accent fills in dark mode */
+
+    --shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.24);
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #14181a;
+  --color-surface: #1d2320;
+  --color-zebra: #242b26;
+  --color-raised: #333a33;
+  --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-border: #565f54;
+  --color-faint: #6b7361;
+  --color-muted: #9aa28e;
+  --color-ink: #f2f3ed;
+
+  --color-forest: #4c9973;
+  --color-forest-hover: #63b389;
+  --color-ochre: #d9a94a;
+  --color-ochre-ink: #d9a94a;
+  --color-slate: #6f93b5;
+  --color-danger: #d97870;
+  --color-danger-hover: #e5948d;
+
+  --color-track: #333a33;
+  --color-tick: #4a5248;
+
+  --color-scrim: rgba(0, 0, 0, 0.55);
+  --color-on-accent: #10140f;
+
+  --shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.24);
 }
 
 /* ---------------------------------------------------------------------------
@@ -103,11 +183,12 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+    color-scheme: light dark;
   }
 
   body {
-    background-color: var(--color-page);
-    color: var(--color-ink-black);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
@@ -116,8 +197,15 @@
     font-feature-settings: 'cv11', 'ss01';
   }
 
-  /* Headings never exceed 600 — heaviness reads as shouting next to the red. */
-  h1,
+  /* The masthead: only the page-title h1 gets the serif. Everything below
+     it — section labels, card titles — stays sans, or the serif stops
+     reading as an accent and starts reading as the whole system. */
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
   h2,
   h3,
   h4,
@@ -132,7 +220,7 @@
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     font-feature-settings: 'tnum' 1, 'zero' 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   /* Uppercase micro-label used for card labels and column headers. */
@@ -140,26 +228,21 @@
     font-size: var(--text-xs);
     line-height: var(--text-xs--line-height);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-ink-grey);
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
     font-weight: var(--font-weight-medium);
   }
 
-  /* Focus is always red, always visible, never removed. */
+  /* Focus is always the accent, always visible, never removed. */
   :focus-visible {
-    outline: 2px solid var(--color-ink-red);
+    outline: 2px solid var(--color-forest);
     outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  /* On black surfaces the red ring needs a white companion to stay legible. */
-  .on-black :focus-visible {
-    outline-color: var(--color-ink-white);
+    border-radius: 1px;
   }
 
   ::selection {
-    background-color: var(--color-ink-red);
-    color: var(--color-ink-white);
+    background-color: var(--color-forest);
+    color: var(--color-on-accent);
   }
 
   [hidden] {
@@ -172,7 +255,7 @@
 --------------------------------------------------------------------------- */
 
 @utility card {
-  background-color: var(--color-ink-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-card);
 }
@@ -224,7 +307,8 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Print — the PDF path is this stylesheet plus window.print().
+   Print — the PDF path is this stylesheet plus window.print(). A paper
+   system prints closer to its screen form than most would, by design.
 --------------------------------------------------------------------------- */
 
 @media print {
@@ -234,6 +318,7 @@
 
   body {
     background: #fff;
+    color: #000;
   }
 
   [data-print='hide'] {
