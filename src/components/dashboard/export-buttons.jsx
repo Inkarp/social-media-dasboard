@@ -37,12 +37,12 @@ export function ExportButtons({ rows, filename }) {
         .filter((row) => row.dimension === sheet.dimension)
         .map((row) => ({
           Name: row.label,
-          Planned: row.planned,
+          Target: row.planned,
           Implemented: row.implemented,
           Pending: row.pending,
         }))
       const worksheet = XLSX.utils.json_to_sheet(
-        sheetRows.length > 0 ? sheetRows : [{ Name: 'No activity in this period', Planned: '', Implemented: '', Pending: '' }],
+        sheetRows.length > 0 ? sheetRows : [{ Name: 'No activity in this period', Target: '', Implemented: '', Pending: '' }],
       )
       worksheet['!cols'] = [{ wch: 32 }, { wch: 10 }, { wch: 12 }, { wch: 10 }]
       XLSX.utils.book_append_sheet(workbook, worksheet, sheet.name)

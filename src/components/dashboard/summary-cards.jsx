@@ -19,7 +19,7 @@ export function SummaryCards({ principalRows }) {
   const completion = completionPct(implemented, planned)
 
   const cards = [
-    { label: 'Planned', figure: planned, bar: null },
+    { label: 'Target', figure: planned, bar: null },
     { label: 'Implemented', figure: implemented, bar: { implemented, planned } },
     { label: 'Pending', figure: pending, bar: null },
     {

@@ -62,7 +62,7 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
             <thead>
               <tr className="border-b border-hairline bg-forest/10">
                 <th className="label px-6 py-3">Name</th>
-                <th className="label px-4 py-3 text-right">Planned</th>
+                <th className="label px-4 py-3 text-right">Target</th>
                 <th className="label px-4 py-3 text-right">Implemented</th>
                 <th className="label px-4 py-3 text-right">Pending</th>
                 <th className="label px-4 py-3">Progress</th>

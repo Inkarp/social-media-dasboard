@@ -88,7 +88,7 @@ export default async function PrincipalsPage({ searchParams }) {
                 </div>
                 <div>
                   <p className="num text-xl font-medium text-ink">{totalPlanned}</p>
-                  <p className="label mt-1">Planned</p>
+                  <p className="label mt-1">Target</p>
                 </div>
                 <div>
                   <p className="num text-xl font-medium text-ink">{totalImplemented}</p>
