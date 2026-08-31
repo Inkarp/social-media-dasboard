@@ -21,7 +21,7 @@ export function BoardColumn({ status, posts, draggable, onCardClick }) {
 
   return (
     <div className="flex min-w-0 flex-col gap-3">
-      <div className="flex items-center justify-between px-1">
+      <div className="flex items-center justify-between border-b-2 border-b-teal px-1 pb-2">
         <h3 className="text-base font-medium text-ink">{STATUS_LABELS[status]}</h3>
         <span className="num text-xs text-muted">{posts.length}</span>
       </div>

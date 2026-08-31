@@ -81,7 +81,7 @@ export default async function PrincipalsPage({ searchParams }) {
             <EmptyState title="No brands match these filters. Clear them to see the full directory." />
           ) : (
             <>
-              <div className="card mb-6 flex flex-wrap items-center gap-6 p-6">
+              <div className="card mb-6 flex flex-wrap items-center gap-6 border-t-4 border-t-slate p-6">
                 <div>
                   <p className="num text-xl font-medium text-ink">{rows.length}</p>
                   <p className="label mt-1">Brands</p>

@@ -28,7 +28,7 @@ export function GroupSection({ group, rows, fy, managers, defaultOpen = true }) 
   const implemented = rows.reduce((sum, row) => sum + row.implemented, 0)
 
   return (
-    <section className="card overflow-hidden">
+    <section className="card overflow-hidden border-t-4 border-t-slate">
       <h3>
         <button
           type="button"
@@ -72,7 +72,7 @@ export function GroupSection({ group, rows, fy, managers, defaultOpen = true }) 
         <div className="border-t border-hairline">
           <div
             aria-hidden
-            className="hidden border-b border-hairline bg-zebra pl-4 pr-4 md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)_minmax(0,1fr)_7rem_3rem_minmax(0,1.4fr)_8.5rem] md:items-center md:gap-4 md:py-2"
+            className="hidden border-b border-hairline bg-slate/10 pl-4 pr-4 md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)_minmax(0,1fr)_7rem_3rem_minmax(0,1.4fr)_8.5rem] md:items-center md:gap-4 md:py-2"
           >
             <span className="label pl-6">Brand</span>
             <span className="label">Manager</span>

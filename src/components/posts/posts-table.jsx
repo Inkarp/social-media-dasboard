@@ -73,11 +73,11 @@ export function PostsTable({ principals }) {
   }
 
   return (
-    <div className="card overflow-hidden">
+    <div className="card overflow-hidden border-t-4 border-t-ochre-ink">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] border-collapse text-left">
           <thead>
-            <tr className="border-b border-hairline bg-zebra">
+            <tr className="border-b border-hairline bg-ochre-ink/10">
               {isEditor && (
                 <th className="w-10 px-4 py-3">
                   <input

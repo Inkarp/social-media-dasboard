@@ -34,7 +34,7 @@ export function SummaryCards({ principalRows }) {
     <section aria-label="Summary" className="mb-8">
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
         {cards.map((card) => (
-          <div key={card.label} className="card flex flex-col gap-4 p-6">
+          <div key={card.label} className="card flex flex-col gap-4 border-t-4 border-t-forest p-6">
             <div>
               <p className="num text-2xl font-medium text-ink">{card.figure}</p>
               <p className="label mt-2">{card.label}</p>

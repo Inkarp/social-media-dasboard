@@ -45,8 +45,8 @@ export function MonthGrid({ month, posts, principals }) {
   const today = toDateOnly(new Date())
 
   return (
-    <div className="card overflow-hidden">
-      <div className="grid grid-cols-7 border-b border-hairline bg-zebra">
+    <div className="card overflow-hidden border-t-4 border-t-wine">
+      <div className="grid grid-cols-7 border-b border-hairline bg-wine/10">
         {WEEKDAY_LABELS.map((label) => (
           <div key={label} className="label px-2 py-2 text-center">
             {label}

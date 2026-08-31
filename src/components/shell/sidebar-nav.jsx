@@ -3,14 +3,14 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/cn'
-import { ACCENT_BG, ACCENT_TEXT, isNavActive, NAV_ITEMS } from '@/lib/nav'
+import { ACCENT_BG, ACCENT_TEXT, ACCENT_WASH_STRONG, isNavActive, NAV_ITEMS } from '@/lib/nav'
 
 /**
  * Sidebar navigation, styled as a tabbed ledger index rather than a generic
  * icon rail. Each section carries its own accent — the same idea as a
- * binder's colour-coded divider tabs — surfaced two ways: a numbered chip
- * (outlined at rest, solid-filled in that section's colour when active) and
- * a thin bar flush against the sidebar's inner edge on the active row.
+ * binder's colour-coded divider tabs — surfaced three ways on the active
+ * row: a solid-filled numbered chip, a wash across the whole row, and a
+ * bar flush against the sidebar's inner edge.
  *
  * Section colour never touches shared meaning elsewhere in the app — a
  * button, a post's status, the calibrated gauge — only wayfinding. Only one
@@ -41,7 +41,9 @@ export function SidebarNav() {
             className={cn(
               'group relative flex items-center gap-3 rounded-control py-2.5 pl-2.5 pr-4',
               'text-base transition-colors duration-[120ms] ease-standard',
-              active ? cn('font-medium', ACCENT_TEXT[item.accent]) : 'text-muted hover:bg-hover hover:text-ink',
+              active
+                ? cn('font-semibold', ACCENT_TEXT[item.accent], ACCENT_WASH_STRONG[item.accent])
+                : 'text-muted hover:bg-hover hover:text-ink',
             )}
           >
             <span
@@ -58,7 +60,7 @@ export function SidebarNav() {
             <item.icon aria-hidden strokeWidth={active ? 2 : 1.5} className="size-4 shrink-0" />
             {item.label}
             {active && (
-              <span aria-hidden className={cn('absolute inset-y-1 right-0 w-1 rounded-l-chip', ACCENT_BG[item.accent])} />
+              <span aria-hidden className={cn('absolute inset-y-1 right-0 w-1.5 rounded-l-chip', ACCENT_BG[item.accent])} />
             )}
           </Link>
         )

@@ -30,7 +30,7 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
     : rows
 
   return (
-    <div className="card overflow-hidden">
+    <div className="card overflow-hidden border-t-4 border-t-forest">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-hairline px-6 py-4">
         <h2 className="text-md text-ink">{title}</h2>
         {searchable && rows.length > 0 && (
@@ -60,7 +60,7 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-left">
             <thead>
-              <tr className="border-b border-hairline bg-zebra">
+              <tr className="border-b border-hairline bg-forest/10">
                 <th className="label px-6 py-3">Name</th>
                 <th className="label px-4 py-3 text-right">Planned</th>
                 <th className="label px-4 py-3 text-right">Implemented</th>

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/cn'
-import { ACCENT_BG, ACCENT_TEXT, isNavActive, NAV_ITEMS } from '@/lib/nav'
+import { ACCENT_BG, ACCENT_TEXT, ACCENT_WASH, isNavActive, NAV_ITEMS } from '@/lib/nav'
 
 /**
  * Below md the sidebar becomes a bottom bar. The active marker rotates from a
@@ -35,7 +35,7 @@ export function MobileNav() {
                 className={cn(
                   'relative flex flex-col items-center gap-1 px-1 py-3',
                   'text-xs transition-colors duration-[120ms] ease-standard',
-                  active ? cn('font-medium', ACCENT_TEXT[item.accent]) : 'text-muted',
+                  active ? cn('font-semibold', ACCENT_TEXT[item.accent], ACCENT_WASH[item.accent]) : 'text-muted',
                 )}
               >
                 {active && (

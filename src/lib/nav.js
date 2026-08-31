@@ -53,6 +53,24 @@ export const ACCENT_BORDER = {
   teal: 'border-teal',
 }
 
+/** A light wash for banded headers and hero cards. @type {Record<SectionAccent, string>} */
+export const ACCENT_WASH = {
+  forest: 'bg-forest/10',
+  slate: 'bg-slate/10',
+  ochre: 'bg-ochre-ink/10',
+  wine: 'bg-wine/10',
+  teal: 'bg-teal/10',
+}
+
+/** A stronger wash for the sidebar's active row. @type {Record<SectionAccent, string>} */
+export const ACCENT_WASH_STRONG = {
+  forest: 'bg-forest/16',
+  slate: 'bg-slate/16',
+  ochre: 'bg-ochre-ink/16',
+  wine: 'bg-wine/16',
+  teal: 'bg-teal/16',
+}
+
 /**
  * Exact match for the dashboard, prefix match for everything else.
  * @param {string} pathname
