@@ -60,6 +60,14 @@
   --color-danger-12: rgba(168, 67, 60, 0.12);
   --color-danger-06: rgba(168, 67, 60, 0.06);
 
+  /* Section accents — one per nav item, carrying page identity through the
+     sidebar's ledger tabs and each page's masthead rule. Verified 4.5:1+ as
+     text and as white-on-fill in both modes. Never used for shared
+     semantics (buttons, post status, the calibrated gauge) — those stay
+     forest/danger everywhere so their meaning doesn't shift page to page. */
+  --color-wine: #7a3b54;
+  --color-teal: #2b6b6e;
+
   /* Gauge/meter neutrals (calibrated-bar track, ticks). */
   --color-track: #e4e6dc;
   --color-tick: #c6cabb;
@@ -151,6 +159,9 @@
     --color-danger-12: rgba(217, 120, 112, 0.16);
     --color-danger-06: rgba(217, 120, 112, 0.1);
 
+    --color-wine: #c97fa0;
+    --color-teal: #5cb5b8;
+
     --color-track: #333a33;
     --color-tick: #4a5248;
 
@@ -165,8 +176,10 @@
   --color-bg: #14181a;
   --color-surface: #1d2320;
   --color-zebra: #242b26;
+  --color-hover: #29312b;
   --color-raised: #333a33;
   --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-hairline-soft: rgba(255, 255, 255, 0.05);
   --color-border: #565f54;
   --color-faint: #6b7361;
   --color-muted: #9aa28e;
@@ -174,11 +187,20 @@
 
   --color-forest: #4c9973;
   --color-forest-hover: #63b389;
+  --color-forest-40: rgba(76, 153, 115, 0.4);
+  --color-forest-12: rgba(76, 153, 115, 0.16);
+  --color-forest-06: rgba(76, 153, 115, 0.1);
   --color-ochre: #d9a94a;
-  --color-ochre-ink: #d9a94a;
+  --color-ochre-ink: #d9a94a; /* already verified 7.4:1 — no separate dim variant needed */
   --color-slate: #6f93b5;
   --color-danger: #d97870;
   --color-danger-hover: #e5948d;
+  --color-danger-40: rgba(217, 120, 112, 0.4);
+  --color-danger-12: rgba(217, 120, 112, 0.16);
+  --color-danger-06: rgba(217, 120, 112, 0.1);
+
+  --color-wine: #c97fa0;
+  --color-teal: #5cb5b8;
 
   --color-track: #333a33;
   --color-tick: #4a5248;

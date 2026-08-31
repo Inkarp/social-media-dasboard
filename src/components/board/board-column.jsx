@@ -31,7 +31,7 @@ export function BoardColumn({ status, posts, draggable, onCardClick }) {
         className={cn(
           'flex min-h-32 flex-1 flex-col gap-2 rounded-card border border-dashed border-hairline p-2',
           'transition-colors duration-[120ms] ease-standard',
-          isOver && 'border-forest bg-forest-06',
+          isOver && 'border-teal bg-teal/10',
         )}
       >
         {posts.map((post) => (

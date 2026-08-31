@@ -3,11 +3,13 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/cn'
-import { isNavActive, NAV_ITEMS } from '@/lib/nav'
+import { ACCENT_BG, ACCENT_TEXT, isNavActive, NAV_ITEMS } from '@/lib/nav'
 
 /**
  * Below md the sidebar becomes a bottom bar. The active marker rotates from a
- * left rule to a top rule so the motif survives the change in axis.
+ * left rule to a top rule so the motif survives the change in axis, and each
+ * tab keeps its section's colour from the sidebar rather than flattening to
+ * one accent.
  */
 export function MobileNav() {
   const pathname = usePathname()
@@ -33,14 +35,16 @@ export function MobileNav() {
                 className={cn(
                   'relative flex flex-col items-center gap-1 px-1 py-3',
                   'text-xs transition-colors duration-[120ms] ease-standard',
-                  active ? 'font-medium text-forest' : 'text-muted',
+                  active ? cn('font-medium', ACCENT_TEXT[item.accent]) : 'text-muted',
                 )}
               >
-                {active && <span aria-hidden className="absolute inset-x-3 top-0 h-[3px] bg-forest" />}
+                {active && (
+                  <span aria-hidden className={cn('absolute inset-x-3 top-0 h-[3px]', ACCENT_BG[item.accent])} />
+                )}
                 <item.icon
                   aria-hidden
                   strokeWidth={active ? 2 : 1.5}
-                  className={cn('size-4', active ? 'text-forest' : 'text-current')}
+                  className={cn('size-4', active ? ACCENT_TEXT[item.accent] : 'text-current')}
                 />
                 {item.short}
               </Link>

@@ -42,6 +42,7 @@ export default async function PostsPage({ searchParams }) {
   return (
     <PostsListProvider rows={rows}>
       <PageHeader
+        accent="ochre"
         title="Posts"
         description={`Every individual post and campaign for ${fyLabel(fy)}.`}
         actions={

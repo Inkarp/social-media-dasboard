@@ -54,6 +54,7 @@ export default async function DashboardPage({ searchParams }) {
   return (
     <>
       <PageHeader
+        accent="forest"
         title="Overview"
         description={`Planned against published activity across every principal, for ${periodLabel}.`}
         actions={

@@ -25,6 +25,7 @@ export default async function BoardPage({ searchParams }) {
   return (
     <>
       <PageHeader
+        accent="teal"
         title="Board"
         description={`Move posts from planned through to published, for ${fyLabel(fy)}.`}
       />

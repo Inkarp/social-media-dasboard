@@ -55,6 +55,7 @@ export default async function PrincipalsPage({ searchParams }) {
   return (
     <>
       <PageHeader
+        accent="slate"
         title="Principals"
         description={`The plan for ${fyLabel(fy)}${quarter ? ` · ${quarterFullLabel(quarter)}` : ''}. Set a yearly target per brand; expand a row to override a quarter.`}
         actions={

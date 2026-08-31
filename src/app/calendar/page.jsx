@@ -42,6 +42,7 @@ export default async function CalendarPage({ searchParams }) {
   return (
     <>
       <PageHeader
+        accent="wine"
         title="Calendar"
         description="Posts on their scheduled dates, one month at a time."
         actions={<CalendarNav month={month} />}

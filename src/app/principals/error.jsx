@@ -21,7 +21,7 @@ export default function PrincipalsError({ error, reset }) {
 
   return (
     <div className="max-w-xl">
-      <PageHeader title="Principals" />
+      <PageHeader accent="slate" title="Principals" />
       <Card>
         <CardHeader
           title="The brand directory could not be loaded"

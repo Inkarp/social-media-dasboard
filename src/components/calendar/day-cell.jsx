@@ -42,7 +42,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
         <span
           className={cn(
             'num flex size-6 items-center justify-center rounded-full text-sm',
-            isToday ? 'bg-forest text-on-accent' : inCurrentMonth ? 'text-ink' : 'text-muted',
+            isToday ? 'bg-wine text-on-accent' : inCurrentMonth ? 'text-ink' : 'text-muted',
           )}
         >
           {dayNumber}
