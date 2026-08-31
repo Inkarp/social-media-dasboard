@@ -3,10 +3,10 @@ import { cn } from '@/lib/cn'
 /**
  * Buttons say what happens. "Save target", not "Submit".
  *
- * Variants carry weight, not hue — the palette has one accent, so hierarchy is
- * fill vs outline vs bare. `danger` is the same red as `primary` because there
- * is no second colour to reach for; destructive actions are distinguished by
- * their wording and by always sitting behind a confirmation dialog.
+ * Variants carry weight, not hue for `primary`/`secondary`/`ghost` — fill vs
+ * outline vs bare. `danger` is the one place a second colour exists at all,
+ * reserved for destructive actions, which also always sit behind a
+ * confirmation dialog rather than relying on colour alone.
  */
 
 /** @typedef {'primary' | 'secondary' | 'ghost' | 'danger'} ButtonVariant */
@@ -14,10 +14,10 @@ import { cn } from '@/lib/cn'
 
 /** @type {Record<ButtonVariant, string>} */
 const VARIANTS = {
-  primary: 'bg-ink-red text-ink-white hover:bg-ink-black',
-  secondary: 'border border-hairline bg-ink-white text-ink-black hover:bg-hover',
-  ghost: 'text-ink-grey hover:bg-hover hover:text-ink-black',
-  danger: 'border border-ink-red bg-transparent text-ink-red hover:bg-ink-red hover:text-ink-white',
+  primary: 'bg-forest text-on-accent hover:bg-forest-hover',
+  secondary: 'border border-hairline bg-surface text-ink hover:bg-hover',
+  ghost: 'text-muted hover:bg-hover hover:text-ink',
+  danger: 'border border-danger bg-transparent text-danger hover:bg-danger hover:text-on-accent',
 }
 
 /** @type {Record<ButtonSize, string>} */
@@ -33,7 +33,7 @@ const SIZES = {
 export function buttonClasses({ variant = 'primary', size = 'md', className } = {}) {
   return cn(
     'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-control font-medium',
-    'transition-colors duration-[120ms] ease-instrument',
+    'transition-colors duration-[120ms] ease-standard',
     'disabled:pointer-events-none disabled:opacity-50',
     VARIANTS[variant],
     SIZES[size],

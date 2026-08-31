@@ -59,31 +59,31 @@ export function PrincipalRow({ row, fy, managers, index }) {
             onClick={() => setExpanded((value) => !value)}
             aria-expanded={expanded}
             aria-label={`${expanded ? 'Hide' : 'Show'} quarter targets for ${row.name}`}
-            className="-ml-1 shrink-0 rounded-control p-1 text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+            className="-ml-1 shrink-0 rounded-control p-1 text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
           >
             <ChevronRight
               aria-hidden
               strokeWidth={1.75}
               className={cn(
-                'size-4 transition-transform duration-[120ms] ease-instrument',
+                'size-4 transition-transform duration-[120ms] ease-standard',
                 expanded && 'rotate-90',
               )}
             />
           </button>
           <span className="min-w-0">
-            <span className="block truncate text-base font-medium text-ink-black">{row.name}</span>
-            {!row.isActive && <span className="text-xs text-ink-grey">Retired</span>}
+            <span className="block truncate text-base font-medium text-ink">{row.name}</span>
+            {!row.isActive && <span className="text-xs text-muted">Retired</span>}
           </span>
         </div>
 
         {/* Manager -------------------------------------------------------- */}
-        <span className="truncate text-sm text-ink-grey">
+        <span className="truncate text-sm text-muted">
           <span className="md:hidden">Manager: </span>
           {row.managerName ?? 'Unassigned'}
         </span>
 
         {/* Country -------------------------------------------------------- */}
-        <span className="truncate text-sm text-ink-grey">{row.country ?? '—'}</span>
+        <span className="truncate text-sm text-muted">{row.country ?? '—'}</span>
 
         {/* Yearly target -------------------------------------------------- */}
         <div className="flex items-center gap-3">
@@ -91,7 +91,7 @@ export function PrincipalRow({ row, fy, managers, index }) {
           {isEditor ? (
             <YearlyTargetInput editor={editor} />
           ) : (
-            <span className="num py-1.5 text-base text-ink-black md:w-20 md:text-right">
+            <span className="num py-1.5 text-base text-ink md:w-20 md:text-right">
               {row.yearlyTarget}
             </span>
           )}
@@ -100,7 +100,7 @@ export function PrincipalRow({ row, fy, managers, index }) {
         {/* Published ------------------------------------------------------ */}
         <div className="flex items-center gap-2">
           <span className="label md:hidden">Published</span>
-          <span className="num text-base text-ink-black md:w-full md:text-right">
+          <span className="num text-base text-ink md:w-full md:text-right">
             {row.implemented}
           </span>
         </div>
@@ -134,11 +134,11 @@ export function PrincipalRow({ row, fy, managers, index }) {
               <dl className="flex flex-wrap gap-6">
                 {/** @type {readonly [1, 2, 3, 4]} */ ([1, 2, 3, 4]).map((quarter) => (
                   <div key={quarter} className="flex flex-col gap-1">
-                    <dt className="text-xs text-ink-grey">Q{quarter}</dt>
-                    <dd className="num text-base text-ink-black">
+                    <dt className="text-xs text-muted">Q{quarter}</dt>
+                    <dd className="num text-base text-ink">
                       {resolved[`q${quarter}`]}
                       {row.overrides[`q${quarter}`] === null && (
-                        <span className="ml-1 text-xs text-ink-grey">derived</span>
+                        <span className="ml-1 text-xs text-muted">derived</span>
                       )}
                     </dd>
                   </div>

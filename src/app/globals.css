@@ -32,22 +32,33 @@
   /* Neutral ramp — paper fading to ink. Redefined under dark below. */
   --color-bg: #f2f3ee; /* page */
   --color-surface: #ffffff; /* card / sheet */
-  --color-zebra: #eef0e8; /* table stripe, hover fill */
+  --color-zebra: #eef0e8; /* table row stripe, at rest */
+  --color-hover: #e9ebe1; /* interactive hover wash — a hair stronger than zebra */
   --color-raised: #e4e6dc; /* floating layers (modal, dropdown) — paired with shadow-overlay */
   --color-hairline: #dee1d5; /* decorative rule, not a UI boundary — no AA requirement */
+  --color-hairline-soft: #e8eae2; /* lighter rule — skeleton blocks, nested dividers */
   --color-border: #8b9080; /* input borders, table header rule — verified 3:1 on surface */
   --color-faint: #a6ab98; /* disabled text, placeholder icons */
   --color-muted: #6b7161; /* secondary text — verified 4.5:1 on bg and surface */
   --color-ink: #1f2a3a; /* primary text, headings — verified 12.9:1 / 14.5:1 */
 
-  /* Accent — forest primary, ochre secondary, slate tertiary, danger for destructive/behind-plan. */
+  /* Accent — forest primary, ochre secondary, slate tertiary, danger for destructive/behind-plan.
+     Fixed opacity steps (not an arbitrary /N modifier) for the same reason the
+     old system used them: status weight is a closed set of three tiers, not a
+     free variable. */
   --color-forest: #2e6b4f;
   --color-forest-hover: #24573f;
+  --color-forest-40: rgba(46, 107, 79, 0.4);
+  --color-forest-12: rgba(46, 107, 79, 0.12);
+  --color-forest-06: rgba(46, 107, 79, 0.06);
   --color-ochre: #b98a2e; /* decorative use only (swatches, dots) — not verified as text */
   --color-ochre-ink: #8c6a1f; /* text/icon-safe ochre — verified 5.0:1 on surface */
   --color-slate: #3b5875; /* links, tertiary — verified 7.4:1 on surface */
   --color-danger: #a8433c;
   --color-danger-hover: #8a372f;
+  --color-danger-40: rgba(168, 67, 60, 0.4);
+  --color-danger-12: rgba(168, 67, 60, 0.12);
+  --color-danger-06: rgba(168, 67, 60, 0.06);
 
   /* Gauge/meter neutrals (calibrated-bar track, ticks). */
   --color-track: #e4e6dc;
@@ -117,8 +128,10 @@
     --color-bg: #14181a;
     --color-surface: #1d2320;
     --color-zebra: #242b26;
+    --color-hover: #29312b;
     --color-raised: #333a33;
     --color-hairline: rgba(255, 255, 255, 0.08);
+    --color-hairline-soft: rgba(255, 255, 255, 0.05);
     --color-border: #565f54;
     --color-faint: #6b7361;
     --color-muted: #9aa28e;
@@ -126,11 +139,17 @@
 
     --color-forest: #4c9973;
     --color-forest-hover: #63b389;
+    --color-forest-40: rgba(76, 153, 115, 0.4);
+    --color-forest-12: rgba(76, 153, 115, 0.16);
+    --color-forest-06: rgba(76, 153, 115, 0.1);
     --color-ochre: #d9a94a;
     --color-ochre-ink: #d9a94a; /* already verified 7.4:1 — no separate dim variant needed */
     --color-slate: #6f93b5;
     --color-danger: #d97870;
     --color-danger-hover: #e5948d;
+    --color-danger-40: rgba(217, 120, 112, 0.4);
+    --color-danger-12: rgba(217, 120, 112, 0.16);
+    --color-danger-06: rgba(217, 120, 112, 0.1);
 
     --color-track: #333a33;
     --color-tick: #4a5248;

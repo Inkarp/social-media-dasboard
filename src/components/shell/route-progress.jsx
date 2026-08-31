@@ -9,7 +9,7 @@ const RouteProgressContext =
   (createContext(null))
 
 /**
- * One thin red bar, fixed to the top of the viewport, that fills whenever a
+ * One thin forest bar, fixed to the top of the viewport, that fills whenever a
  * navigation is in flight — a sidebar `<Link>`, the FY switcher, a filter
  * dropdown, the calendar's prev/next. One visual language for "something is
  * loading" everywhere in the app, so a click gets an answer immediately, even
@@ -150,7 +150,7 @@ function RouteProgressBar({ active }) {
     <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5">
       <div
         className={cn(
-          'h-full origin-left bg-ink-red transition-[opacity,transform] duration-200 ease-instrument',
+          'h-full origin-left bg-forest transition-[opacity,transform] duration-200 ease-standard',
           visible ? 'opacity-100' : 'opacity-0',
         )}
         style={{ transform: `scaleX(${scale})` }}

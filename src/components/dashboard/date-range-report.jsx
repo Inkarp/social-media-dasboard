@@ -50,8 +50,8 @@ export function DateRangeReport({ from, to, preset }) {
         onClick={() => setExpanded((v) => !v)}
         className={cn(
           'inline-flex items-center gap-2 self-start rounded-control border border-hairline px-3 py-2 text-sm',
-          'transition-colors duration-[120ms] ease-instrument hover:border-ink-grey',
-          hasRange ? 'border-ink-red text-ink-red' : 'text-ink-grey hover:text-ink-black',
+          'transition-colors duration-[120ms] ease-standard hover:border-muted',
+          hasRange ? 'border-forest text-forest' : 'text-muted hover:text-ink',
         )}
       >
         <CalendarRange aria-hidden strokeWidth={1.5} className="size-4" />
@@ -59,7 +59,7 @@ export function DateRangeReport({ from, to, preset }) {
       </button>
 
       {expanded && (
-        <div className={cn('flex flex-wrap items-end gap-4 rounded-card border border-hairline bg-ink-white p-4', isPending && 'opacity-60')}>
+        <div className={cn('flex flex-wrap items-end gap-4 rounded-card border border-hairline bg-surface p-4', isPending && 'opacity-60')}>
           <div className="flex flex-wrap gap-2">
             {REPORT_PRESETS.map((option) => (
               <button
@@ -67,10 +67,10 @@ export function DateRangeReport({ from, to, preset }) {
                 type="button"
                 onClick={() => applyPreset(option.id)}
                 className={cn(
-                  'rounded-control border px-3 py-1.5 text-sm transition-colors duration-[120ms] ease-instrument',
+                  'rounded-control border px-3 py-1.5 text-sm transition-colors duration-[120ms] ease-standard',
                   preset === option.id
-                    ? 'border-ink-red bg-ink-red-06 text-ink-red'
-                    : 'border-hairline text-ink-grey hover:border-ink-grey hover:text-ink-black',
+                    ? 'border-forest bg-forest-06 text-forest'
+                    : 'border-hairline text-muted hover:border-muted hover:text-ink',
                 )}
               >
                 {option.label}
@@ -79,7 +79,7 @@ export function DateRangeReport({ from, to, preset }) {
           </div>
 
           <div className="flex items-end gap-3">
-            <label className="flex flex-col gap-1 text-xs text-ink-grey">
+            <label className="flex flex-col gap-1 text-xs text-muted">
               From
               <input
                 type="date"
@@ -88,7 +88,7 @@ export function DateRangeReport({ from, to, preset }) {
                 className={cn(inputClasses, 'num w-40')}
               />
             </label>
-            <label className="flex flex-col gap-1 text-xs text-ink-grey">
+            <label className="flex flex-col gap-1 text-xs text-muted">
               To
               <input
                 type="date"
@@ -103,7 +103,7 @@ export function DateRangeReport({ from, to, preset }) {
             <button
               type="button"
               onClick={() => apply({ from: null, to: null, preset: null })}
-              className="flex items-center gap-1.5 rounded-control px-2 py-2 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:text-ink-black"
+              className="flex items-center gap-1.5 rounded-control px-2 py-2 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:text-ink"
             >
               <X aria-hidden strokeWidth={1.75} className="size-4" />
               Clear

@@ -60,7 +60,7 @@ export default async function PrincipalsPage({ searchParams }) {
         actions={
           <EditorOnly
             fallback={
-              <span className="text-sm text-ink-grey">
+              <span className="text-sm text-muted">
                 Sign in to edit — viewing needs no account.
               </span>
             }
@@ -82,15 +82,15 @@ export default async function PrincipalsPage({ searchParams }) {
             <>
               <div className="card mb-6 flex flex-wrap items-center gap-6 p-6">
                 <div>
-                  <p className="num text-xl font-medium text-ink-black">{rows.length}</p>
+                  <p className="num text-xl font-medium text-ink">{rows.length}</p>
                   <p className="label mt-1">Brands</p>
                 </div>
                 <div>
-                  <p className="num text-xl font-medium text-ink-black">{totalPlanned}</p>
+                  <p className="num text-xl font-medium text-ink">{totalPlanned}</p>
                   <p className="label mt-1">Planned</p>
                 </div>
                 <div>
-                  <p className="num text-xl font-medium text-ink-black">{totalImplemented}</p>
+                  <p className="num text-xl font-medium text-ink">{totalImplemented}</p>
                   <p className="label mt-1">Published</p>
                 </div>
                 <div className="min-w-48 flex-1">

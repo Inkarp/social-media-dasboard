@@ -59,7 +59,7 @@ export function PrincipalFormDialog({ managers, principal, trigger }) {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-control px-3 py-1.5 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+          className="rounded-control px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           Edit
         </button>
@@ -128,7 +128,7 @@ export function PrincipalFormDialog({ managers, principal, trigger }) {
                 <ChevronDown
                   aria-hidden
                   strokeWidth={1.5}
-                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
                 />
               </div>
             </Field>
@@ -151,7 +151,7 @@ export function PrincipalFormDialog({ managers, principal, trigger }) {
                 <ChevronDown
                   aria-hidden
                   strokeWidth={1.5}
-                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
                 />
               </div>
             </Field>
@@ -178,7 +178,7 @@ export function PrincipalFormDialog({ managers, principal, trigger }) {
                 type="color"
                 value={colour}
                 onChange={(event) => setColour(event.target.value.toUpperCase())}
-                className="size-10 shrink-0 cursor-pointer rounded-control border border-hairline bg-ink-white p-1"
+                className="size-10 shrink-0 cursor-pointer rounded-control border border-hairline bg-surface p-1"
               />
               <input
                 aria-label="Brand colour hex value"
@@ -199,9 +199,9 @@ export function PrincipalFormDialog({ managers, principal, trigger }) {
           {error && (
             <p
               role="alert"
-              className="flex items-start gap-3 rounded-card border border-ink-red-12 bg-ink-red-06 px-4 py-3 text-base text-ink-black"
+              className="flex items-start gap-3 rounded-card border border-danger-12 bg-danger-06 px-4 py-3 text-base text-ink"
             >
-              <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-ink-red" />
+              <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-danger" />
               {error}
             </p>
           )}

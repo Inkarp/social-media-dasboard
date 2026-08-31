@@ -35,7 +35,7 @@ export function DayListModal({ date, posts, onClose, onSelect }) {
             <button
               type="button"
               onClick={() => onSelect(post)}
-              className="flex w-full items-center gap-3 rounded-control px-3 py-2 text-left transition-colors duration-[120ms] ease-instrument hover:bg-hover"
+              className="flex w-full items-center gap-3 rounded-control px-3 py-2 text-left transition-colors duration-[120ms] ease-standard hover:bg-hover"
             >
               <span
                 aria-hidden
@@ -43,8 +43,8 @@ export function DayListModal({ date, posts, onClose, onSelect }) {
                 style={{ backgroundColor: post.brandColor ?? 'transparent' }}
               />
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-base text-ink-black">{post.name}</span>
-                <span className="block truncate text-sm text-ink-grey">{post.principalName}</span>
+                <span className="block truncate text-base text-ink">{post.name}</span>
+                <span className="block truncate text-sm text-muted">{post.principalName}</span>
               </span>
               <ChannelIcons channels={post.channels} className="shrink-0" />
               <StatusBadge status={post.status} className="shrink-0" />

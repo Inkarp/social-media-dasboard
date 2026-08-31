@@ -58,7 +58,7 @@ export function DashboardFilters({ groups, managers }) {
               </option>
             ))}
           </select>
-          <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey" />
+          <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
         </div>
       </div>
 
@@ -80,7 +80,7 @@ export function DashboardFilters({ groups, managers }) {
               </option>
             ))}
           </select>
-          <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey" />
+          <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
         </div>
       </div>
 
@@ -102,7 +102,7 @@ export function DashboardFilters({ groups, managers }) {
               </option>
             ))}
           </select>
-          <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey" />
+          <ChevronDown aria-hidden strokeWidth={1.5} className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export function DashboardFilters({ groups, managers }) {
         <button
           type="button"
           onClick={() => set({ group: null, pm: null, status: null })}
-          className="flex items-center gap-2 rounded-control px-3 py-2 text-base text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+          className="flex items-center gap-2 rounded-control px-3 py-2 text-base text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           <X aria-hidden strokeWidth={1.75} className="size-4" />
           Clear filters

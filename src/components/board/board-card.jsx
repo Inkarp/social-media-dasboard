@@ -29,7 +29,7 @@ export function BoardCard({ post, draggable, onClick }) {
       style={transform ? { transform: CSS.Translate.toString(transform) } : undefined}
       className={cn(
         'card relative flex cursor-pointer flex-col gap-2 p-3 text-left',
-        'transition-colors duration-[120ms] ease-instrument hover:border-ink-grey',
+        'transition-colors duration-[120ms] ease-standard hover:border-muted',
         draggable && 'touch-none',
         isDragging && 'opacity-40',
       )}
@@ -39,11 +39,11 @@ export function BoardCard({ post, draggable, onClick }) {
         className="absolute inset-y-0 left-0 w-[3px]"
         style={{ backgroundColor: post.brandColor ?? 'transparent' }}
       />
-      <p className="truncate pl-2 text-sm font-medium text-ink-black">{post.name}</p>
-      <p className="truncate pl-2 text-xs text-ink-grey">{post.principalName}</p>
+      <p className="truncate pl-2 text-sm font-medium text-ink">{post.name}</p>
+      <p className="truncate pl-2 text-xs text-muted">{post.principalName}</p>
       <div className="flex items-center justify-between pl-2">
         <ChannelIcons channels={post.channels} iconClassName="size-3.5" />
-        <span className="num text-xs text-ink-grey">{post.postDate}</span>
+        <span className="num text-xs text-muted">{post.postDate}</span>
       </div>
     </div>
   )

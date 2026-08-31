@@ -36,7 +36,7 @@ export function SummaryCards({ principalRows }) {
         {cards.map((card) => (
           <div key={card.label} className="card flex flex-col gap-4 p-6">
             <div>
-              <p className="num text-2xl font-medium text-ink-black">{card.figure}</p>
+              <p className="num text-2xl font-medium text-ink">{card.figure}</p>
               <p className="label mt-2">{card.label}</p>
             </div>
             {card.bar && (

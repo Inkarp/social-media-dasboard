@@ -32,13 +32,13 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
   return (
     <div className="card overflow-hidden">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-hairline px-6 py-4">
-        <h2 className="text-md text-ink-black">{title}</h2>
+        <h2 className="text-md text-ink">{title}</h2>
         {searchable && rows.length > 0 && (
           <div className="relative">
             <Search
               aria-hidden
               strokeWidth={1.5}
-              className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-ink-grey"
+              className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-muted"
             />
             <input
               type="search"
@@ -46,16 +46,16 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search"
               aria-label={`Search ${title}`}
-              className="w-44 rounded-control border border-hairline bg-ink-white py-1.5 pl-8 pr-3 text-sm text-ink-black placeholder:text-ink-grey transition-colors duration-[120ms] ease-instrument hover:border-ink-grey focus:border-ink-red"
+              className="w-44 rounded-control border border-hairline bg-surface py-1.5 pl-8 pr-3 text-sm text-ink placeholder:text-muted transition-colors duration-[120ms] ease-standard hover:border-muted focus:border-forest"
             />
           </div>
         )}
       </div>
 
       {rows.length === 0 ? (
-        <p className="px-6 py-8 text-base text-ink-grey">No activity in this period.</p>
+        <p className="px-6 py-8 text-base text-muted">No activity in this period.</p>
       ) : filtered.length === 0 ? (
-        <p className="px-6 py-8 text-base text-ink-grey">Nothing matches “{search}”.</p>
+        <p className="px-6 py-8 text-base text-muted">Nothing matches “{search}”.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-left">
@@ -74,7 +74,7 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
                   key={row.key}
                   className={cn('border-b border-hairline-soft last:border-0', index % 2 === 1 && 'bg-zebra')}
                 >
-                  <td className="px-6 py-3 text-base text-ink-black">
+                  <td className="px-6 py-3 text-base text-ink">
                     <span className="flex items-center gap-2">
                       {showAccent && (
                         <span
@@ -86,9 +86,9 @@ export function BreakdownTable({ title, rows, searchable = true, showAccent = fa
                       <span className="truncate">{row.label}</span>
                     </span>
                   </td>
-                  <td className="num px-4 py-3 text-right text-base text-ink-black">{row.planned}</td>
-                  <td className="num px-4 py-3 text-right text-base text-ink-black">{row.implemented}</td>
-                  <td className="num px-4 py-3 text-right text-base text-ink-black">{row.pending}</td>
+                  <td className="num px-4 py-3 text-right text-base text-ink">{row.planned}</td>
+                  <td className="num px-4 py-3 text-right text-base text-ink">{row.implemented}</td>
+                  <td className="num px-4 py-3 text-right text-base text-ink">{row.pending}</td>
                   <td className="px-4 py-3">
                     <CalibratedBar
                       implemented={row.implemented}

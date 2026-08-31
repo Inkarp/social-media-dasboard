@@ -61,14 +61,14 @@ export function ChannelIcon({ channel, className, labelled = false }) {
  */
 export function ChannelIcons({ channels, className, iconClassName }) {
   if (channels.length === 0) {
-    return <span className="text-sm text-ink-grey">No channels</span>
+    return <span className="text-sm text-muted">No channels</span>
   }
 
   return (
     <span
       role="img"
       aria-label={channelListLabel(channels)}
-      className={cn('inline-flex items-center gap-2 text-ink-grey', className)}
+      className={cn('inline-flex items-center gap-2 text-muted', className)}
     >
       {channels.map((channel) => (
         <ChannelIcon key={channel} channel={channel} className={iconClassName} />

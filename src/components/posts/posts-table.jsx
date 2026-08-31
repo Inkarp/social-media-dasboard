@@ -65,7 +65,7 @@ export function PostsTable({ principals }) {
   if (items.length === 0) {
     return (
       <div className="card overflow-hidden px-6 py-8">
-        <p className="text-base text-ink-grey">
+        <p className="text-base text-muted">
           No posts match these filters. Clear them, or add the first post for this year.
         </p>
       </div>
@@ -88,7 +88,7 @@ export function PostsTable({ principals }) {
                       if (el) el.indeterminate = someSelected && !allSelected
                     }}
                     onChange={toggleAll}
-                    className="size-4 accent-[color:var(--color-ink-red)]"
+                    className="size-4 accent-[color:var(--color-forest)]"
                   />
                 </th>
               )}
@@ -109,7 +109,7 @@ export function PostsTable({ principals }) {
                 className={cn(
                   'border-b border-hairline-soft last:border-0',
                   index % 2 === 1 && 'bg-zebra',
-                  selected.has(row.id) && 'bg-ink-red-06',
+                  selected.has(row.id) && 'bg-forest-06',
                 )}
               >
                 {isEditor && (
@@ -119,16 +119,16 @@ export function PostsTable({ principals }) {
                       aria-label={`Select ${row.name}`}
                       checked={selected.has(row.id)}
                       onChange={() => toggleOne(row.id)}
-                      className="size-4 accent-[color:var(--color-ink-red)]"
+                      className="size-4 accent-[color:var(--color-forest)]"
                     />
                   </td>
                 )}
-                <td className="max-w-64 truncate px-4 py-3 text-base text-ink-black">{row.name}</td>
+                <td className="max-w-64 truncate px-4 py-3 text-base text-ink">{row.name}</td>
                 <td className="px-4 py-3">
                   <ChannelIcons channels={row.channels} />
                 </td>
                 <td className="px-4 py-3">
-                  <span className="flex items-center gap-2 text-sm text-ink-black">
+                  <span className="flex items-center gap-2 text-sm text-ink">
                     <span
                       aria-hidden
                       className="size-2 shrink-0 rounded-full"
@@ -136,13 +136,13 @@ export function PostsTable({ principals }) {
                     />
                     <span className="truncate">
                       {row.principalName}
-                      {!row.principalActive && <span className="ml-1 text-xs text-ink-grey">Retired</span>}
+                      {!row.principalActive && <span className="ml-1 text-xs text-muted">Retired</span>}
                     </span>
                   </span>
                 </td>
-                <td className="max-w-40 truncate px-4 py-3 text-sm text-ink-grey">{row.productName ?? '—'}</td>
-                <td className="max-w-40 truncate px-4 py-3 text-sm text-ink-grey">{row.managerName ?? 'Unassigned'}</td>
-                <td className="num whitespace-nowrap px-4 py-3 text-sm text-ink-black">{row.postDate}</td>
+                <td className="max-w-40 truncate px-4 py-3 text-sm text-muted">{row.productName ?? '—'}</td>
+                <td className="max-w-40 truncate px-4 py-3 text-sm text-muted">{row.managerName ?? 'Unassigned'}</td>
+                <td className="num whitespace-nowrap px-4 py-3 text-sm text-ink">{row.postDate}</td>
                 <td className="px-4 py-3">
                   <StatusBadge status={row.status} />
                 </td>

@@ -147,7 +147,7 @@ export function PostFormDialog({
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-control px-3 py-1.5 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+          className="rounded-control px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           Edit
         </button>
@@ -222,7 +222,7 @@ export function PostFormDialog({
                 <ChevronDown
                   aria-hidden
                   strokeWidth={1.5}
-                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
                 />
               </div>
             </Field>
@@ -233,7 +233,7 @@ export function PostFormDialog({
                 readOnly
                 disabled
                 value={manager ?? 'Unassigned'}
-                className={cn(inputClasses, 'cursor-not-allowed text-ink-grey')}
+                className={cn(inputClasses, 'cursor-not-allowed text-muted')}
               />
             </Field>
           </div>
@@ -278,7 +278,7 @@ export function PostFormDialog({
                 <ChevronDown
                   aria-hidden
                   strokeWidth={1.5}
-                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+                  className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
                 />
               </div>
             </Field>
@@ -293,7 +293,7 @@ export function PostFormDialog({
                   key={preset.id}
                   type="button"
                   onClick={() => setChannels([...preset.channels])}
-                  className="rounded-control border border-hairline px-3 py-1.5 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:border-ink-grey hover:text-ink-black"
+                  className="rounded-control border border-hairline px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
                 >
                   {preset.label}
                 </button>
@@ -303,7 +303,7 @@ export function PostFormDialog({
                   key={channel}
                   type="button"
                   onClick={() => setChannels([channel])}
-                  className="rounded-control border border-hairline px-3 py-1.5 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:border-ink-grey hover:text-ink-black"
+                  className="rounded-control border border-hairline px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:border-muted hover:text-ink"
                 >
                   {CHANNEL_LABELS[channel]} only
                 </button>
@@ -312,14 +312,14 @@ export function PostFormDialog({
 
             <div className="flex flex-wrap gap-4">
               {CHANNELS.map((channel) => (
-                <label key={channel} className="flex items-center gap-2 text-base text-ink-black">
+                <label key={channel} className="flex items-center gap-2 text-base text-ink">
                   <input
                     type="checkbox"
                     checked={channels.includes(channel)}
                     onChange={() => toggleChannel(channel)}
-                    className="size-4 accent-[color:var(--color-ink-red)]"
+                    className="size-4 accent-[color:var(--color-forest)]"
                   />
-                  <ChannelIcon channel={channel} className="size-4 text-ink-grey" />
+                  <ChannelIcon channel={channel} className="size-4 text-muted" />
                   {CHANNEL_LABELS[channel]}
                 </label>
               ))}
@@ -329,9 +329,9 @@ export function PostFormDialog({
           {error && (
             <p
               role="alert"
-              className="flex items-start gap-3 rounded-card border border-ink-red-12 bg-ink-red-06 px-4 py-3 text-base text-ink-black"
+              className="flex items-start gap-3 rounded-card border border-danger-12 bg-danger-06 px-4 py-3 text-base text-ink"
             >
-              <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-ink-red" />
+              <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-danger" />
               {error}
             </p>
           )}

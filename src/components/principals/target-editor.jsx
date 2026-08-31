@@ -24,10 +24,10 @@ import { deriveQuarterTargets, QUARTERS, quarterMonths } from '@/lib/fy'
 /** @typedef {import('@/lib/fy').Quarter} QuarterKey */
 
 const numberField = cn(
-  'num rounded-control border border-hairline bg-ink-white px-2 py-1.5 text-right',
-  'text-base tabular-nums text-ink-black',
-  'transition-colors duration-[120ms] ease-instrument',
-  'hover:border-ink-grey focus:border-ink-red',
+  'num rounded-control border border-hairline bg-surface px-2 py-1.5 text-right',
+  'text-base tabular-nums text-ink',
+  'transition-colors duration-[120ms] ease-standard',
+  'hover:border-muted focus:border-forest',
   'disabled:opacity-50',
 )
 
@@ -145,9 +145,9 @@ export function YearlyTargetInput({ editor }) {
       />
       <span aria-live="polite" className="flex w-4 shrink-0 items-center">
         {editor.state === 'saving' && (
-          <Loader2 aria-label="Saving" className="size-3.5 animate-spin text-ink-grey" />
+          <Loader2 aria-label="Saving" className="size-3.5 animate-spin text-muted" />
         )}
-        {editor.state === 'saved' && <Check aria-label="Saved" className="size-3.5 text-ink-red" />}
+        {editor.state === 'saved' && <Check aria-label="Saved" className="size-3.5 text-forest" />}
       </span>
     </div>
   )
@@ -164,9 +164,9 @@ export function QuarterTargetInputs({ editor }) {
           <div key={quarter} className="flex flex-col gap-1">
             <label
               htmlFor={`q${quarter}-${editor.principalId}`}
-              className="text-xs text-ink-grey"
+              className="text-xs text-muted"
             >
-              Q{quarter} <span className="text-ink-grey">{quarterMonths(quarter)}</span>
+              Q{quarter} <span className="text-muted">{quarterMonths(quarter)}</span>
             </label>
             <input
               id={`q${quarter}-${editor.principalId}`}
@@ -188,13 +188,13 @@ export function QuarterTargetInputs({ editor }) {
         ))}
       </div>
 
-      <p className="max-w-prose text-sm text-ink-grey">
+      <p className="max-w-prose text-sm text-muted">
         Leave a quarter empty to split the yearly target evenly, with the remainder falling in Q4.
         A number here overrides that — including zero.
       </p>
 
       {editor.state === 'error' && editor.message && (
-        <p role="alert" className="text-sm text-ink-red">
+        <p role="alert" className="text-sm text-danger">
           {editor.message}
         </p>
       )}

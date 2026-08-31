@@ -23,17 +23,17 @@ export function Header({ viewer }) {
   return (
     <header
       data-print="hide"
-      className="sticky top-0 z-20 border-b border-hairline bg-ink-white/95 backdrop-blur-sm"
+      className="sticky top-0 z-20 border-b border-hairline bg-surface/95 backdrop-blur-sm"
     >
       <div className="flex items-center justify-between px-4 pt-4 md:hidden">
-        <InkarpLogo tone="dark" />
-        <ModeBadge editing={viewer.isEditor} tone="dark" />
+        <InkarpLogo />
+        <ModeBadge editing={viewer.isEditor} />
       </div>
 
       <div className="flex flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
         <div className="min-w-0">
-          <h1 className="text-lg text-ink-black">{greetingFor(now)}</h1>
-          <p className="mt-1 text-sm text-ink-grey">{longDate(now)}</p>
+          <h1 className="text-lg text-ink">{greetingFor(now)}</h1>
+          <p className="mt-1 text-sm text-muted">{longDate(now)}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-4">
@@ -44,7 +44,7 @@ export function Header({ viewer }) {
           {viewer.isEditor ? (
             <div className="flex items-center gap-4">
               <span className="hidden md:block">
-                <ModeBadge editing tone="dark" />
+                <ModeBadge editing />
               </span>
               <SignOutButton />
             </div>

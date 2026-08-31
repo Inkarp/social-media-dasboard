@@ -51,7 +51,7 @@ export function RetirePrincipalDialog({ principal }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="rounded-control px-3 py-1.5 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+        className="rounded-control px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
       >
         {retired ? 'Restore' : 'Retire'}
       </button>
@@ -84,14 +84,14 @@ export function RetirePrincipalDialog({ principal }) {
         }
       >
         {retired ? (
-          <p className="text-base text-ink-grey">
+          <p className="text-base text-muted">
             {principal.name} will appear in the brand pickers again and can have new posts and
             targets recorded against it.
           </p>
         ) : (
-          <div className="flex flex-col gap-4 text-base text-ink-grey">
+          <div className="flex flex-col gap-4 text-base text-muted">
             <p>
-              <span className="text-ink-black">Every post already recorded against{' '}
+              <span className="text-ink">Every post already recorded against{' '}
               {principal.name} is kept.</span>{' '}
               They stay in the calendar, on the board, and in every historical breakdown, so past
               figures do not change.
@@ -104,7 +104,7 @@ export function RetirePrincipalDialog({ principal }) {
         )}
 
         {error && (
-          <p role="alert" className="mt-4 text-sm text-ink-red">
+          <p role="alert" className="mt-4 text-sm text-danger">
             {error}
           </p>
         )}

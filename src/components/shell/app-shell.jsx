@@ -13,7 +13,7 @@ export function AppShell({ viewer, children }) {
     <div className="min-h-dvh">
       <a
         href="#main"
-        className="sr-only-focusable absolute left-4 top-4 z-50 rounded-control bg-ink-black px-4 py-2 text-base text-ink-white"
+        className="sr-only-focusable absolute left-4 top-4 z-50 rounded-control bg-ink px-4 py-2 text-base text-surface"
       >
         Skip to content
       </a>

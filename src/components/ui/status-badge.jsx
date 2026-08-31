@@ -14,7 +14,7 @@ export function StatusBadge({ status, className }) {
   return (
     <span className={cn('inline-flex items-center gap-2 whitespace-nowrap', className)}>
       <span aria-hidden className={cn('size-2 shrink-0 rounded-chip', STATUS_SWATCH[status])} />
-      <span className="text-sm text-ink-black">{STATUS_LABELS[status]}</span>
+      <span className="text-sm text-ink">{STATUS_LABELS[status]}</span>
     </span>
   )
 }

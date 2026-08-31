@@ -36,25 +36,25 @@ export function GroupSection({ group, rows, fy, managers, defaultOpen = true }) 
           aria-expanded={open}
           className={cn(
             'flex w-full items-center gap-4 px-4 py-4 text-left',
-            'transition-colors duration-[120ms] ease-instrument hover:bg-hover',
+            'transition-colors duration-[120ms] ease-standard hover:bg-hover',
           )}
         >
           <ChevronDown
             aria-hidden
             strokeWidth={1.75}
             className={cn(
-              'size-4 shrink-0 text-ink-grey transition-transform duration-[120ms] ease-instrument',
+              'size-4 shrink-0 text-muted transition-transform duration-[120ms] ease-standard',
               !open && '-rotate-90',
             )}
           />
 
-          <span className="flex-1 text-md font-medium text-ink-black">{group}</span>
+          <span className="flex-1 text-md font-medium text-ink">{group}</span>
 
-          <span className="num hidden text-xs text-ink-grey sm:block">
+          <span className="num hidden text-xs text-muted sm:block">
             {rows.length} {rows.length === 1 ? 'brand' : 'brands'}
           </span>
 
-          <span className="num text-xs text-ink-grey">
+          <span className="num text-xs text-muted">
             {implemented} / {planned}
           </span>
 

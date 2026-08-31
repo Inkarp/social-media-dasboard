@@ -22,16 +22,16 @@ export function BoardColumn({ status, posts, draggable, onCardClick }) {
   return (
     <div className="flex min-w-0 flex-col gap-3">
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-base font-medium text-ink-black">{STATUS_LABELS[status]}</h3>
-        <span className="num text-xs text-ink-grey">{posts.length}</span>
+        <h3 className="text-base font-medium text-ink">{STATUS_LABELS[status]}</h3>
+        <span className="num text-xs text-muted">{posts.length}</span>
       </div>
 
       <div
         ref={setNodeRef}
         className={cn(
           'flex min-h-32 flex-1 flex-col gap-2 rounded-card border border-dashed border-hairline p-2',
-          'transition-colors duration-[120ms] ease-instrument',
-          isOver && 'border-ink-red bg-ink-red-06',
+          'transition-colors duration-[120ms] ease-standard',
+          isOver && 'border-forest bg-forest-06',
         )}
       >
         {posts.map((post) => (

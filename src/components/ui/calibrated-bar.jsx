@@ -5,10 +5,10 @@ import { completionPct } from '@/lib/fy'
  * The signature element: a calibrated gauge, not a rounded pastel pill.
  *
  * Anatomy
- *   · 6px track at 6% black, square ends, no gradient anywhere
- *   · red fill for implemented posts
- *   · 1px grey tick marks at 25 / 50 / 75 of the bar's width
- *   · 2px black marker at the target position
+ *   · 6px track, square ends, no gradient anywhere
+ *   · forest fill for implemented posts
+ *   · 1px tick marks at 25 / 50 / 75 of the bar's width
+ *   · 2px ink marker at the target position
  *   · the percentage in tabular mono, right-aligned alongside
  *
  * The scale is `max(implemented, planned)`, which is what lets the target
@@ -50,7 +50,7 @@ export function CalibratedBar({ implemented, planned, showPercentage = true, lab
         {/* Fill. Animated with scaleX so a server component can carry the
             motion without shipping any JavaScript to do it. */}
         <div
-          className="absolute inset-y-0 left-0 origin-left bg-ink-red motion-safe:[animation:gauge-fill_var(--duration-gauge)_var(--ease-instrument)_both]"
+          className="absolute inset-y-0 left-0 origin-left bg-forest motion-safe:[animation:gauge-fill_var(--duration-fill)_var(--ease-standard)_both]"
           style={{ width: `${fillPct}%` }}
         />
 
@@ -70,14 +70,14 @@ export function CalibratedBar({ implemented, planned, showPercentage = true, lab
         {target > 0 && (
           <span
             aria-hidden
-            className="absolute inset-y-0 w-0.5 bg-ink-black"
+            className="absolute inset-y-0 w-0.5 bg-ink"
             style={{ left: `min(calc(${markerPct}% - 1px), calc(100% - 2px))` }}
           />
         )}
       </div>
 
       {showPercentage && (
-        <span className="num w-10 shrink-0 text-right text-xs text-ink-black">{percentage}%</span>
+        <span className="num w-10 shrink-0 text-right text-xs text-ink">{percentage}%</span>
       )}
     </div>
   )

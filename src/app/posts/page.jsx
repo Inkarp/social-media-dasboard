@@ -47,7 +47,7 @@ export default async function PostsPage({ searchParams }) {
         actions={
           <EditorOnly
             fallback={
-              <span className="text-sm text-ink-grey">
+              <span className="text-sm text-muted">
                 Sign in to edit — viewing needs no account.
               </span>
             }

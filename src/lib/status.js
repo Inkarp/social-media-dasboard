@@ -2,14 +2,14 @@
  * Post status. The four values are a Postgres check constraint, so this list is
  * the single client-side mirror of it.
  *
- * Status is differentiated by weight, fill and position — never by hue. The
- * palette has exactly one accent, so "at risk amber" and "on target green" are
- * not available and are not missed:
+ * Status is differentiated by weight, fill and position — never by hue. These
+ * four values are stages of one workflow, not a judgement, so they share the
+ * one accent rather than reaching for a traffic-light palette:
  *
- *   published    solid red fill
- *   in_review    red at 40% opacity
- *   in_progress  red hairline outline, no fill
- *   planned      grey hairline outline
+ *   published    solid forest fill
+ *   in_review    forest at 40% opacity
+ *   in_progress  forest hairline outline, no fill
+ *   planned      muted hairline outline
  */
 
 /** @type {readonly ['planned', 'in_progress', 'in_review', 'published']} */
@@ -36,10 +36,10 @@ export const STATUS_LABELS = {
 /** Tailwind classes for the status swatch, ordered by visual weight. */
 /** @type {Record<PostStatus, string>} */
 export const STATUS_SWATCH = {
-  published: 'bg-ink-red',
-  in_review: 'bg-ink-red-40',
-  in_progress: 'border border-ink-red bg-transparent',
-  planned: 'border border-ink-grey bg-transparent',
+  published: 'bg-forest',
+  in_review: 'bg-forest-40',
+  in_progress: 'border border-forest bg-transparent',
+  planned: 'border border-muted bg-transparent',
 }
 
 /**

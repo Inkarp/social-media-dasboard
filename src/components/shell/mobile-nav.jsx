@@ -18,7 +18,7 @@ export function MobileNav() {
     <nav
       aria-label="Sections"
       data-print="hide"
-      className="on-black fixed inset-x-0 bottom-0 z-30 border-t border-[color:var(--color-sidebar-hairline)] bg-ink-black pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="flex items-stretch">
         {NAV_ITEMS.map((item) => {
@@ -32,19 +32,15 @@ export function MobileNav() {
                 aria-current={active ? 'page' : undefined}
                 className={cn(
                   'relative flex flex-col items-center gap-1 px-1 py-3',
-                  'text-xs transition-colors duration-[120ms] ease-instrument',
-                  active
-                    ? 'font-medium text-ink-white'
-                    : 'text-[color:var(--color-sidebar-muted)]',
+                  'text-xs transition-colors duration-[120ms] ease-standard',
+                  active ? 'font-medium text-forest' : 'text-muted',
                 )}
               >
-                {active && (
-                  <span aria-hidden className="absolute inset-x-3 top-0 h-[3px] bg-ink-red" />
-                )}
+                {active && <span aria-hidden className="absolute inset-x-3 top-0 h-[3px] bg-forest" />}
                 <item.icon
                   aria-hidden
                   strokeWidth={active ? 2 : 1.5}
-                  className={cn('size-4', active ? 'text-ink-red' : 'text-current')}
+                  className={cn('size-4', active ? 'text-forest' : 'text-current')}
                 />
                 {item.short}
               </Link>

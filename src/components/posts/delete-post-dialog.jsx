@@ -48,7 +48,7 @@ export function DeletePostDialog({ id, name, onDeleted }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="rounded-control px-3 py-1.5 text-sm text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+        className="rounded-control px-3 py-1.5 text-sm text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
       >
         Delete
       </button>
@@ -71,7 +71,7 @@ export function DeletePostDialog({ id, name, onDeleted }) {
         }
       >
         {error && (
-          <p role="alert" className="text-sm text-ink-red">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}

@@ -15,11 +15,11 @@ export function EmptyState({ title, action, className }) {
     <div
       className={cn(
         'flex flex-col items-start gap-4 border border-dashed border-hairline px-6 py-12',
-        'rounded-card bg-ink-white',
+        'rounded-card bg-surface',
         className,
       )}
     >
-      <p className="max-w-md text-base text-ink-grey">{title}</p>
+      <p className="max-w-md text-base text-muted">{title}</p>
       {action}
     </div>
   )

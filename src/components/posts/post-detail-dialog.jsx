@@ -32,13 +32,13 @@ export function PostDetailDialog({ post, open, onClose }) {
         {post.description && (
           <div>
             <dt className="label">Description</dt>
-            <dd className="mt-1 text-ink-black">{post.description}</dd>
+            <dd className="mt-1 text-ink">{post.description}</dd>
           </div>
         )}
         <div className="flex flex-wrap gap-6">
           <div>
             <dt className="label">Date</dt>
-            <dd className="num mt-1 text-ink-black">{post.postDate}</dd>
+            <dd className="num mt-1 text-ink">{post.postDate}</dd>
           </div>
           <div>
             <dt className="label">Status</dt>
@@ -49,12 +49,12 @@ export function PostDetailDialog({ post, open, onClose }) {
           {post.productName && (
             <div>
               <dt className="label">Product</dt>
-              <dd className="mt-1 text-ink-black">{post.productName}</dd>
+              <dd className="mt-1 text-ink">{post.productName}</dd>
             </div>
           )}
           <div>
             <dt className="label">Manager</dt>
-            <dd className="mt-1 text-ink-black">{post.managerName ?? 'Unassigned'}</dd>
+            <dd className="mt-1 text-ink">{post.managerName ?? 'Unassigned'}</dd>
           </div>
         </div>
         <div>

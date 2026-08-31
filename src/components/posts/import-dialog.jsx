@@ -258,31 +258,31 @@ export function ImportDialog({ principals }) {
                 const file = event.target.files?.[0]
                 if (file) void handleFile(file)
               }}
-              className="text-sm text-ink-grey file:mr-3 file:rounded-control file:border file:border-hairline file:bg-ink-white file:px-3 file:py-1.5 file:text-sm file:text-ink-black"
+              className="text-sm text-muted file:mr-3 file:rounded-control file:border file:border-hairline file:bg-surface file:px-3 file:py-1.5 file:text-sm file:text-ink"
             />
           </div>
 
-          {isPending && <p className="text-sm text-ink-grey">Importing…</p>}
+          {isPending && <p className="text-sm text-muted">Importing…</p>}
 
           {error && (
             <p
               role="alert"
-              className="flex items-start gap-3 rounded-card border border-ink-red-12 bg-ink-red-06 px-4 py-3 text-base text-ink-black"
+              className="flex items-start gap-3 rounded-card border border-danger-12 bg-danger-06 px-4 py-3 text-base text-ink"
             >
-              <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-ink-red" />
+              <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-danger" />
               {error}
             </p>
           )}
 
           {result && !result.ok && (
-            <p role="alert" className="text-sm text-ink-red">
+            <p role="alert" className="text-sm text-danger">
               {result.error}
             </p>
           )}
 
           {result && result.ok && (
             <div className="flex flex-col gap-3">
-              <p className="text-base text-ink-black">
+              <p className="text-base text-ink">
                 <span className="num font-medium">{result.inserted}</span> post
                 {result.inserted === 1 ? '' : 's'} imported.
               </p>
@@ -293,8 +293,8 @@ export function ImportDialog({ principals }) {
                   </p>
                   <ul className="flex max-h-48 flex-col gap-1 overflow-y-auto rounded-control border border-hairline p-3">
                     {result.skipped.map((row) => (
-                      <li key={row.row} className="text-sm text-ink-grey">
-                        <span className="num text-ink-black">Row {row.row}</span> — {row.reason}
+                      <li key={row.row} className="text-sm text-muted">
+                        <span className="num text-ink">Row {row.row}</span> — {row.reason}
                       </li>
                     ))}
                   </ul>

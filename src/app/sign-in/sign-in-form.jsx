@@ -8,9 +8,9 @@ import { buttonClasses } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
 
 const fieldClasses = cn(
-  'w-full rounded-control border border-hairline bg-ink-white px-3 py-2',
-  'text-base text-ink-black placeholder:text-ink-grey',
-  'transition-colors duration-[120ms] ease-instrument hover:border-ink-grey',
+  'w-full rounded-control border border-hairline bg-surface px-3 py-2',
+  'text-base text-ink placeholder:text-muted',
+  'transition-colors duration-[120ms] ease-standard hover:border-muted',
 )
 
 /** @param {{ next: string }} props */
@@ -56,9 +56,9 @@ export function SignInForm({ next }) {
         <p
           id="sign-in-error"
           role="alert"
-          className="flex items-start gap-3 rounded-card border border-ink-red-12 bg-ink-red-06 px-4 py-3 text-base text-ink-black"
+          className="flex items-start gap-3 rounded-card border border-danger-12 bg-danger-06 px-4 py-3 text-base text-ink"
         >
-          <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-ink-red" />
+          <span aria-hidden className="mt-1 block h-4 w-[3px] shrink-0 bg-danger" />
           {state.error}
         </p>
       )}

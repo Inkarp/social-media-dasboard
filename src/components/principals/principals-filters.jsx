@@ -76,7 +76,7 @@ export function PrincipalsFilters({ managers, groups }) {
           <Search
             aria-hidden
             strokeWidth={1.5}
-            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted"
           />
           <input
             id="principal-search"
@@ -85,9 +85,9 @@ export function PrincipalsFilters({ managers, groups }) {
             placeholder="Brand, group, manager or country"
             onChange={(event) => setSearch(event.target.value)}
             className={cn(
-              'w-full rounded-control border border-hairline bg-ink-white py-2 pl-9 pr-3',
-              'text-base text-ink-black placeholder:text-ink-grey',
-              'transition-colors duration-[120ms] ease-instrument hover:border-ink-grey focus:border-ink-red',
+              'w-full rounded-control border border-hairline bg-surface py-2 pl-9 pr-3',
+              'text-base text-ink placeholder:text-muted',
+              'transition-colors duration-[120ms] ease-standard hover:border-muted focus:border-forest',
             )}
           />
         </div>
@@ -114,7 +114,7 @@ export function PrincipalsFilters({ managers, groups }) {
           <ChevronDown
             aria-hidden
             strokeWidth={1.5}
-            className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+            className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
           />
         </div>
       </div>
@@ -140,17 +140,17 @@ export function PrincipalsFilters({ managers, groups }) {
           <ChevronDown
             aria-hidden
             strokeWidth={1.5}
-            className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+            className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
           />
         </div>
       </div>
 
-      <label className="flex items-center gap-2 py-2 text-base text-ink-black">
+      <label className="flex items-center gap-2 py-2 text-base text-ink">
         <input
           type="checkbox"
           checked={showRetired}
           onChange={(event) => set({ retired: event.target.checked ? '1' : null })}
-          className="size-4 accent-[color:var(--color-ink-red)]"
+          className="size-4 accent-[color:var(--color-forest)]"
         />
         Show retired
       </label>
@@ -159,7 +159,7 @@ export function PrincipalsFilters({ managers, groups }) {
         <button
           type="button"
           onClick={() => set({ q: null, group: null, pm: null, retired: null })}
-          className="flex items-center gap-2 rounded-control px-3 py-2 text-base text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+          className="flex items-center gap-2 rounded-control px-3 py-2 text-base text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           <X aria-hidden strokeWidth={1.75} className="size-4" />
           Clear filters

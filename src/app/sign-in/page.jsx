@@ -28,10 +28,10 @@ export default async function SignInPage({ searchParams }) {
         <PageHeader title="You are signed in" description="Editing is unlocked on every section." />
         <Card>
           <div className="flex items-center justify-between gap-4">
-            <ModeBadge editing tone="dark" />
-            {viewer.email && <span className="num text-sm text-ink-grey">{viewer.email}</span>}
+            <ModeBadge editing />
+            {viewer.email && <span className="num text-sm text-muted">{viewer.email}</span>}
           </div>
-          <p className="mt-6 text-base text-ink-grey">
+          <p className="mt-6 text-base text-muted">
             Add, edit and delete controls are now visible across the dashboard. Leaving editing
             returns you to the same read-only view everyone else sees.
           </p>
@@ -59,12 +59,12 @@ export default async function SignInPage({ searchParams }) {
         />
         <Card>
           <div className="flex items-center justify-between gap-4">
-            <ModeBadge tone="dark" />
-            {viewer.email && <span className="num text-sm text-ink-grey">{viewer.email}</span>}
+            <ModeBadge />
+            {viewer.email && <span className="num text-sm text-muted">{viewer.email}</span>}
           </div>
-          <p className="mt-6 text-base text-ink-grey">
+          <p className="mt-6 text-base text-muted">
             Ask whoever administers the Supabase project to add this account to{' '}
-            <span className="num text-ink-black">admin_users</span>.
+            <span className="num text-ink">admin_users</span>.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link href="/" className={buttonClasses()}>
@@ -93,16 +93,16 @@ export default async function SignInPage({ searchParams }) {
               title="No project connected"
               hint="Sign-in needs a Supabase project. The dashboard still opens read-only without one."
             />
-            <p className="mt-6 text-base text-ink-grey">
-              Add <span className="num text-ink-black">NEXT_PUBLIC_SUPABASE_URL</span> and{' '}
-              <span className="num text-ink-black">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> to{' '}
-              <span className="num text-ink-black">.env.local</span>, then restart the dev server.
+            <p className="mt-6 text-base text-muted">
+              Add <span className="num text-ink">NEXT_PUBLIC_SUPABASE_URL</span> and{' '}
+              <span className="num text-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> to{' '}
+              <span className="num text-ink">.env.local</span>, then restart the dev server.
               Next only reads that file at startup.
             </p>
           </>
         )}
 
-        <p className="mt-6 border-t border-hairline-soft pt-6 text-sm text-ink-grey">
+        <p className="mt-6 border-t border-hairline-soft pt-6 text-sm text-muted">
           Editor accounts are created by whoever administers the Supabase project — there is no
           self-registration, by design. Access is enforced by row-level security in the database, so
           the key your browser holds can read every table and write to none of them.

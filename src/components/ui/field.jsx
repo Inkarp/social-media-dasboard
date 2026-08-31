@@ -1,10 +1,10 @@
 import { cn } from '@/lib/cn'
 
 export const inputClasses = cn(
-  'w-full rounded-control border border-hairline bg-ink-white px-3 py-2',
-  'text-base text-ink-black placeholder:text-ink-grey',
-  'transition-colors duration-[120ms] ease-instrument',
-  'hover:border-ink-grey focus:border-ink-red',
+  'w-full rounded-control border border-hairline bg-surface px-3 py-2',
+  'text-base text-ink placeholder:text-muted',
+  'transition-colors duration-[120ms] ease-standard',
+  'hover:border-muted focus:border-forest',
   'disabled:opacity-50',
 )
 
@@ -26,7 +26,7 @@ export function Field({ label, htmlFor, hint, children, className }) {
         {label}
       </label>
       {children}
-      {hint && <p className="text-sm text-ink-grey">{hint}</p>}
+      {hint && <p className="text-sm text-muted">{hint}</p>}
     </div>
   )
 }

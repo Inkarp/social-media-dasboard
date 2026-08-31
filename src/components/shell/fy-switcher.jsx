@@ -48,10 +48,10 @@ export function FySwitcher({ options, currentFy }) {
             })
           }}
           className={cn(
-            'num appearance-none rounded-control border border-hairline bg-ink-white',
-            'py-2 pl-3 pr-9 text-base font-medium text-ink-black',
-            'transition-colors duration-[120ms] ease-instrument',
-            'hover:border-ink-grey disabled:opacity-60',
+            'num appearance-none rounded-control border border-hairline bg-surface',
+            'py-2 pl-3 pr-9 text-base font-medium text-ink',
+            'transition-colors duration-[120ms] ease-standard',
+            'hover:border-muted disabled:opacity-60',
           )}
         >
           {options.map((fy) => (
@@ -64,7 +64,7 @@ export function FySwitcher({ options, currentFy }) {
         <ChevronDown
           aria-hidden
           strokeWidth={1.5}
-          className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-ink-grey"
+          className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted"
         />
       </div>
     </div>

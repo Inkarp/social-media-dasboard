@@ -42,7 +42,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
         <span
           className={cn(
             'num flex size-6 items-center justify-center rounded-full text-sm',
-            isToday ? 'bg-ink-red text-ink-white' : inCurrentMonth ? 'text-ink-black' : 'text-ink-grey',
+            isToday ? 'bg-forest text-on-accent' : inCurrentMonth ? 'text-ink' : 'text-muted',
           )}
         >
           {dayNumber}
@@ -52,7 +52,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
             type="button"
             onClick={() => setAddOpen(true)}
             aria-label={`Add a post on ${date}`}
-            className="rounded-control px-1.5 text-sm leading-none text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+            className="rounded-control px-1.5 text-sm leading-none text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
           >
             +
           </button>
@@ -65,7 +65,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
             key={post.id}
             type="button"
             onClick={() => setSelected(post)}
-            className="flex items-center gap-1.5 truncate rounded-control px-1.5 py-1 text-left text-xs transition-colors duration-[120ms] ease-instrument hover:bg-hover"
+            className="flex items-center gap-1.5 truncate rounded-control px-1.5 py-1 text-left text-xs transition-colors duration-[120ms] ease-standard hover:bg-hover"
             title={post.name}
           >
             <span
@@ -73,7 +73,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
               className="size-1.5 shrink-0 rounded-full"
               style={{ backgroundColor: post.brandColor ?? 'transparent' }}
             />
-            <span className="truncate text-ink-black">{post.name}</span>
+            <span className="truncate text-ink">{post.name}</span>
           </button>
         ))}
 
@@ -81,7 +81,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
           <button
             type="button"
             onClick={() => setShowAll(true)}
-            className="px-1.5 text-left text-xs text-ink-grey transition-colors duration-[120ms] ease-instrument hover:text-ink-black"
+            className="px-1.5 text-left text-xs text-muted transition-colors duration-[120ms] ease-standard hover:text-ink"
           >
             +{overflow} more
           </button>

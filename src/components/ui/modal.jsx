@@ -54,23 +54,23 @@ export function Modal({
         if (event.target === ref.current) onClose()
       }}
       className={cn(
-        'w-[min(32rem,calc(100vw-2rem))] rounded-card border border-hairline bg-ink-white p-0',
-        'text-ink-black shadow-overlay backdrop:bg-scrim',
+        'w-[min(32rem,calc(100vw-2rem))] rounded-card border border-hairline bg-surface p-0',
+        'text-ink shadow-overlay backdrop:bg-scrim',
         'open:animate-none',
       )}
     >
       <div className="flex items-start justify-between gap-4 border-b border-hairline px-6 py-4">
         <div className="min-w-0">
-          <h2 id={labelledBy} className="text-md text-ink-black">
+          <h2 id={labelledBy} className="text-md text-ink">
             {title}
           </h2>
-          {description && <p className="mt-1 text-sm text-ink-grey">{description}</p>}
+          {description && <p className="mt-1 text-sm text-muted">{description}</p>}
         </div>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="-mr-2 -mt-1 rounded-control p-2 text-ink-grey transition-colors duration-[120ms] ease-instrument hover:bg-hover hover:text-ink-black"
+          className="-mr-2 -mt-1 rounded-control p-2 text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           <X aria-hidden strokeWidth={1.75} className="size-4" />
         </button>

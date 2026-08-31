@@ -28,12 +28,12 @@ export default function PrincipalsError({ error, reset }) {
           hint="The database did not answer. This is usually a dropped connection rather than anything wrong with your data."
         />
 
-        <p className="mt-6 text-base text-ink-grey">
+        <p className="mt-6 text-base text-muted">
           Nothing has been changed. Targets and posts are untouched.
         </p>
 
         {error.message && (
-          <p className="num mt-4 break-words rounded-card border border-hairline bg-zebra px-4 py-3 text-sm text-ink-grey">
+          <p className="num mt-4 break-words rounded-card border border-hairline bg-zebra px-4 py-3 text-sm text-muted">
             {error.message}
           </p>
         )}
