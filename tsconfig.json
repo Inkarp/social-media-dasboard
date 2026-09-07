@@ -33,11 +33,12 @@
   "include": [
     "**/*.js",
     "**/*.jsx",
+    ".next-verify/types/**/*.ts",
     ".next/types/**/*.ts",
-    "next-env.d.ts",
-    ".next-verify/types/**/*.ts"
+    "next-env.d.ts"
   ],
   "exclude": [
+    ".next-studio",
     "node_modules"
   ]
 }

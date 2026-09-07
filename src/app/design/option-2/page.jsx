@@ -1,7 +1,4 @@
-import { Public_Sans, Roboto_Mono } from 'next/font/google'
 
-const sans = Public_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--lg-sans' })
-const mono = Roboto_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--lg-mono' })
 
 const ROWS = [
   { brand: 'Bruker', manager: 'B Krishna', target: 12, published: 12, planned: 0, pending: 0 },
@@ -33,7 +30,7 @@ function Strip({ target, published, planned, pending }) {
 
 export default function Option2() {
   return (
-    <div className={`${sans.variable} ${mono.variable} lg-root`}>
+    <div className={`lg-root`}>
       <style>{`
         .lg-root {
           position: fixed; inset: 0; overflow: auto; z-index: 9999;
@@ -41,10 +38,10 @@ export default function Option2() {
           --lg-rule: rgba(255,255,255,.09); --lg-text: #E6E9EE; --lg-mist: #7C8797;
           --lg-red: #D9636B; --lg-teal: #2FB897; --lg-amber: #C9924A; --lg-track: #2C333D;
           background: var(--lg-bg); color: var(--lg-text);
-          font-family: var(--lg-sans), sans-serif; font-size: 13.5px; line-height: 1.5;
+          font-family: 'Segoe UI', system-ui, sans-serif, sans-serif; font-size: 13.5px; line-height: 1.5;
         }
         .lg-root :focus-visible { outline: 2px solid var(--lg-teal); outline-offset: 2px; }
-        .lg-num { font-family: var(--lg-mono), monospace; font-variant-numeric: tabular-nums; }
+        .lg-num { font-family: 'Consolas', monospace, monospace; font-variant-numeric: tabular-nums; }
         .lg-shell { max-width: 1180px; margin: 0 auto; padding: 40px 32px 80px; }
         .lg-back { color: var(--lg-mist); text-decoration: none; font-size: 12px; display: inline-block; margin-bottom: 24px; }
         .lg-back:hover { color: var(--lg-text); }
@@ -83,7 +80,7 @@ export default function Option2() {
         .lg-panel { background: var(--lg-surface); border: 1px solid var(--lg-rule); padding: 22px; }
 
         .lg-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .lg-btn { font-family: var(--lg-sans); font-size: 12.5px; font-weight: 600; padding: 8px 12px; border-radius: 2px; border: 1px solid transparent; cursor: pointer; white-space: nowrap; }
+        .lg-btn { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; padding: 8px 12px; border-radius: 2px; border: 1px solid transparent; cursor: pointer; white-space: nowrap; }
         .lg-btn--primary { background: var(--lg-teal); color: #06231A; }
         .lg-btn--primary:hover { background: #48d1af; }
         .lg-btn--secondary { background: transparent; border-color: var(--lg-rule); color: var(--lg-text); }
@@ -95,7 +92,7 @@ export default function Option2() {
 
         .lg-field { margin-bottom: 14px; }
         .lg-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--lg-mist); margin-bottom: 6px; }
-        .lg-field input, .lg-field select { width: 100%; background: var(--lg-bg); border: 1px solid var(--lg-rule); border-radius: 2px; padding: 8px 10px; color: var(--lg-text); font-family: var(--lg-sans); font-size: 13px; }
+        .lg-field input, .lg-field select { width: 100%; background: var(--lg-bg); border: 1px solid var(--lg-rule); border-radius: 2px; padding: 8px 10px; color: var(--lg-text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; }
         .lg-field input:focus, .lg-field select:focus { border-color: var(--lg-teal); outline: none; }
         .lg-hint { font-size: 11.5px; color: var(--lg-mist); margin-top: 6px; }
       `}</style>

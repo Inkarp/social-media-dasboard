@@ -32,7 +32,7 @@ const SIZES = {
  */
 export function buttonClasses({ variant = 'primary', size = 'md', className } = {}) {
   return cn(
-    'inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-control font-medium',
+    `studio-button studio-button-${variant} inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-control font-medium`,
     'transition-all duration-[120ms] ease-standard',
     'disabled:pointer-events-none disabled:opacity-50',
     VARIANTS[variant],

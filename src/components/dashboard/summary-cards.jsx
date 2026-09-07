@@ -41,7 +41,7 @@ export function SummaryCards({ principalRows }) {
           const Icon = card.icon
 
           return (
-            <div key={card.label} className={`card flex min-h-40 flex-col justify-between gap-4 border-t-4 p-5 ${card.accent}`}>
+            <div key={card.label} className={`studio-stat card flex min-h-40 flex-col justify-between gap-4 p-5 ${card.accent}`}>
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className={`num whitespace-nowrap font-semibold text-ink ${card.figureClass}`}>{card.figure}</p>

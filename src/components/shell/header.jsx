@@ -23,7 +23,7 @@ export function Header({ viewer }) {
   return (
     <header
       data-print="hide"
-      className="sticky top-0 z-20 border-b border-hairline bg-bg/75 backdrop-blur-xl"
+      className="studio-topbar sticky top-0 z-20 border-b border-hairline bg-bg/75 backdrop-blur-xl"
     >
       <div className="flex items-center justify-between px-4 pt-4 md:hidden">
         <InkarpLogo />

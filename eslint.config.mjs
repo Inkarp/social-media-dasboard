@@ -24,7 +24,7 @@ const config = [
     // Build output is generated, not authored. `.next-verify` is the isolated
     // build directory used by `NEXT_DIST_DIR=.next-verify next build`, which
     // exists so a verification build never clobbers a running dev server.
-    ignores: ['.next/**', '.next-verify/**', 'node_modules/**', 'next-env.d.ts'],
+    ignores: ['.next-studio/**', '.next/**', '.next-verify/**', 'node_modules/**', 'next-env.d.ts'],
   },
 ]
 

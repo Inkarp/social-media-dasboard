@@ -20,7 +20,7 @@ export function MobileNav() {
     <nav
       aria-label="Sections"
       data-print="hide"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-bg/90 pb-[env(safe-area-inset-bottom)] shadow-overlay backdrop-blur-xl md:hidden"
+      className="studio-mobile-nav fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-bg/90 pb-[env(safe-area-inset-bottom)] shadow-overlay backdrop-blur-xl md:hidden"
     >
       <ul className="flex items-stretch">
         {NAV_ITEMS.map((item) => {

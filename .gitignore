@@ -19,3 +19,5 @@ yarn-error.log*
 supabase/.branches/
 supabase/.temp/
 .next-verify/
+
+.next-studio/

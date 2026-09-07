@@ -1,7 +1,4 @@
-import { Space_Grotesk, Space_Mono } from 'next/font/google'
 
-const grotesk = Space_Grotesk({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--cal-sans' })
-const mono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--cal-mono' })
 
 const ROWS = [
   { brand: 'Bruker', manager: 'B Krishna', target: 12, published: 12, pct: 100 },
@@ -38,7 +35,7 @@ function Dial({ pct }) {
 
 export default function Option1() {
   return (
-    <div className={`${grotesk.variable} ${mono.variable} cal-root`}>
+    <div className={`cal-root`}>
       <style>{`
         .cal-root {
           position: fixed; inset: 0; overflow: auto; z-index: 9999;
@@ -46,10 +43,10 @@ export default function Option1() {
           --cal-hairline: rgba(255,255,255,.08); --cal-text: #EDEFF1; --cal-mist: #8A96A3;
           --cal-amber: #E8A33D; --cal-cyan: #4FC1E0; --cal-red: #E0524F; --cal-track: #2C3540;
           background: var(--cal-bg); color: var(--cal-text);
-          font-family: var(--cal-sans), sans-serif; font-size: 14px; line-height: 1.5;
+          font-family: 'Segoe UI', system-ui, sans-serif, sans-serif; font-size: 14px; line-height: 1.5;
         }
         .cal-root :focus-visible { outline: 2px solid var(--cal-amber); outline-offset: 2px; }
-        .cal-num { font-family: var(--cal-mono), monospace; font-variant-numeric: tabular-nums; }
+        .cal-num { font-family: 'Consolas', monospace, monospace; font-variant-numeric: tabular-nums; }
         .cal-shell { max-width: 1180px; margin: 0 auto; padding: 40px 32px 80px; }
         .cal-back { color: var(--cal-mist); text-decoration: none; font-size: 12.5px; display: inline-block; margin-bottom: 24px; }
         .cal-back:hover { color: var(--cal-text); }
@@ -80,7 +77,7 @@ export default function Option1() {
         .cal-panel { background: var(--cal-surface); border: 1px solid var(--cal-hairline); border-radius: 3px; padding: 24px; }
 
         .cal-btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
-        .cal-btn { font-family: var(--cal-sans); font-size: 13px; font-weight: 500; padding: 9px 16px; border-radius: 3px; border: 1px solid transparent; cursor: pointer; }
+        .cal-btn { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; font-weight: 500; padding: 9px 16px; border-radius: 3px; border: 1px solid transparent; cursor: pointer; }
         .cal-btn--primary { background: var(--cal-amber); color: #1B1300; }
         .cal-btn--primary:hover { background: #f2b158; }
         .cal-btn--secondary { background: transparent; border-color: var(--cal-hairline); color: var(--cal-text); }
@@ -92,7 +89,7 @@ export default function Option1() {
 
         .cal-field { margin-bottom: 16px; }
         .cal-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--cal-mist); margin-bottom: 7px; }
-        .cal-field input, .cal-field select { width: 100%; background: var(--cal-bg); border: 1px solid var(--cal-hairline); border-radius: 3px; padding: 9px 12px; color: var(--cal-text); font-family: var(--cal-sans); font-size: 13.5px; }
+        .cal-field input, .cal-field select { width: 100%; background: var(--cal-bg); border: 1px solid var(--cal-hairline); border-radius: 3px; padding: 9px 12px; color: var(--cal-text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13.5px; }
         .cal-field input:focus, .cal-field select:focus { border-color: var(--cal-amber); outline: none; }
         .cal-hint { font-size: 12px; color: var(--cal-mist); margin-top: 6px; }
       `}</style>

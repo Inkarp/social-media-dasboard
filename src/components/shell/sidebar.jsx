@@ -15,14 +15,18 @@ export function Sidebar({ viewer }) {
   return (
     <aside
       data-print="hide"
-      className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-hairline bg-bg/80 shadow-overlay backdrop-blur-xl md:flex"
+      className="studio-sidebar fixed inset-y-0 left-0 z-30 hidden w-64 flex-col md:flex"
     >
       <div className="border-b border-hairline px-6 py-6">
         <InkarpLogo />
       </div>
 
       <div className="flex-1 overflow-y-auto">
+        <p className="studio-nav-label">YOUR WORKSPACE</p>
         <SidebarNav />
+      </div>
+
+      <div className="studio-sidebar-note" aria-hidden="true">
       </div>
 
       <div className="border-t border-hairline bg-surface/60 px-6 py-4">

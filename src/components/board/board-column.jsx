@@ -20,7 +20,7 @@ export function BoardColumn({ status, posts, draggable, onCardClick }) {
   const { setNodeRef, isOver } = useDroppable({ id: status })
 
   return (
-    <div className="card flex min-w-0 flex-col gap-3 border-t-4 border-t-teal p-3">
+    <div className="studio-board-column card flex min-w-0 flex-col gap-3 border-t-4 border-t-teal p-3">
       <div className="flex items-center justify-between border-b border-hairline px-1 pb-3">
         <h3 className="text-base font-semibold text-teal">{STATUS_LABELS[status]}</h3>
         <span className="num rounded-chip bg-teal/10 px-2 py-1 text-xs font-semibold text-teal">{posts.length}</span>

@@ -1,37 +1,22 @@
-import { cn } from '@/lib/cn'
-import { ACCENT_BORDER, ACCENT_TEXT, ACCENT_WASH } from '@/lib/nav'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 
-/**
- * The masthead. When a section accent is given it bleeds full-width, edge to
- * edge with `<main>`'s own padding cancelled out — a coloured band at the top
- * of every page, not just a hint of colour next to the title. This is the
- * one place the "which section am I in" answer is unmissable.
- *
- * @param {{
- *   title: string,
- *   description?: string,
- *   actions?: import('react').ReactNode,
- *   accent?: import('@/lib/nav').SectionAccent,
- * }} props
- */
-export function PageHeader({ title, description, actions, accent }) {
+/** @param {{ title: string, description?: string, actions?: import('react').ReactNode, accent?: import('@/lib/nav').SectionAccent }} props */
+export function PageHeader({ title, description, actions, accent = 'forest' }) {
   return (
-    <div
-      className={cn(
-        'mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between',
-        accent &&
-          cn(
-            '-mx-4 -mt-6 border-b px-4 pb-6 pt-7 md:-mx-8 md:-mt-8 md:px-8 md:pb-7 md:pt-9',
-            ACCENT_BORDER[accent],
-            ACCENT_WASH[accent],
-          ),
-      )}
-    >
-      <div className="min-w-0">
-        <h2 className={cn('text-xl text-ink', accent && ACCENT_TEXT[accent])}>{title}</h2>
-        {description && <p className="mt-2 max-w-2xl text-base font-medium text-ink">{description}</p>}
+    <section className="studio-hero" data-accent={accent}>
+      <div className="studio-hero-art" aria-hidden="true">
+        <span className="orbit orbit-one" />
+        <span className="orbit orbit-two" />
+        <span className="orbit-core"><ArrowUpRight strokeWidth={1.2} /></span>
+        <Sparkles className="orbit-spark" strokeWidth={1.3} />
       </div>
-      {actions && <div className="flex shrink-0 flex-wrap items-center gap-3">{actions}</div>}
-    </div>
+      <div className="studio-hero-copy">
+        <span className="studio-eyebrow"><span /> INKARP SOCIAL STUDIO</span>
+        <h2>{title}<span className="hero-period">.</span></h2>
+        {description && <p>{description}</p>}
+        {actions && <div className="mt-6 flex flex-wrap items-center gap-3">{actions}</div>}
+      </div>
+      <span className="hero-caption" aria-hidden="true">IDEAS INTO IMPACT &#8599;</span>
+    </section>
   )
 }

@@ -34,7 +34,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
   return (
     <div
       className={cn(
-        'flex min-h-24 flex-col gap-1 border-b border-r border-hairline-soft p-2 transition-colors duration-[120ms] ease-standard hover:bg-hover',
+        'studio-day flex min-h-24 flex-col gap-1 border-b border-r border-hairline-soft p-2 transition-colors duration-[120ms] ease-standard hover:bg-hover',
         !inCurrentMonth && 'bg-zebra',
       )}
     >

@@ -12,8 +12,8 @@ import { cn } from '@/lib/cn'
  */
 export function InkarpLogo({ className }) {
   return (
-    <span className={cn('flex flex-col items-start gap-1.5', className)}>
-      <svg viewBox="0 0 104.09 49.82" className="h-7 w-auto shrink-0" role="img" aria-label="Inkarp">
+    <span className={cn('flex items-center justify-center', className)}>
+      <svg viewBox="0 0 104.09 49.82" className="h-auto w-32 max-w-full shrink-0 md:w-40" role="img" aria-label="Inkarp">
         <path fill="#be0010" d="M7.66,12.13h2v4.6h-2s0-4.6,0-4.6Z" />
         <path
           fill="var(--color-ink)"
@@ -25,6 +25,7 @@ export function InkarpLogo({ className }) {
         />
         <path
           fill="var(--color-ink)"
+          fillRule="evenodd"
           d="M52.87,23.97h-2.03s-.07-2.46,1.69-3.94c0,0,1.11-1.26,3.55-1.59,1.17-.16,2.35-.15,3.51.03,1.14.18,2.22.66,3.13,1.38,0,0,.81.63,1.19,2.12.12.5.17,1.02.16,1.53v9.96s0,1.09.74,1.1h1.24v1.5s-1.73.35-2.79-.06c0,0-1.21-.43-1.16-2.42,0,0-1.98,2.49-5.24,2.86,0,0-3.72.43-5.42-1.41,0,0-1.64-1.3-1.44-3.94,0,0-.21-2.62,2.94-4.01,0,0,1.28-.64,5.04-.93,0,0,2.07-.05,3.01-.66.42-.24.75-.62.92-1.07.08-.27.1-.55.07-.82-.03-.54-.13-1.52-.56-2.14,0,0-.29-.62-1.44-1.02-.73-.24-1.5-.34-2.27-.31-.5,0-.99.04-1.49.12-.73.09-1.41.38-1.99.83-.88.71-1.39,1.78-1.36,2.92v-.03ZM61.99,27.03v2.27c0,.41-.03.82-.12,1.23-.15.66-.49,1.66-1.22,2.43-.55.54-1.21.97-1.93,1.24-.84.32-1.73.47-2.63.46-.8,0-1.61-.07-2.33-.44-.82-.4-1.41-1.15-1.6-2.04-.12-.52-.1-1.05.05-1.56.21-.69.77-1.7,2.24-2.29.25-.12.5-.23.77-.31.6-.18,1.23-.27,1.85-.28.35-.01.69-.02,1.03-.04,1.22-.09,3.19-.29,3.89-.67h0Z"
         />
         <path
@@ -46,7 +47,6 @@ export function InkarpLogo({ className }) {
         />
         <path fill="#be0010" d="M33.9,12.19h2v6.19h-2v-6.19Z" />
       </svg>
-      <span className="text-xs uppercase leading-none text-teal">Social Dashboard</span>
     </span>
   )
 }

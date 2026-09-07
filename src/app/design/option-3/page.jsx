@@ -1,8 +1,4 @@
-import { Source_Serif_4, Inter, IBM_Plex_Mono } from 'next/font/google'
 
-const serif = Source_Serif_4({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--tl-serif' })
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--tl-sans' })
-const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--tl-mono' })
 
 const ROWS = [
   { brand: 'Bruker', manager: 'B Krishna', country: 'Germany', target: 12, published: 12, pct: 100 },
@@ -24,39 +20,39 @@ function RegMark() {
 
 export default function Option3() {
   return (
-    <div className={`${serif.variable} ${inter.variable} ${plexMono.variable} tl-root`}>
+    <div className={`tl-root`}>
       <style>{`
         .tl-root {
           position: fixed; inset: 0; overflow: auto; z-index: 9999;
           --tl-paper: #F1F3EF; --tl-sheet: #FFFFFF; --tl-ink: #1F2A3A; --tl-rule: #D6D9CF;
           --tl-muted: #6B7267; --tl-forest: #2E6B4F; --tl-ochre: #B98A2E; --tl-slate: #3B5875;
           background: var(--tl-paper); color: var(--tl-ink);
-          font-family: var(--tl-sans), sans-serif; font-size: 14px; line-height: 1.55;
+          font-family: 'Segoe UI', system-ui, sans-serif, sans-serif; font-size: 14px; line-height: 1.55;
         }
         .tl-root :focus-visible { outline: 2px solid var(--tl-forest); outline-offset: 2px; }
-        .tl-num { font-family: var(--tl-mono), monospace; font-variant-numeric: tabular-nums; }
+        .tl-num { font-family: 'Consolas', monospace, monospace; font-variant-numeric: tabular-nums; }
         .tl-shell { max-width: 1180px; margin: 0 auto; padding: 40px 32px 80px; }
         .tl-back { color: var(--tl-muted); text-decoration: none; font-size: 12.5px; display: inline-block; margin-bottom: 24px; }
         .tl-back:hover { color: var(--tl-ink); }
 
         .tl-hero { border-bottom: 2px solid var(--tl-ink); padding-bottom: 22px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .tl-mast { font-family: var(--tl-sans); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--tl-forest); margin: 0 0 8px; font-weight: 600; }
-        .tl-h1 { font-family: var(--tl-serif); font-size: 34px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
+        .tl-mast { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--tl-forest); margin: 0 0 8px; font-weight: 600; }
+        .tl-h1 { font-family: Georgia, serif; font-size: 34px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
         .tl-sub { color: var(--tl-muted); margin: 0; max-width: 48ch; font-size: 13.5px; }
         .tl-hero-meta { text-align: right; }
         .tl-hero-meta .tl-num { font-size: 26px; font-weight: 600; }
-        .tl-hero-meta span.tl-lbl { display: block; color: var(--tl-muted); font-family: var(--tl-sans); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+        .tl-hero-meta span.tl-lbl { display: block; color: var(--tl-muted); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
 
-        .tl-section-label { font-family: var(--tl-sans); color: var(--tl-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 12px; font-weight: 600; }
+        .tl-section-label { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--tl-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 12px; font-weight: 600; }
 
         .tl-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 38px; }
         .tl-spec { position: relative; background: var(--tl-sheet); border: 1px solid var(--tl-rule); padding: 16px 18px; }
         .tl-spec .tl-regmark { position: absolute; top: 8px; right: 8px; color: var(--tl-rule); }
         .tl-spec .tl-num { font-size: 24px; font-weight: 500; display: block; }
-        .tl-spec .tl-lbl { font-family: var(--tl-sans); color: var(--tl-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; border-top: 1px solid var(--tl-rule); margin-top: 10px; padding-top: 8px; display: block; }
+        .tl-spec .tl-lbl { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--tl-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; border-top: 1px solid var(--tl-rule); margin-top: 10px; padding-top: 8px; display: block; }
 
         table.tl-table { width: 100%; border-collapse: collapse; background: var(--tl-sheet); border: 1px solid var(--tl-rule); margin-bottom: 38px; }
-        .tl-table th { font-family: var(--tl-sans); text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--tl-muted); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--tl-ink); }
+        .tl-table th { font-family: 'Segoe UI', system-ui, sans-serif; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--tl-muted); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--tl-ink); }
         .tl-table td { padding: 12px 14px; border-bottom: 1px solid var(--tl-rule); font-size: 13.5px; }
         .tl-table tr:last-child td { border-bottom: none; }
         .tl-table tr:hover td { background: var(--tl-paper); }
@@ -66,8 +62,8 @@ export default function Option3() {
         .tl-panel { position: relative; background: var(--tl-sheet); border: 1px solid var(--tl-rule); padding: 22px; }
         .tl-panel .tl-regmark { position: absolute; top: 10px; right: 10px; color: var(--tl-rule); }
 
-        .tl-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; font-family: var(--tl-sans); }
-        .tl-btn { font-family: var(--tl-sans); font-size: 12.5px; font-weight: 600; padding: 9px 15px; border-radius: 1px; border: 1px solid transparent; cursor: pointer; }
+        .tl-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; font-family: 'Segoe UI', system-ui, sans-serif; }
+        .tl-btn { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 12.5px; font-weight: 600; padding: 9px 15px; border-radius: 1px; border: 1px solid transparent; cursor: pointer; }
         .tl-btn--primary { background: var(--tl-forest); color: #fff; }
         .tl-btn--primary:hover { background: #24573f; }
         .tl-btn--secondary { background: transparent; border-color: var(--tl-ink); color: var(--tl-ink); }
@@ -77,11 +73,11 @@ export default function Option3() {
         .tl-btn--danger { background: transparent; border-color: #A8433C; color: #A8433C; }
         .tl-btn--danger:hover { background: rgba(168,67,60,.08); }
 
-        .tl-field { margin-bottom: 15px; font-family: var(--tl-sans); }
+        .tl-field { margin-bottom: 15px; font-family: 'Segoe UI', system-ui, sans-serif; }
         .tl-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--tl-muted); margin-bottom: 6px; font-weight: 600; }
-        .tl-field input, .tl-field select { width: 100%; background: var(--tl-paper); border: 1px solid var(--tl-rule); border-radius: 1px; padding: 9px 11px; color: var(--tl-ink); font-family: var(--tl-sans); font-size: 13.5px; }
+        .tl-field input, .tl-field select { width: 100%; background: var(--tl-paper); border: 1px solid var(--tl-rule); border-radius: 1px; padding: 9px 11px; color: var(--tl-ink); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13.5px; }
         .tl-field input:focus, .tl-field select:focus { border-color: var(--tl-forest); outline: none; }
-        .tl-hint { font-size: 12px; color: var(--tl-muted); margin-top: 6px; font-family: var(--tl-sans); }
+        .tl-hint { font-size: 12px; color: var(--tl-muted); margin-top: 6px; font-family: 'Segoe UI', system-ui, sans-serif; }
       `}</style>
 
       <div className="tl-shell">

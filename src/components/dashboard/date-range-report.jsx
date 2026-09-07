@@ -78,7 +78,7 @@ export function DateRangeReport({ from, to, preset }) {
             ))}
           </div>
 
-          <div className="flex items-end gap-3">
+          <div className="flex flex-wrap items-end gap-3">
             <label className="flex flex-col gap-1 text-xs text-muted">
               From
               <input
