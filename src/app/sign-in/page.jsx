@@ -24,9 +24,9 @@ export default async function SignInPage({ searchParams }) {
 
   if (viewer.isEditor) {
     return (
-      <div className="max-w-xl">
+      <>
         <PageHeader title="You are signed in" description="Editing is unlocked on every section." />
-        <Card>
+        <Card className="max-w-2xl">
           <div className="flex items-center justify-between gap-4">
             <ModeBadge editing />
             {viewer.email && <span className="num text-sm text-muted">{viewer.email}</span>}
@@ -42,7 +42,7 @@ export default async function SignInPage({ searchParams }) {
             <SignOutButton label="Leave editing" variant="secondary" />
           </div>
         </Card>
-      </div>
+      </>
     )
   }
 
@@ -52,12 +52,12 @@ export default async function SignInPage({ searchParams }) {
   // authorised to edit yet.
   if (viewer.hasSession) {
     return (
-      <div className="max-w-xl">
+      <>
         <PageHeader
           title="Signed in, not authorised to edit"
           description="This account can view everything but cannot add, edit or delete anything yet."
         />
-        <Card>
+        <Card className="max-w-2xl">
           <div className="flex items-center justify-between gap-4">
             <ModeBadge />
             {viewer.email && <span className="num text-sm text-muted">{viewer.email}</span>}
@@ -73,12 +73,12 @@ export default async function SignInPage({ searchParams }) {
             <SignOutButton />
           </div>
         </Card>
-      </div>
+      </>
     )
   }
 
   return (
-    <div className="max-w-xl">
+    <>
       <PageHeader
         title="Sign in to edit"
         description="Viewing needs no account. Signing in unlocks adding, editing and deleting."
@@ -86,36 +86,51 @@ export default async function SignInPage({ searchParams }) {
 
       <Card>
         {viewer.canSignIn ? (
-          <SignInForm next={next} />
+          <div className="grid gap-10 md:grid-cols-2">
+            <div className="max-w-sm">
+              <SignInForm next={next} />
+            </div>
+
+            <div className="flex flex-col md:border-l md:border-hairline-soft md:pl-10">
+              <p className="text-base text-muted">
+                Editor accounts are created by whoever administers the Supabase project — there is
+                no self-registration, by design. Access is enforced by row-level security in the
+                database, so the key your browser holds can read every table and write to none of
+                them.
+              </p>
+
+              <Link
+                href="/"
+                className={buttonClasses({ variant: 'ghost', className: 'mt-6 -ml-3 self-start' })}
+              >
+                <ArrowLeft aria-hidden strokeWidth={1.75} className="size-4" />
+                Back to the dashboard
+              </Link>
+            </div>
+          </div>
         ) : (
           <>
             <CardHeader
               title="No project connected"
               hint="Sign-in needs a Supabase project. The dashboard still opens read-only without one."
             />
-            <p className="mt-6 text-base text-muted">
+            <p className="mt-6 max-w-2xl text-base text-muted">
               Add <span className="num text-ink">NEXT_PUBLIC_SUPABASE_URL</span> and{' '}
               <span className="num text-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> to{' '}
               <span className="num text-ink">.env.local</span>, then restart the dev server.
               Next only reads that file at startup.
             </p>
+
+            <Link
+              href="/"
+              className={buttonClasses({ variant: 'ghost', className: 'mt-6 -ml-3' })}
+            >
+              <ArrowLeft aria-hidden strokeWidth={1.75} className="size-4" />
+              Back to the dashboard
+            </Link>
           </>
         )}
-
-        <p className="mt-6 border-t border-hairline-soft pt-6 text-sm text-muted">
-          Editor accounts are created by whoever administers the Supabase project — there is no
-          self-registration, by design. Access is enforced by row-level security in the database, so
-          the key your browser holds can read every table and write to none of them.
-        </p>
-
-        <Link
-          href="/"
-          className={buttonClasses({ variant: 'ghost', className: 'mt-6 -ml-3' })}
-        >
-          <ArrowLeft aria-hidden strokeWidth={1.75} className="size-4" />
-          Back to the dashboard
-        </Link>
       </Card>
-    </div>
+    </>
   )
 }
