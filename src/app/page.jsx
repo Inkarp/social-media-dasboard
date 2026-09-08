@@ -24,7 +24,6 @@ export const metadata = { title: 'Overview' }
  * @param {{ searchParams: Promise<Record<string, string | string[] | undefined>> }} props
  */
 export default async function DashboardPage({ searchParams }) {
-  if (process.env.FORCE_TEST_ERROR) throw new Error('forced test error')
   const params = await searchParams
 
   const fy = intParam(params, 'fy') ?? currentFy()
