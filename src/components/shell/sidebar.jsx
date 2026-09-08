@@ -23,8 +23,10 @@ export function Sidebar({ viewer }) {
       data-collapsed={collapsed}
       className="studio-sidebar fixed inset-y-0 left-0 z-30 hidden w-64 flex-col md:flex"
     >
-      <div className="sidebar-heading border-b border-hairline px-6 py-6">
-        <InkarpLogo className="sidebar-logo min-w-0 flex-1" />
+      <div className="sidebar-topbar">
+        <div className="sidebar-card">
+          <InkarpLogo className="sidebar-logo" />
+        </div>
         <button
           type="button"
           onClick={() => setCollapsed((value) => !value)}
@@ -32,9 +34,9 @@ export function Sidebar({ viewer }) {
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           aria-expanded={!collapsed}
           aria-controls="sidebar-navigation"
-          className="flex size-9 shrink-0 items-center justify-center rounded-lg text-ink hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+          className="sidebar-toggle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
-          <ToggleIcon className="size-5" aria-hidden="true" />
+          <ToggleIcon className="size-4.5" aria-hidden="true" />
         </button>
       </div>
 

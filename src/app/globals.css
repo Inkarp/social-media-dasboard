@@ -85,6 +85,54 @@
   --duration-fill: 600ms;
 }
 
+/*
+ * Dark mode. `data-theme` is stamped on <html> before paint (see the inline
+ * script in layout.jsx) so this is the only selector that needs to exist —
+ * no prefers-color-scheme duplication required. Redefining the @theme custom
+ * properties here is enough to re-theme every Tailwind utility that already
+ * reads var(--color-*) (text-ink, bg-surface, border-hairline, ...); only the
+ * hand-styled "Scientific studio" chrome further down needs its own explicit
+ * dark overrides, since it uses literal hex values rather than tokens.
+ */
+:root[data-theme='dark'] {
+  --color-bg: #170f21;
+  --color-surface: #1e1530;
+  --color-zebra: #1c1429;
+  --color-hover: #2f2444;
+  --color-raised: #241a34;
+  --color-hairline: rgba(230, 220, 250, 0.14);
+  --color-hairline-soft: rgba(230, 220, 250, 0.08);
+  --color-border: #6f6485;
+  --color-faint: #574a68;
+  --color-muted: #b6a9c9;
+  --color-ink: #f3eefb;
+
+  --color-forest: #2fbf8f;
+  --color-forest-hover: #26a67a;
+  --color-forest-40: rgba(47, 191, 143, 0.4);
+  --color-forest-12: rgba(47, 191, 143, 0.16);
+  --color-forest-06: rgba(47, 191, 143, 0.1);
+  --color-ochre: #e0a53a;
+  --color-ochre-ink: #f0c070;
+  --color-slate: #9b83e8;
+  --color-danger: #ef5f7d;
+  --color-danger-hover: #e14568;
+  --color-danger-40: rgba(239, 95, 125, 0.4);
+  --color-danger-12: rgba(239, 95, 125, 0.16);
+  --color-danger-06: rgba(239, 95, 125, 0.1);
+  --color-wine: #e069a8;
+  --color-teal: #34c3dc;
+
+  --color-track: #372b4a;
+  --color-tick: rgba(230, 220, 250, 0.3);
+  --color-scrim: rgba(8, 5, 13, 0.6);
+
+  --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-overlay: 0 28px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(230, 220, 250, 0.1);
+
+  color-scheme: dark;
+}
+
 @layer base {
   *,
   *::before,
@@ -150,6 +198,10 @@
   [hidden] {
     display: none !important;
   }
+}
+
+:root[data-theme='dark'] body {
+  background: radial-gradient(ellipse at 95% 10%, #3a2a52 0, transparent 40%), radial-gradient(ellipse at 20% 85%, #3a2418 0, transparent 40%), var(--color-bg);
 }
 
 @utility card {
@@ -266,12 +318,18 @@
     overflow: hidden;
     transition: width 180ms ease;
   }
-  .studio-sidebar > div:first-child { margin: 14px; padding: 18px; border: 0; border-radius: 20px; background: #fffaf5; }
-  .studio-sidebar .sidebar-heading { display: flex; align-items: center; gap: 8px; padding: 12px; }
+  .studio-sidebar .sidebar-topbar { display: flex; align-items: center; gap: 8px; margin: 14px; }
+  .sidebar-card { flex: 1; min-width: 0; padding: 18px; border: 0; border-radius: 20px; background: #fffaf5; }
+  .sidebar-toggle { display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #ffffff12; border: 1px solid #ffffff25; color: #f6efff; transition: background 120ms ease, transform 120ms ease; }
+  .sidebar-toggle:hover { background: #ffffff22; }
+  .sidebar-toggle:active { transform: scale(0.94); }
+  .theme-toggle-moon { display: none; }
+  :root[data-theme='dark'] .theme-toggle-sun { display: none; }
+  :root[data-theme='dark'] .theme-toggle-moon { display: block; }
   .studio-content { transition: padding-left 180ms ease; }
   .studio-sidebar[data-collapsed='true'] { width: 72px; }
-  .studio-sidebar[data-collapsed='true'] .sidebar-heading { margin: 10px; padding: 8px; justify-content: center; }
-  .studio-sidebar[data-collapsed='true'] .sidebar-logo,
+  .studio-sidebar[data-collapsed='true'] .sidebar-topbar { margin: 10px; justify-content: center; }
+  .studio-sidebar[data-collapsed='true'] .sidebar-card,
   .studio-sidebar[data-collapsed='true'] .studio-nav-label,
   .studio-sidebar[data-collapsed='true'] .sidebar-number,
   .studio-sidebar[data-collapsed='true'] .sidebar-link-label,
@@ -356,6 +414,58 @@
   dialog::backdrop { background: #24143680; backdrop-filter: blur(7px); }
   .studio-mobile-nav { margin: 0 10px 10px; overflow: hidden; border: 1px solid #d9c9ea; border-radius: 22px; background: #fffaf5f2; }
   .studio-mobile-nav a[aria-current='page'] { background: #e6dbf8; color: #6339a1; }
+
+  /*
+   * Dark mode overrides for the hand-styled chrome above. The sidebar itself
+   * stays the same fixed dark purple in both themes (it's brand chrome, not
+   * a themed surface) — only its inner white logo card needs a dark version.
+   */
+  :root[data-theme='dark'] .sidebar-card { background: #1c1329; }
+  :root[data-theme='dark'] .studio-topbar { background: #170f21d9; }
+  :root[data-theme='dark'] .studio-hero { --hero-color: #382a52; background: radial-gradient(ellipse at 50% 120%, rgba(255, 246, 219, 0.08), transparent 65%), var(--hero-color); border-color: rgba(255, 255, 255, 0.1); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+  :root[data-theme='dark'] .studio-hero[data-accent='slate'] { --hero-color: #26314f; }
+  :root[data-theme='dark'] .studio-hero[data-accent='ochre'] { --hero-color: #4a3620; }
+  :root[data-theme='dark'] .studio-hero[data-accent='wine'] { --hero-color: #43263a; }
+  :root[data-theme='dark'] .studio-hero[data-accent='teal'] { --hero-color: #1f3c38; }
+  :root[data-theme='dark'] .studio-eyebrow { color: #c9bcdb; }
+  :root[data-theme='dark'] .hero-period { color: #e8709f; }
+  :root[data-theme='dark'] .studio-hero-copy > p { color: #cdbfe0; }
+  :root[data-theme='dark'] .hero-caption { color: #a993c2; }
+  :root[data-theme='dark'] .orbit { border-color: rgba(210, 185, 235, 0.35); }
+  :root[data-theme='dark'] .studio-button-secondary { background: #241a34; border-color: #4a3d63; box-shadow: 0 3px 0 #100a19; }
+  :root[data-theme='dark'] .studio-button-secondary:hover { background: #372a4e; border-color: #7a67a0; }
+  :root[data-theme='dark'] .card { background: #1e1530ed; border-color: rgba(230, 220, 250, 0.14); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35); }
+  :root[data-theme='dark'] .studio-stat:nth-child(1) { background: #372a54; }
+  :root[data-theme='dark'] .studio-stat:nth-child(2) { background: #39471f; }
+  :root[data-theme='dark'] .studio-stat:nth-child(3) { background: #4a3324; }
+  :root[data-theme='dark'] .studio-stat:nth-child(4) { background: #1f3c37; }
+  :root[data-theme='dark'] .studio-stat:nth-child(5) { background: #452a3d; }
+  :root[data-theme='dark'] .studio-stat::after { border-color: rgba(255, 255, 255, 0.08); }
+  :root[data-theme='dark'] .studio-stat .label { color: #c7b9d9; }
+  :root[data-theme='dark'] .studio-stat .size-10 { background: rgba(255, 255, 255, 0.12); color: #e8dcf5; }
+  :root[data-theme='dark'] input:not([type='checkbox']):not([type='radio']):not([type='color']),
+  :root[data-theme='dark'] select,
+  :root[data-theme='dark'] textarea { box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.25); }
+  :root[data-theme='dark'] select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b6a9c9' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); }
+  :root[data-theme='dark'] [role='tablist'] { background: #241a34; }
+  :root[data-theme='dark'] [role='tab'][aria-selected='true'] { background: #4a3566; box-shadow: 0 3px 7px rgba(0, 0, 0, 0.4); }
+  :root[data-theme='dark'] table thead { background: #241a34; }
+  :root[data-theme='dark'] .studio-board-column:nth-child(4n+1) { background: #2e2247; border-top-color: #a98ee6; }
+  :root[data-theme='dark'] .studio-board-column:nth-child(4n+2) { background: #3c2f18; border-top-color: #e0b464; }
+  :root[data-theme='dark'] .studio-board-column:nth-child(4n+3) { background: #1f3327; border-top-color: #7ec7a3; }
+  :root[data-theme='dark'] .studio-board-column:nth-child(4n+4) { background: #3a2130; border-top-color: #e08fb5; }
+  :root[data-theme='dark'] .studio-day:hover { background: #2a2038; }
+  :root[data-theme='dark'] dialog::backdrop { background: rgba(5, 3, 9, 0.7); }
+  :root[data-theme='dark'] .studio-mobile-nav { border-color: #4a3d63; background: #1c1428f2; }
+  :root[data-theme='dark'] .studio-mobile-nav a[aria-current='page'] { background: #3a2c56; color: #d9c8f5; }
+  :root[data-theme='dark'] .insight-metrics .insight-metric { background: linear-gradient(135deg, #2e2247, #1c1329 85%); }
+  :root[data-theme='dark'] .insight-metrics .insight-metric:nth-child(2) { background: linear-gradient(135deg, #38431f, #1c1329 85%); }
+  :root[data-theme='dark'] .insight-metrics .insight-metric:nth-child(3) { background: linear-gradient(135deg, #472e1f, #1c1329 85%); }
+  :root[data-theme='dark'] .insight-metrics .insight-metric:nth-child(4) { background: linear-gradient(135deg, #3a2438, #1c1329 85%); }
+  :root[data-theme='dark'] .insight-icon { background: rgba(255, 255, 255, 0.08); color: #c4a8f0; }
+  :root[data-theme='dark'] .insight-donut { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); }
+  :root[data-theme='dark'] .insight-donut > div { background: #1c1329; }
+  :root[data-theme='dark'] .insight-rank { background: #2e2247; color: #c4a8f0; }
 
 @media (min-width: 1600px) { #main { max-width: 1680px; width: 100%; margin-inline: auto; } }
 @media (max-width: 1100px) {

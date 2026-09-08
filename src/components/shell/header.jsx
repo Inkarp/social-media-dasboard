@@ -4,6 +4,7 @@ import { SignOutButton } from '@/components/auth/sign-out-button'
 import { InkarpLogo } from '@/components/brand/inkarp-logo'
 import { FySwitcher } from '@/components/shell/fy-switcher'
 import { ModeBadge } from '@/components/shell/mode-badge'
+import { ThemeToggle } from '@/components/shell/theme-toggle'
 import { currentFy, fyOptions } from '@/lib/fy'
 import { greetingFor, longDate } from '@/lib/greeting'
 
@@ -27,7 +28,10 @@ export function Header({ viewer }) {
     >
       <div className="flex items-center justify-between px-4 pt-4 md:hidden">
         <InkarpLogo />
-        <ModeBadge editing={viewer.isEditor} />
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <ModeBadge editing={viewer.isEditor} />
+        </div>
       </div>
 
       <div className="flex flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between md:px-8 md:py-6">
@@ -40,6 +44,10 @@ export function Header({ viewer }) {
           <Suspense fallback={<div className="h-9 w-32 rounded-control border border-hairline" />}>
             <FySwitcher options={options} currentFy={current} />
           </Suspense>
+
+          <span className="hidden md:block">
+            <ThemeToggle />
+          </span>
 
           {viewer.isEditor ? (
             <div className="flex items-center gap-4">
