@@ -1,5 +1,6 @@
 'use client'
 
+import { useSearchParams, useRouter } from 'next/navigation'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 /** @typedef {import('@/lib/data/posts').PostRow} PostRow */
@@ -27,11 +28,19 @@ const PostsListContext = createContext(/** @type {PostsListContextValue | null} 
  */
 export function PostsListProvider({ rows, children }) {
   const [items, setItems] = useState(rows)
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
   useEffect(() => setItems(rows), [rows])
 
   /** @param {PostRow} post */
   function upsert(post) {
+    const format = searchParams.get('format')
+    if (format && (post.format ?? 'unclassified') !== format) {
+      setItems((current) => current.filter((row) => row.id !== post.id))
+      router.refresh()
+      return
+    }
     setItems((current) => {
       const exists = current.some((row) => row.id === post.id)
       return exists ? current.map((row) => (row.id === post.id ? post : row)) : [post, ...current]

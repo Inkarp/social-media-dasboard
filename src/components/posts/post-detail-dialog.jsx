@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatBadge } from '@/components/ui/format-badge'
 import { useId } from 'react'
 import { Button } from '@/components/ui/button'
 import { ChannelIcons } from '@/components/ui/channel-icon'
@@ -44,6 +45,7 @@ export function PostDetailDialog({ post, open, onClose }) {
             <dt className="label">Status</dt>
             <dd className="mt-1">
               <StatusBadge status={post.status} />
+                  <FormatBadge format={post.format} />
             </dd>
           </div>
           {post.productName && (

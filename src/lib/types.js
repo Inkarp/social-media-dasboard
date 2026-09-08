@@ -147,6 +147,7 @@
  * @property {string | null} product_name
  * @property {Channel[]} channels
  * @property {string} post_date
+ * @property {import('@/lib/post-formats').PostFormat | null} format
  * @property {PostStatus} status
  * @property {number} fy Generated from post_date by Postgres. Read-only.
  * @property {number} quarter Generated from post_date by Postgres. Read-only.
@@ -162,6 +163,7 @@
  * @property {string | null} [product_name]
  * @property {Channel[]} [channels]
  * @property {string} post_date
+ * @property {import('@/lib/post-formats').PostFormat} format
  * @property {PostStatus} status
  * @property {string} [created_at]
  * @property {string} [updated_at]
@@ -175,6 +177,7 @@
  * @property {string | null} [product_name]
  * @property {Channel[]} [channels]
  * @property {string} [post_date]
+ * @property {import('@/lib/post-formats').PostFormat} [format]
  * @property {PostStatus} [status]
  * @property {string} [created_at]
  * @property {string} [updated_at]
@@ -202,6 +205,7 @@
  * @property {number | null} [p_quarter]
  * @property {string | null} [p_group]
  * @property {string | null} [p_pm]
+ * @property {string | null} [p_format]
  * @property {string | null} [p_status]
  * @property {string | null} [p_from]
  * @property {string | null} [p_to]
@@ -263,6 +267,7 @@
  * @property {Record<never, never>} public.Views
  * @property {Object} public.Functions
  * @property {{ Args: DashboardRollupArgs, Returns: DashboardRollupRow[] }} public.Functions.dashboard_rollup
+ * @property {{ Args: DashboardRollupArgs, Returns: import('@/lib/post-formats').FormatRollup[] }} public.Functions.post_format_rollup
  * @property {{ Args: Record<string, never>, Returns: boolean }} public.Functions.is_admin
  * @property {Record<never, never>} public.Enums
  * @property {Record<never, never>} public.CompositeTypes

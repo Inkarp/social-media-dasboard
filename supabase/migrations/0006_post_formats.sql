@@ -1,30 +1,24 @@
--- =============================================================================
--- 0003 · dashboard_rollup
---
--- Every figure on the dashboard comes out of this one function. The alternative
--- — fetching posts into the browser and reducing them in JavaScript — ships
--- thousands of rows across the wire on every filter change with 50 brands over
--- a full year, and gets slower every month the company operates.
---
--- Returns one row per entity per dimension:
---   'principal' | 'group' | 'manager' | 'product' | 'campaign'
---
--- Definitions, fixed by the brief:
---   implemented = posts with status 'published'. Nothing else counts.
---   pending     = every post in scope that is not published.
---   planned     = the target from `targets`, respecting the quarter filter.
---
--- Two behaviours worth knowing before you read a number off this:
---
---   · Targets exist per principal, so `planned` is 0 on the product and
---     campaign dimensions. Inkarp does not plan at that grain.
---
---   · A custom date range (p_from / p_to) narrows which POSTS are counted but
---     does not prorate `planned` — a target for a quarter cannot be
---     meaningfully sliced into "the 12th to the 19th". Compare implemented
---     against planned only when the range is a whole year or a whole quarter.
--- =============================================================================
+-- Preserve existing posts as unclassified; all new posts require a format.
+ alter table public.posts add column if not exists format text;
+ alter table public.posts drop constraint if exists posts_format_check;
+ alter table public.posts add constraint posts_format_check
+   check (format in ('static', 'carousel', 'reel', 'video'));
+ create index if not exists posts_format_date_idx on public.posts (format, post_date);
 
+ create or replace function public.require_post_format() returns trigger
+ language plpgsql set search_path = public as $$
+ begin
+   if new.format is null and (TG_OP = 'INSERT' or old.format is not null) then
+     raise exception 'Choose a post format: Static, Carousel, Reel or Video.';
+   end if;
+   return new;
+ end;
+ $$;
+ drop trigger if exists posts_require_format on public.posts;
+ create trigger posts_require_format before insert or update on public.posts
+ for each row execute function public.require_post_format();
+
+ drop function if exists public.dashboard_rollup(int, int, text, uuid, text, date, date);
 create or replace function public.dashboard_rollup(
   p_fy      int,
   p_quarter int   default null,
@@ -32,7 +26,8 @@ create or replace function public.dashboard_rollup(
   p_pm      uuid  default null,
   p_status  text  default null,
   p_from    date  default null,
-  p_to      date  default null
+  p_to      date  default null,
+  p_format  text  default null
 )
 returns table (
   dimension   text,
@@ -88,6 +83,7 @@ begin
     join scoped_principals sp on sp.id = po.principal_id
     where po.post_date between v_from and v_to
       and (p_status is null or po.status = p_status)
+      and (p_format is null or coalesce(po.format, 'unclassified') = p_format)
   ),
 
   -- The even split with the remainder landing on Q4, matching
@@ -206,9 +202,31 @@ begin
 end;
 $$;
 
-comment on function public.dashboard_rollup(int, int, text, uuid, text, date, date) is
+comment on function public.dashboard_rollup(int, int, text, uuid, text, date, date, text) is
   'Server-side aggregation for the dashboard breakdown tables. See migration 0003 for the definition of planned/implemented/pending and the date-range caveat.';
 
 -- Readable by everyone, exactly like the tables it reads.
-grant execute on function public.dashboard_rollup(int, int, text, uuid, text, date, date)
+grant execute on function public.dashboard_rollup(int, int, text, uuid, text, date, date, text)
   to anon, authenticated;
+
+create or replace function public.post_format_rollup(
+ p_fy int, p_quarter int default null, p_group text default null,
+ p_pm uuid default null, p_status text default null,
+ p_from date default null, p_to date default null, p_format text default null
+) returns table (principal_id uuid, principal_name text, format text, implemented int, pending int)
+language sql stable security invoker set search_path = public as $$
+ select pr.id, pr.name, coalesce(po.format, 'unclassified'),
+ count(*) filter (where po.status = 'published')::int,
+ count(*) filter (where po.status <> 'published')::int
+ from public.posts po join public.principals pr on pr.id = po.principal_id
+ where po.fy = p_fy and (p_quarter is null or po.quarter = p_quarter)
+ and (p_group is null or pr.group_name = p_group)
+ and (p_pm is null or pr.product_manager_id = p_pm)
+ and (p_status is null or po.status = p_status)
+ and (p_from is null or po.post_date >= p_from)
+ and (p_to is null or po.post_date <= p_to)
+ and (p_format is null or coalesce(po.format, 'unclassified') = p_format)
+ group by pr.id, pr.name, coalesce(po.format, 'unclassified');
+$$;
+grant execute on function public.post_format_rollup(int, int, text, uuid, text, date, date, text) to anon, authenticated;
+notify pgrst, 'reload schema';

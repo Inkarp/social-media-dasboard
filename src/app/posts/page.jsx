@@ -1,8 +1,10 @@
+import { parseFormatFilter } from '@/lib/post-formats'
 import { EditorOnly } from '@/components/auth/editor-only'
 import { PostsFilters } from '@/components/posts/posts-filters'
 import { PostsHeaderActions } from '@/components/posts/posts-header-actions'
 import { PostsListProvider } from '@/components/posts/posts-list-context'
 import { PostsTable } from '@/components/posts/posts-table'
+import { PostsExport } from '@/components/posts/posts-export'
 import { EmptyState } from '@/components/ui/empty-state'
 import { PageHeader } from '@/components/ui/page-header'
 import { getActivePrincipalOptions } from '@/lib/data/principals'
@@ -35,6 +37,7 @@ export default async function PostsPage({ searchParams }) {
       search: firstParam(params, 'q'),
       channel,
       status,
+      format: parseFormatFilter(firstParam(params, 'format')),
     }),
     getActivePrincipalOptions(),
   ])
@@ -63,6 +66,7 @@ export default async function PostsPage({ searchParams }) {
       ) : (
         <>
           <PostsFilters />
+          <div className="mb-4"><PostsExport /></div>
           <PostsTable principals={principals} />
         </>
       )}

@@ -1,5 +1,6 @@
 'use client'
 
+import { FORMAT_LABELS } from '@/lib/post-formats'
 import { Download, Printer } from 'lucide-react'
 import * as XLSX from 'xlsx'
 import { buttonClasses } from '@/components/ui/button'
@@ -26,9 +27,9 @@ const SHEETS = [
  * stylesheet already in globals.css: every piece of chrome not meant for
  * paper carries `data-print="hide"`.
  *
- * @param {{ rows: RollupRow[], filename: string }} props
+ * @param {{ rows: RollupRow[], filename: string, formats?: import('@/lib/post-formats').FormatRollup[] }} props
  */
-export function ExportButtons({ rows, filename }) {
+export function ExportButtons({ rows, filename, formats = [] }) {
   function exportSpreadsheet() {
     const workbook = XLSX.utils.book_new()
 
@@ -48,6 +49,8 @@ export function ExportButtons({ rows, filename }) {
       XLSX.utils.book_append_sheet(workbook, worksheet, sheet.name)
     }
 
+    const formatSheet = XLSX.utils.json_to_sheet(formats.map((row) => ({ Principal: row.principal_name, Format: FORMAT_LABELS[row.format], Published: row.implemented, Pending: row.pending })), { header: ['Principal', 'Format', 'Published', 'Pending'] })
+    XLSX.utils.book_append_sheet(workbook, formatSheet, 'Post formats')
     XLSX.writeFile(workbook, `${filename}.xlsx`)
   }
 

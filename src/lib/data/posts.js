@@ -1,4 +1,5 @@
 import 'server-only'
+import { hasPostFormats } from '@/lib/data/format-support'
 
 import { getPrincipalIndex } from '@/lib/data/principals'
 import { toDateOnly } from '@/lib/fy'
@@ -22,6 +23,7 @@ import { createClient } from '@/lib/supabase/server'
  * @property {string | null} productName
  * @property {Channel[]} channels
  * @property {string} postDate
+ * @property {import('@/lib/post-formats').PostFormat | null} format
  * @property {PostStatus} status
  * @property {string} principalId
  * @property {string} principalName
@@ -37,6 +39,7 @@ import { createClient } from '@/lib/supabase/server'
  * @property {Date} to
  * @property {string} [search]
  * @property {Channel} [channel]
+ * @property {import('@/lib/post-formats').FormatKey} [format]
  * @property {PostStatus} [status]
  * @property {string} [principalId]
  */
@@ -53,7 +56,7 @@ const unknownPrincipal = {
 /**
  * @param {{
  *   id: string, name: string, description: string | null, product_name: string | null,
- *   channels: string[], post_date: string, status: string, principal_id: string
+ *   channels: string[], post_date: string, status: string, format: string | null, principal_id: string
  * }} post
  * @param {Map<string, PrincipalIndexEntry>} index
  * @returns {PostRow}
@@ -67,6 +70,7 @@ function toRow(post, index) {
     productName: post.product_name,
     channels: /** @type {Channel[]} */ (post.channels),
     postDate: post.post_date,
+    format: /** @type {import('@/lib/post-formats').PostFormat | null} */ (post.format),
     status: /** @type {PostStatus} */ (post.status),
     principalId: post.principal_id,
     principalName: principal.name,
@@ -92,14 +96,18 @@ export async function getPosts(query) {
   const supabase = await createClient()
   if (!supabase) return { rows: [], offline: true }
 
+  const formatsReady = await hasPostFormats()
+  if (!formatsReady && query.format && query.format !== 'unclassified') return { rows: [], offline: false }
   let request = supabase
     .from('posts')
-    .select('id, name, description, product_name, channels, post_date, status, principal_id')
+    .select('*')
     .gte('post_date', toDateOnly(query.from))
     .lte('post_date', toDateOnly(query.to))
     .order('post_date', { ascending: false })
     .order('created_at', { ascending: false })
 
+  if (formatsReady && query.format === 'unclassified') request = request.is('format', null)
+  else if (formatsReady && query.format && query.format !== 'unclassified') request = request.eq('format', query.format)
   if (query.status) request = request.eq('status', query.status)
   if (query.principalId) request = request.eq('principal_id', query.principalId)
   if (query.channel) request = request.contains('channels', [query.channel])
@@ -107,7 +115,7 @@ export async function getPosts(query) {
   const [postsResult, index] = await Promise.all([request, getPrincipalIndex()])
   if (postsResult.error) throw new Error(postsResult.error.message)
 
-  let rows = (postsResult.data ?? []).map((post) => toRow(post, index))
+  let rows = (postsResult.data ?? []).map((post) => toRow({ ...post, format: post.format ?? null }, index))
 
   const search = query.search?.trim().toLowerCase() ?? ''
   if (search) {

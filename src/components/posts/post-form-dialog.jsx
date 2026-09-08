@@ -10,6 +10,7 @@ import { Modal } from '@/components/ui/modal'
 import { cn } from '@/lib/cn'
 import { CHANNEL_LABELS, CHANNEL_PRESETS, CHANNELS } from '@/lib/channels'
 import { toDateOnly } from '@/lib/fy'
+import { POST_FORMATS, FORMAT_LABELS } from '@/lib/post-formats'
 import { POST_STATUSES, STATUS_LABELS } from '@/lib/status'
 
 /** @typedef {import('@/lib/channels').Channel} Channel */
@@ -100,6 +101,7 @@ export function PostFormDialog({
       productName: productName === '' ? null : productName,
       channels: [...channels],
       postDate: String(formData.get('postDate') ?? ''),
+      format: /** @type {import('@/lib/post-formats').PostFormat} */ (formData.get('format')),
       status: /** @type {PostStatus} */ (formData.get('status')),
       principalId,
       principalName: principal?.name ?? 'Unknown brand',
@@ -188,6 +190,13 @@ export function PostFormDialog({
               defaultValue={post?.name ?? ''}
               className={inputClasses}
             />
+          </Field>
+
+          <Field label="Post format" htmlFor={`${id}-format`} hint="Choose the content format. Reels and regular videos are tracked separately.">
+            <select id={`${id}-format`} name="format" required defaultValue={post?.format ?? ''} className={selectClasses}>
+              <option value="" disabled>{post ? 'Not classified ? choose a format' : 'Choose a format'}</option>
+              {POST_FORMATS.map((format) => <option key={format} value={format}>{FORMAT_LABELS[format]}</option>)}
+            </select>
           </Field>
 
           <Field label="Description" htmlFor={`${id}-description`} hint="Optional.">

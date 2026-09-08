@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatBadge } from '@/components/ui/format-badge'
 import { useState } from 'react'
 import { useIsEditor } from '@/components/auth/editor-provider'
 import { DayListModal } from '@/components/calendar/day-list-modal'
@@ -74,6 +75,7 @@ export function DayCell({ date, dayNumber, inCurrentMonth, isToday, posts, princ
               style={{ backgroundColor: post.brandColor ?? 'transparent' }}
             />
             <span className="truncate text-ink">{post.name}</span>
+                  <FormatBadge format={post.format} compact />
           </button>
         ))}
 

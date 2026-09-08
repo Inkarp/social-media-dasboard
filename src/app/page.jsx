@@ -1,6 +1,9 @@
+import { FormatCharts } from '@/components/dashboard/format-charts'
+import { parseFormatFilter } from '@/lib/post-formats'
 import { EditorOnly } from '@/components/auth/editor-only'
 import { BreakdownTable } from '@/components/dashboard/breakdown-table'
 import { DashboardFilters } from '@/components/dashboard/dashboard-filters'
+import { DashboardInsights } from '@/components/dashboard/dashboard-insights'
 import { DateRangeReport } from '@/components/dashboard/date-range-report'
 import { ExportButtons } from '@/components/dashboard/export-buttons'
 import { SummaryCards } from '@/components/dashboard/summary-cards'
@@ -37,8 +40,8 @@ export default async function DashboardPage({ searchParams }) {
   const from = rawFrom && rawTo ? parseDateOnly(rawFrom) : undefined
   const to = rawFrom && rawTo ? parseDateOnly(rawTo) : undefined
 
-  const [{ rows, groups, managers, offline }, principals] = await Promise.all([
-    getDashboardData({ fy, quarter, group, managerId, status, from, to }),
+  const [{ rows, formats, groups, managers, offline }, principals] = await Promise.all([
+    getDashboardData({ fy, quarter, group, managerId, status, from, to, format: parseFormatFilter(firstParam(params, 'format')) }),
     getActivePrincipalOptions(),
   ])
 
@@ -59,7 +62,7 @@ export default async function DashboardPage({ searchParams }) {
         description={`Planned against published activity across every principal, for ${periodLabel}.`}
         actions={
           <>
-            <ExportButtons rows={rows} filename={filename} />
+            <ExportButtons formats={formats} rows={rows} filename={filename} />
             <EditorOnly>
               <PostFormDialog principals={principals} />
             </EditorOnly>
@@ -80,6 +83,8 @@ export default async function DashboardPage({ searchParams }) {
           </div>
 
           <SummaryCards principalRows={principalRows} />
+          <DashboardInsights rows={rows} />
+          <FormatCharts rows={formats} />
 
           <div className="flex flex-col gap-6">
             <BreakdownTable title="By Principal" rows={principalRows} showAccent />

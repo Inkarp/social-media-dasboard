@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatFilter } from '@/components/posts/format-filter'
 import { ChevronDown, Search, X } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState, useTransition } from 'react'
@@ -48,7 +49,7 @@ export function PostsFilters() {
 
   const channel = searchParams.get('channel') ?? ''
   const status = searchParams.get('status') ?? ''
-  const hasFilters = Boolean(currentSearch || channel || status)
+  const hasFilters = Boolean(searchParams.get('format') || currentSearch || channel || status)
 
   return (
     <div
@@ -134,10 +135,12 @@ export function PostsFilters() {
         </div>
       </div>
 
+      <FormatFilter />
+
       {hasFilters && (
         <button
           type="button"
-          onClick={() => set({ q: null, channel: null, status: null })}
+          onClick={() => set({ q: null, channel: null, status: null, format: null })}
           className="flex items-center gap-2 rounded-control px-3 py-2 text-base text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           <X aria-hidden strokeWidth={1.75} className="size-4" />

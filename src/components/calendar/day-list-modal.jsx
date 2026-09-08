@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatBadge } from '@/components/ui/format-badge'
 import { format, parseISO } from 'date-fns'
 import { useId } from 'react'
 import { Button } from '@/components/ui/button'
@@ -48,6 +49,7 @@ export function DayListModal({ date, posts, onClose, onSelect }) {
               </span>
               <ChannelIcons channels={post.channels} className="shrink-0" />
               <StatusBadge status={post.status} className="shrink-0" />
+                  <FormatBadge format={post.format} />
             </button>
           </li>
         ))}

@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------------------
-   Inkarp design tokens - high-voltage command center.
+   Inkarp design tokens - scientific workspace.
 --------------------------------------------------------------------------- */
 
 @theme {
@@ -227,7 +227,35 @@
   }
 }
 
-/* Electric studio: sculpted surfaces, bright accents, and an orbital motif. */
+.insight-metrics .insight-metric { background: linear-gradient(135deg, #f1e9fc, #ffffff 85%); }
+.insight-metrics .insight-metric:nth-child(2) { background: linear-gradient(135deg, #edf6d9, #ffffff 85%); }
+.insight-metrics .insight-metric:nth-child(3) { background: linear-gradient(135deg, #ffeadf, #ffffff 85%); }
+.insight-metrics .insight-metric:nth-child(4) { background: linear-gradient(135deg, #f6e5f1, #ffffff 85%); }
+.insight-icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 12px 12px 5px 12px; color: #7350a5; background: #ffffffa6; }
+.insight-donut { display: grid; place-items: center; width: 176px; height: 176px; border-radius: 50%; box-shadow: 0 8px 24px #7350a510; }
+.insight-donut > div { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 138px; height: 138px; border-radius: 50%; background: #fff; }
+.insight-rank { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; border-radius: 10px; font-size: 11px; color: #7350a5; background: #eee7fa; }
+
+/* Decorative particles sit behind all interactive content. */
+.science-shell { position: relative; isolation: isolate; }
+.science-background { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background-image: radial-gradient(#7350a517 1px, transparent 1px); background-size: 28px 28px; }
+.science-particle { position: absolute; top: -80px; color: #7350a5; opacity: .16; animation: science-fall linear infinite; will-change: transform; }
+.science-particle:nth-child(3n) { color: #b52b79; }
+.science-particle svg { width: 100%; height: auto; }
+@keyframes science-fall {
+  from { transform: translate3d(-15px, -80px, 0) rotate(-25deg); }
+  to { transform: translate3d(35px, calc(100vh + 160px), 0) rotate(155deg); }
+}
+.science-flask { position: absolute; width: 34px; height: 34px; top: 62px; left: 35px; color: #7350a5; transform: rotate(-18deg); }
+.science-microscope { position: absolute; width: 38px; height: 38px; bottom: 45px; right: 34px; color: #8d427d; }
+@media (max-width: 640px) { .science-particle:nth-child(even) { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .science-particle { animation: none; top: 30%; transform: rotate(-15deg); }
+  .science-particle:nth-child(3n) { top: 65%; }
+  .science-particle:nth-child(3n + 1) { top: 85%; }
+}
+
+/* Scientific studio: pastel colors and molecular illustrations. */
 .studio-sidebar {
     margin: 12px 0 12px 12px;
     width: 244px;
@@ -236,8 +264,26 @@
     color: #f6efff;
     box-shadow: 0 18px 45px #25193922;
     overflow: hidden;
+    transition: width 180ms ease;
   }
   .studio-sidebar > div:first-child { margin: 14px; padding: 18px; border: 0; border-radius: 20px; background: #fffaf5; }
+  .studio-sidebar .sidebar-heading { display: flex; align-items: center; gap: 8px; padding: 12px; }
+  .studio-content { transition: padding-left 180ms ease; }
+  .studio-sidebar[data-collapsed='true'] { width: 72px; }
+  .studio-sidebar[data-collapsed='true'] .sidebar-heading { margin: 10px; padding: 8px; justify-content: center; }
+  .studio-sidebar[data-collapsed='true'] .sidebar-logo,
+  .studio-sidebar[data-collapsed='true'] .studio-nav-label,
+  .studio-sidebar[data-collapsed='true'] .sidebar-number,
+  .studio-sidebar[data-collapsed='true'] .sidebar-link-label,
+  .studio-sidebar[data-collapsed='true'] .sidebar-active-marker,
+  .studio-sidebar[data-collapsed='true'] .studio-sidebar-note,
+  .studio-sidebar[data-collapsed='true'] > div:last-child { display: none; }
+  .studio-sidebar[data-collapsed='true'] nav { padding: 14px 10px; }
+  .studio-sidebar[data-collapsed='true'] nav a { justify-content: center; gap: 0; padding: 14px 0; }
+  .studio-sidebar[data-collapsed='true'] nav a > svg { width: 22px; height: 22px; }
+  @media (min-width: 768px) {
+    .studio-sidebar[data-collapsed='true'] ~ .studio-content { padding-left: 84px; }
+  }
   .studio-nav-label { margin: 22px 26px 2px; font-size: 10px; font-weight: 600; letter-spacing: .18em; color: #c4b3d9; }
   .studio-sidebar nav { gap: 9px; padding: 18px 14px; }
   .studio-sidebar nav a { color: #d6c9e5; border-radius: 18px 7px 18px 18px; padding: 14px 12px; border-color: transparent; }
@@ -245,7 +291,7 @@
   .studio-sidebar nav a > span:first-child { background: #ffffff0d; border-color: #ffffff25; color: #d6c9e5; border-radius: 50%; }
   .studio-sidebar nav a[aria-current='page'] { background: #d9f780; color: #251939; box-shadow: 0 6px 0 #0e081e50; }
   .studio-sidebar nav a[aria-current='page'] > span:first-child { background: #251939; color: #d9f780; }
-  .studio-sidebar nav a[aria-current='page'] > span:last-child { background: #251939; height: 7px; width: 7px; top: 23px; right: 13px; }
+  .studio-sidebar nav a[aria-current='page'] > .sidebar-active-marker { background: #251939; height: 7px; width: 7px; top: 23px; right: 13px; }
   .studio-sidebar > div:last-child { background: #ffffff08; border-color: #ffffff15; }
   .studio-sidebar > div:last-child .text-muted { color: #d0c1e0; }
   .studio-sidebar > div:last-child .text-ink { color: #d9f780; }
@@ -330,6 +376,7 @@
 }
 @media print {
   .studio-hero { background: white; box-shadow: none; border: 1px solid #ccc; padding: 20px; }
+  section[aria-label='Post format insights'] .overflow-y-auto { max-height: none; overflow: visible; }
   .studio-hero-art, .hero-caption { display: none; }
   .studio-hero-copy { max-width: 100%; }
   .studio-stat { break-inside: avoid; }

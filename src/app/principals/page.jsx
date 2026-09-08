@@ -1,7 +1,10 @@
+import { FormatCharts } from '@/components/dashboard/format-charts'
+import { parseFormatFilter } from '@/lib/post-formats'
 import { EditorOnly } from '@/components/auth/editor-only'
 import { GroupSection } from '@/components/principals/group-section'
 import { PrincipalFormDialog } from '@/components/principals/principal-form-dialog'
 import { PrincipalsFilters } from '@/components/principals/principals-filters'
+import { PrincipalCharts } from '@/components/principals/principal-charts'
 import { CalibratedBar } from '@/components/ui/calibrated-bar'
 import { EmptyState } from '@/components/ui/empty-state'
 import { PageHeader } from '@/components/ui/page-header'
@@ -31,12 +34,13 @@ export default async function PrincipalsPage({ searchParams }) {
   const rawPeriod = intParam(params, 'period')
   const quarter = isQuarter(rawPeriod) ? rawPeriod : null
 
-  const { rows, managers, groups, offline } = await getPrincipals({
+  const { rows, formats, managers, groups, offline } = await getPrincipals({
     fy,
     quarter,
     search: firstParam(params, 'q'),
     group: firstParam(params, 'group'),
     managerId: firstParam(params, 'pm'),
+    format: parseFormatFilter(firstParam(params, 'format')),
     includeInactive: firstParam(params, 'retired') === '1',
   })
 
@@ -103,6 +107,9 @@ export default async function PrincipalsPage({ searchParams }) {
                   <p className="label mt-2">Against plan</p>
                 </div>
               </div>
+
+              <PrincipalCharts rows={rows} />
+              <FormatCharts rows={formats} principals={rows} />
 
               <div className="flex flex-col gap-4">
                 {orderedGroups.map((group) => (

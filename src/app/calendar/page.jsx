@@ -1,3 +1,5 @@
+import { FormatFilter } from '@/components/posts/format-filter'
+import { parseFormatFilter } from '@/lib/post-formats'
 import { CalendarNav } from '@/components/calendar/calendar-nav'
 import { MonthGrid, monthGridRange } from '@/components/calendar/month-grid'
 import { EmptyState } from '@/components/ui/empty-state'
@@ -35,7 +37,7 @@ export default async function CalendarPage({ searchParams }) {
   const range = monthGridRange(month)
 
   const [{ rows, offline }, principals] = await Promise.all([
-    getPosts({ from: range.start, to: range.end }),
+    getPosts({ format: parseFormatFilter(firstParam(params, 'format')), from: range.start, to: range.end }),
     getActivePrincipalOptions(),
   ])
 
@@ -48,6 +50,7 @@ export default async function CalendarPage({ searchParams }) {
         actions={<CalendarNav month={month} />}
       />
 
+      <div className="mb-6 flex"><FormatFilter /></div>
       {offline ? (
         <EmptyState title="No database is connected yet. Add your Supabase URL and key to .env.local, then restart the dev server." />
       ) : (

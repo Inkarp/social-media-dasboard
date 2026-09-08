@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatBadge } from '@/components/ui/format-badge'
 import { useMemo, useState } from 'react'
 import { useIsEditor } from '@/components/auth/editor-provider'
 import { BulkDeleteBar } from '@/components/posts/bulk-delete-bar'
@@ -99,6 +100,7 @@ export function PostsTable({ principals }) {
               <th className="label px-4 py-3">Manager</th>
               <th className="label px-4 py-3">Date</th>
               <th className="label px-4 py-3">Status</th>
+              <th className="label px-4 py-3">Format</th>
               {isEditor && <th className="label px-4 py-3 text-right">Actions</th>}
             </tr>
           </thead>
@@ -146,6 +148,9 @@ export function PostsTable({ principals }) {
                 <td className="num whitespace-nowrap px-4 py-3 text-sm text-ink">{row.postDate}</td>
                 <td className="px-4 py-3">
                   <StatusBadge status={row.status} />
+                </td>
+                <td className="px-4 py-3">
+                  <FormatBadge format={row.format} />
                 </td>
                 {isEditor && (
                   <td className="px-4 py-3">

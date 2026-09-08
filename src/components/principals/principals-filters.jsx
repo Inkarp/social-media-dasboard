@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatFilter } from '@/components/posts/format-filter'
 import { ChevronDown, Search, X } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState, useTransition } from 'react'
@@ -58,7 +59,7 @@ export function PrincipalsFilters({ managers, groups }) {
   const group = searchParams.get('group') ?? ''
   const manager = searchParams.get('pm') ?? ''
   const showRetired = searchParams.get('retired') === '1'
-  const hasFilters = Boolean(currentSearch || group || manager || showRetired)
+  const hasFilters = Boolean(searchParams.get('format') || currentSearch || group || manager || showRetired)
 
   return (
     <div
@@ -155,10 +156,11 @@ export function PrincipalsFilters({ managers, groups }) {
         Show retired
       </label>
 
+      <FormatFilter />
       {hasFilters && (
         <button
           type="button"
-          onClick={() => set({ q: null, group: null, pm: null, retired: null })}
+          onClick={() => set({ format: null, q: null, group: null, pm: null, retired: null })}
           className="flex items-center gap-2 rounded-control px-3 py-2 text-base text-muted transition-colors duration-[120ms] ease-standard hover:bg-hover hover:text-ink"
         >
           <X aria-hidden strokeWidth={1.75} className="size-4" />

@@ -1,5 +1,6 @@
 'use client'
 
+import { POST_FORMATS, FORMAT_LABELS } from '@/lib/post-formats'
 import { format } from 'date-fns'
 import { Download, Upload } from 'lucide-react'
 import { useId, useRef, useState, useTransition } from 'react'
@@ -90,6 +91,7 @@ function rowsFromSheet(json) {
     product: String(pick(row, ['product', 'product name']) ?? '').trim(),
     channels: normalizeChannels(pick(row, ['channels', 'channel'])),
     date: normalizeDate(pick(row, ['date', 'post date'])),
+    format: String(pick(row, ['format', 'post format']) ?? '').trim().toLowerCase(),
     status: normalizeStatus(pick(row, ['status'])),
   }))
 }
@@ -99,7 +101,7 @@ function downloadTemplate(principals) {
   const workbook = XLSX.utils.book_new()
 
   const postsSheet = XLSX.utils.aoa_to_sheet([
-    ['Post name', 'Description', 'Brand', 'Product', 'Channels', 'Date', 'Status'],
+    ['Post name', 'Description', 'Brand', 'Product', 'Channels', 'Date', 'Status', 'Post format'],
     [
       'Spring campaign launch',
       'Optional — free text',
@@ -108,21 +110,23 @@ function downloadTemplate(principals) {
       'Facebook, Instagram',
       '2026-04-15',
       'Planned',
+      'Static',
     ],
   ])
   postsSheet['!cols'] = [{ wch: 28 }, { wch: 30 }, { wch: 24 }, { wch: 20 }, { wch: 26 }, { wch: 12 }, { wch: 12 }]
   XLSX.utils.book_append_sheet(workbook, postsSheet, 'Posts')
 
   const referenceSheet = XLSX.utils.aoa_to_sheet([
-    ['Valid brand names', 'Valid channels', 'Valid statuses'],
+    ['Valid brand names', 'Valid channels', 'Valid statuses', 'Valid post formats'],
     ...Array.from(
-      { length: Math.max(principals.length, CHANNELS.length, POST_STATUSES.length) },
+      { length: Math.max(principals.length, CHANNELS.length, POST_STATUSES.length, POST_FORMATS.length) },
       (_, i) => [
         principals[i]?.name ?? '',
         i < CHANNELS.length ? CHANNEL_LABELS[/** @type {Channel} */ (CHANNELS[i])] : '',
         i < POST_STATUSES.length
           ? STATUS_LABELS[/** @type {import('@/lib/status').PostStatus} */ (POST_STATUSES[i])]
           : '',
+        POST_FORMATS[i] ? FORMAT_LABELS[POST_FORMATS[i]] : '',
       ],
     ),
   ])
@@ -227,7 +231,7 @@ export function ImportDialog({ principals }) {
         onClose={close}
         labelledBy={`${id}-title`}
         title="Import posts from a spreadsheet"
-        description="Download the template, fill in a row per post, then upload it here."
+        description="Download the template, fill in a row per post, choose Static, Carousel, Reel or Video for each row, then upload it here."
         footer={
           <Button variant="secondary" onClick={close}>
             {importedSomething.current ? 'Close and refresh' : 'Close'}

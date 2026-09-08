@@ -1,5 +1,6 @@
 'use client'
 
+import { FormatBadge } from '@/components/ui/format-badge'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import { ChannelIcons } from '@/components/ui/channel-icon'
@@ -41,6 +42,7 @@ export function BoardCard({ post, draggable, onClick }) {
       />
       <p className="truncate pl-2 text-sm font-medium text-ink">{post.name}</p>
       <p className="truncate pl-2 text-xs text-muted">{post.principalName}</p>
+                  <FormatBadge format={post.format} />
       <div className="flex items-center justify-between pl-2">
         <ChannelIcons channels={post.channels} iconClassName="size-3.5" />
         <span className="num text-xs text-muted">{post.postDate}</span>

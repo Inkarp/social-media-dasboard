@@ -1,4 +1,5 @@
 import 'server-only'
+import { hasPostFormats } from '@/lib/data/format-support'
 
 import { targetForPeriod } from '@/lib/fy'
 import { createClient } from '@/lib/supabase/server'
@@ -31,6 +32,7 @@ import { createClient } from '@/lib/supabase/server'
 
 /**
  * @typedef {Object} PrincipalsData
+ * @property {import('@/lib/post-formats').FormatRollup[]} formats
  * @property {PrincipalRow[]} rows
  * @property {ManagerOption[]} managers
  * @property {string[]} groups
@@ -44,6 +46,7 @@ import { createClient } from '@/lib/supabase/server'
  * @property {string} [search]
  * @property {string} [group]
  * @property {string} [managerId]
+ * @property {import('@/lib/post-formats').FormatKey} [format]
  * @property {boolean} [includeInactive]
  */
 
@@ -64,9 +67,10 @@ import { createClient } from '@/lib/supabase/server'
  */
 export async function getPrincipals(query) {
   const supabase = await createClient()
-  if (!supabase) return { rows: [], managers: [], groups: [], offline: true }
+  if (!supabase) return { formats: [], rows: [], managers: [], groups: [], offline: true }
 
-  const [principalsResult, managersResult, targetsResult, rollupResult] = await Promise.all([
+  const formatsReady = await hasPostFormats()
+  const [principalsResult, managersResult, targetsResult, rollupResult, formatsResult] = await Promise.all([
     supabase
       .from('principals')
       .select('id, name, group_name, country, brand_color, is_active, product_manager_id')
@@ -80,12 +84,15 @@ export async function getPrincipals(query) {
     supabase.rpc('dashboard_rollup', {
       p_fy: query.fy,
       p_quarter: query.quarter,
+      ...(formatsReady ? { p_format: query.format ?? null } : {}),
     }),
+    formatsReady ? supabase.rpc('post_format_rollup', { p_fy: query.fy, p_quarter: query.quarter, p_format: query.format ?? null }) : Promise.resolve({ data: [], error: null }),
   ])
 
   if (principalsResult.error) throw new Error(principalsResult.error.message)
   if (managersResult.error) throw new Error(managersResult.error.message)
   if (targetsResult.error) throw new Error(targetsResult.error.message)
+  if (formatsResult.error) throw new Error(formatsResult.error.message)
   if (rollupResult.error) throw new Error(rollupResult.error.message)
 
   const managers = managersResult.data ?? []
@@ -126,7 +133,7 @@ export async function getPrincipals(query) {
       q3: null,
       q4: null,
     }
-    const count = counts.get(principal.id)
+    const count = !formatsReady && query.format && query.format !== 'unclassified' ? undefined : counts.get(principal.id)
 
     return {
       id: principal.id,
@@ -167,7 +174,7 @@ export async function getPrincipals(query) {
     return true
   })
 
-  return { rows: filtered, managers, groups, offline: false }
+  return { formats: formatsReady ? (formatsResult.data ?? []).filter((row) => filtered.some((principal) => principal.id === row.principal_id)) : filtered.map((row) => ({ principal_id: row.id, principal_name: row.name, format: 'unclassified', implemented: row.implemented, pending: row.pending })), rows: filtered, managers, groups, offline: false }
 }
 
 /**

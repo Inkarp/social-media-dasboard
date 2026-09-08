@@ -1,3 +1,7 @@
+'use client'
+
+import { useState } from 'react'
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { InkarpLogo } from '@/components/brand/inkarp-logo'
 import { ModeBadge } from '@/components/shell/mode-badge'
 import { SidebarNav } from '@/components/shell/sidebar-nav'
@@ -5,25 +9,38 @@ import { SidebarNav } from '@/components/shell/sidebar-nav'
 /** @typedef {import('@/lib/viewer').Viewer} Viewer */
 
 /**
- * Fixed 240px paper rail, ruled off from the content by a hairline rather
- * than a colour block. Hidden below the md breakpoint, where navigation
- * moves to a bottom bar instead.
+ * Collapsible desktop navigation. Mobile navigation uses a bottom bar.
  *
  * @param {{ viewer: Viewer }} props
  */
 export function Sidebar({ viewer }) {
+  const [collapsed, setCollapsed] = useState(false)
+  const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose
+
   return (
     <aside
       data-print="hide"
+      data-collapsed={collapsed}
       className="studio-sidebar fixed inset-y-0 left-0 z-30 hidden w-64 flex-col md:flex"
     >
-      <div className="border-b border-hairline px-6 py-6">
-        <InkarpLogo />
+      <div className="sidebar-heading border-b border-hairline px-6 py-6">
+        <InkarpLogo className="sidebar-logo min-w-0 flex-1" />
+        <button
+          type="button"
+          onClick={() => setCollapsed((value) => !value)}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          aria-expanded={!collapsed}
+          aria-controls="sidebar-navigation"
+          className="flex size-9 shrink-0 items-center justify-center rounded-lg text-ink hover:bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        >
+          <ToggleIcon className="size-5" aria-hidden="true" />
+        </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div id="sidebar-navigation" className="min-h-0 flex-1 overflow-y-auto">
         <p className="studio-nav-label">YOUR WORKSPACE</p>
-        <SidebarNav />
+        <SidebarNav collapsed={collapsed} />
       </div>
 
       <div className="studio-sidebar-note" aria-hidden="true">

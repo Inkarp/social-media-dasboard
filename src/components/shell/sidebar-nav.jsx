@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { cn } from '@/lib/cn'
-import { ACCENT_BG, ACCENT_TEXT, ACCENT_WASH_STRONG, isNavActive, NAV_ITEMS } from '@/lib/nav'
+import { ACCENT_BG, ACCENT_TEXT, isNavActive, NAV_ITEMS } from '@/lib/nav'
 
 /**
  * Sidebar navigation, styled as a tabbed ledger index rather than a generic
@@ -21,7 +21,7 @@ import { ACCENT_BG, ACCENT_TEXT, ACCENT_WASH_STRONG, isNavActive, NAV_ITEMS } fr
  * on the dashboard, click Posts, and you're still in 2024-25. Section-specific
  * filters (status, channel, group) are intentionally dropped at the boundary.
  */
-export function SidebarNav() {
+export function SidebarNav({ collapsed = false }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const fy = searchParams.get('fy')
@@ -37,6 +37,8 @@ export function SidebarNav() {
           <Link
             key={item.href}
             href={href}
+            aria-label={item.label}
+            title={collapsed ? item.label : undefined}
             aria-current={active ? 'page' : undefined}
             className={cn(
               'group relative flex items-center gap-3 rounded-control border py-3 pl-2.5 pr-4',
@@ -49,7 +51,7 @@ export function SidebarNav() {
             <span
               aria-hidden
               className={cn(
-                'num flex size-8 shrink-0 items-center justify-center rounded-chip text-xs transition-colors duration-[120ms] ease-standard',
+                'sidebar-number num flex size-8 shrink-0 items-center justify-center rounded-chip text-xs transition-colors duration-[120ms] ease-standard',
                 active
                   ? cn(ACCENT_BG[item.accent], 'text-on-accent')
                   : 'border border-hairline bg-surface/60 text-faint group-hover:border-muted group-hover:text-muted',
@@ -58,8 +60,8 @@ export function SidebarNav() {
               {number}
             </span>
             <item.icon aria-hidden strokeWidth={active ? 2 : 1.5} className="size-4 shrink-0" />
-            {item.label}
-            {active && <span aria-hidden className={cn('absolute inset-y-2 right-2 w-1 rounded-full', ACCENT_BG[item.accent])} />}
+            <span className="sidebar-link-label">{item.label}</span>
+            {active && <span aria-hidden className={cn('sidebar-active-marker absolute inset-y-2 right-2 w-1 rounded-full', ACCENT_BG[item.accent])} />}
           </Link>
         )
       })}

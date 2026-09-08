@@ -2,7 +2,9 @@
 
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
+import { hasPostFormats } from '@/lib/data/format-support'
 import { CHANNELS } from '@/lib/channels'
+import { POST_FORMATS } from '@/lib/post-formats'
 import { POST_STATUSES } from '@/lib/status'
 import { createClient } from '@/lib/supabase/server'
 
@@ -45,6 +47,7 @@ const postFields = {
     .max(CHANNELS.length)
     .transform((v) => [...new Set(v)]),
   postDate: dateOnly,
+  format: z.enum(POST_FORMATS, { message: 'Choose a post format.' }),
   status: z.enum(POST_STATUSES, { message: 'Choose a status.' }),
 }
 
@@ -59,6 +62,7 @@ function readPostForm(formData) {
     productName: formData.get('productName') ?? '',
     channels: formData.getAll('channels'),
     postDate: formData.get('postDate'),
+    format: formData.get('format'),
     status: formData.get('status'),
   }
 }
@@ -68,6 +72,7 @@ function readPostForm(formData) {
 /* -------------------------------------------------------------------------- */
 
 function revalidateEverywherePostsAppear() {
+  revalidatePath('/principals')
   revalidatePath('/posts')
   revalidatePath('/calendar')
   revalidatePath('/board')
@@ -79,6 +84,7 @@ function revalidateEverywherePostsAppear() {
  * @returns {Promise<CreatePostResult>}
  */
 export async function createPostAction(formData) {
+  if (!(await hasPostFormats())) return { ok: false, error: 'Post format setup is pending. Ask your administrator to apply the post formats migration before saving posts.' }
   const parsed = postSchema.safeParse(readPostForm(formData))
   if (!parsed.success) {
     return { ok: false, error: parsed.error.issues[0]?.message ?? 'Check the details and try again.' }
@@ -96,6 +102,7 @@ export async function createPostAction(formData) {
       product_name: parsed.data.productName,
       channels: parsed.data.channels,
       post_date: parsed.data.postDate,
+      format: parsed.data.format,
       status: parsed.data.status,
     })
     .select('id')
@@ -112,6 +119,7 @@ export async function createPostAction(formData) {
  * @returns {Promise<ActionResult>}
  */
 export async function updatePostAction(formData) {
+  if (!(await hasPostFormats())) return { ok: false, error: 'Post format setup is pending. Ask your administrator to apply the post formats migration before saving posts.' }
   const parsed = postSchema.extend({ id: uuid }).safeParse({ ...readPostForm(formData), id: formData.get('id') })
   if (!parsed.success) {
     return { ok: false, error: parsed.error.issues[0]?.message ?? 'Check the details and try again.' }
@@ -129,6 +137,7 @@ export async function updatePostAction(formData) {
       product_name: parsed.data.productName,
       channels: parsed.data.channels,
       post_date: parsed.data.postDate,
+      format: parsed.data.format,
       status: parsed.data.status,
     })
     .eq('id', parsed.data.id)
@@ -223,6 +232,7 @@ const importRowSchema = z.object({
   product: z.string().trim(),
   channels: z.array(z.string()),
   date: z.string(),
+  format: z.enum(POST_FORMATS, { message: 'Choose a post format: Static, Carousel, Reel or Video.' }),
   status: z.string().trim(),
 })
 
@@ -237,6 +247,7 @@ const importRowSchema = z.object({
  * @returns {Promise<ImportResult>}
  */
 export async function importPostsAction(formData) {
+  if (!(await hasPostFormats())) return { ok: false, error: 'Post format setup is pending. Ask your administrator to apply the post formats migration before saving posts.' }
   const raw = formData.get('rows')
   if (typeof raw !== 'string') return { ok: false, error: 'No rows were submitted.' }
 
@@ -265,7 +276,7 @@ export async function importPostsAction(formData) {
   /**
    * @type {{
    *   name: string, description: string | null, principal_id: string,
-   *   product_name: string | null, channels: Channel[], post_date: string, status: PostStatus
+   *   product_name: string | null, channels: Channel[], post_date: string, status: PostStatus, format: import('@/lib/post-formats').PostFormat
    * }[]}
    */
   const toInsert = []
@@ -312,6 +323,7 @@ export async function importPostsAction(formData) {
       product_name: parsed.data.product || null,
       channels: /** @type {Channel[]} */ (parsed.data.channels),
       post_date: parsed.data.date,
+      format: parsed.data.format,
       status: /** @type {PostStatus} */ (status),
     })
   })
