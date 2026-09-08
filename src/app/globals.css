@@ -86,6 +86,25 @@
 }
 
 /*
+ * Donut-chart segment colours. These are read from inline `style` attributes
+ * (the gradient stops are computed per-data, so they can't be plain Tailwind
+ * classes) — routing them through custom properties here, instead of hex
+ * literals in the component, is what lets them re-theme for dark mode.
+ */
+:root {
+  --donut-a: #7350a5;
+  --donut-b: #f2c4a9;
+  --donut-none: #eadff5;
+  --donut-empty: #eee7f5;
+}
+:root[data-theme='dark'] {
+  --donut-a: #9b83e8;
+  --donut-b: #d99b78;
+  --donut-none: #3a2f52;
+  --donut-empty: #2a2038;
+}
+
+/*
  * Dark mode. `data-theme` is stamped on <html> before paint (see the inline
  * script in layout.jsx) so this is the only selector that needs to exist —
  * no prefers-color-scheme duplication required. Redefining the @theme custom

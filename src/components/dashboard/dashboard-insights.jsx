@@ -44,7 +44,7 @@ export function DashboardInsights({ rows }) {
               className="insight-donut"
               role="img"
               aria-label={`${data.published} published and ${data.pending} pending posts`}
-              style={{ background: data.total ? `conic-gradient(#7350a5 0% ${data.published / data.total * 100}%, #eadff5 ${data.published / data.total * 100}% 100%)` : '#eee7f5' }}
+              style={{ background: data.total ? `conic-gradient(var(--donut-a) 0% ${data.published / data.total * 100}%, var(--donut-none) ${data.published / data.total * 100}% 100%)` : 'var(--donut-empty)' }}
             >
               <div><strong className="num text-2xl">{data.total}</strong><span className="text-xs text-muted">Recorded posts</span></div>
             </div>

@@ -26,15 +26,15 @@ export function PrincipalCharts({ rows }) {
           <p className="mt-1 text-xs text-muted">How brands stand against their period targets</p>
           <div className="my-6 flex justify-center">
             <div className="insight-donut" role="img" aria-label={`${reached} target reached, ${below} below target, ${noTarget} without a target`}
-              style={{ background: `conic-gradient(#7350a5 0% ${firstStop}%, #f2c4a9 ${firstStop}% ${secondStop}%, #eadff5 ${secondStop}% 100%)` }}>
+              style={{ background: `conic-gradient(var(--donut-a) 0% ${firstStop}%, var(--donut-b) ${firstStop}% ${secondStop}%, var(--donut-none) ${secondStop}% 100%)` }}>
               <div><strong className="num text-2xl">{total}</strong><span className="text-xs text-muted">Brands shown</span></div>
             </div>
           </div>
           <dl className="space-y-3 text-sm">
             {[
-              { label: 'Target reached', value: reached, color: '#7350a5' },
-              { label: 'Below target', value: below, color: '#f2c4a9' },
-              { label: 'Without a target', value: noTarget, color: '#eadff5' },
+              { label: 'Target reached', value: reached, color: 'var(--donut-a)' },
+              { label: 'Below target', value: below, color: 'var(--donut-b)' },
+              { label: 'Without a target', value: noTarget, color: 'var(--donut-none)' },
             ].map((item) => <div key={item.label} className="flex justify-between gap-3"><dt className="flex items-center gap-2"><span className="size-2.5 rounded-full" style={{ backgroundColor: item.color }} />{item.label}</dt><dd className="num font-semibold">{item.value}</dd></div>)}
           </dl>
           <p className="mt-5 border-t border-hairline pt-4 text-xs leading-relaxed text-muted">Zero targets are shown separately. Below target describes the selected period’s total, not whether a brand is late.</p>
