@@ -339,6 +339,10 @@
   }
   .studio-sidebar .sidebar-topbar { display: flex; align-items: center; gap: 8px; margin: 14px; }
   .sidebar-card { flex: 1; min-width: 0; padding: 18px; border: 0; border-radius: 20px; background: #fffaf5; }
+  .product-switcher { position: relative; flex: 1; min-width: 0; }
+  .product-switcher-trigger { display: flex; width: 100%; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; font: inherit; transition: box-shadow 120ms ease, transform 120ms ease; }
+  .product-switcher-trigger:hover { box-shadow: 0 0 0 2px rgba(190, 0, 16, 0.15); }
+  .product-switcher-trigger:active { transform: scale(0.98); }
   .sidebar-toggle { display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #ffffff12; border: 1px solid #ffffff25; color: #f6efff; transition: background 120ms ease, transform 120ms ease; }
   .sidebar-toggle:hover { background: #ffffff22; }
   .sidebar-toggle:active { transform: scale(0.94); }
@@ -350,29 +354,26 @@
   .studio-sidebar[data-collapsed='true'] .sidebar-topbar { margin: 10px; justify-content: center; }
   .studio-sidebar[data-collapsed='true'] .sidebar-card,
   .studio-sidebar[data-collapsed='true'] .studio-nav-label,
-  .studio-sidebar[data-collapsed='true'] .sidebar-number,
   .studio-sidebar[data-collapsed='true'] .sidebar-link-label,
   .studio-sidebar[data-collapsed='true'] .sidebar-active-marker,
-  .studio-sidebar[data-collapsed='true'] .studio-sidebar-note,
   .studio-sidebar[data-collapsed='true'] > div:last-child { display: none; }
+  .studio-sidebar[data-collapsed='true'] .sidebar-nav-header { margin: 14px 0; justify-content: center; }
   .studio-sidebar[data-collapsed='true'] nav { padding: 14px 10px; }
   .studio-sidebar[data-collapsed='true'] nav a { justify-content: center; gap: 0; padding: 14px 0; }
   .studio-sidebar[data-collapsed='true'] nav a > svg { width: 22px; height: 22px; }
   @media (min-width: 768px) {
     .studio-sidebar[data-collapsed='true'] ~ .studio-content { padding-left: 84px; }
   }
-  .studio-nav-label { margin: 22px 26px 2px; font-size: 10px; font-weight: 600; letter-spacing: .18em; color: #c4b3d9; }
+  .sidebar-nav-header { display: flex; align-items: center; justify-content: space-between; margin: 22px 26px 8px; }
+  .studio-nav-label { margin: 0; font-size: 10px; font-weight: 600; letter-spacing: .18em; color: #c4b3d9; }
   .studio-sidebar nav { gap: 9px; padding: 18px 14px; }
   .studio-sidebar nav a { color: #d6c9e5; border-radius: 18px 7px 18px 18px; padding: 14px 12px; border-color: transparent; }
-  .studio-sidebar nav a:hover { background: #ffffff12; color: #fff; transform: translateX(3px); }
-  .studio-sidebar nav a > span:first-child { background: #ffffff0d; border-color: #ffffff25; color: #d6c9e5; border-radius: 50%; }
+  .studio-sidebar nav a:hover { background: #ffffff12; border-color: #34c3dc80; color: #fff; }
   .studio-sidebar nav a[aria-current='page'] { background: #d9f780; color: #251939; box-shadow: 0 6px 0 #0e081e50; }
-  .studio-sidebar nav a[aria-current='page'] > span:first-child { background: #251939; color: #d9f780; }
   .studio-sidebar nav a[aria-current='page'] > .sidebar-active-marker { background: #251939; height: 7px; width: 7px; top: 23px; right: 13px; }
   .studio-sidebar > div:last-child { background: #ffffff08; border-color: #ffffff15; }
   .studio-sidebar > div:last-child .text-muted { color: #d0c1e0; }
   .studio-sidebar > div:last-child .text-ink { color: #d9f780; }
-  .studio-sidebar-note { position: relative; margin: 18px; padding: 23px 18px; border: 1px solid #a68cbd50; border-radius: 24px 24px 60px 24px; background: linear-gradient(135deg, #654a8033, #f99b7b15); }
   .studio-topbar { background: #f7f4fcd9; border-color: #291d3b0b; }
   #main { min-width: 0; }
   .studio-hero { --hero-color: #dccdf6; position: relative; isolation: isolate; overflow: hidden; margin-bottom: 28px; padding: 32px 36px 36px; border-radius: 32px 32px 80px 32px; background: radial-gradient(ellipse at 50% 120%, #fff6dbb0, transparent 65%), var(--hero-color); border: 1px solid #ffffffb0; box-shadow: 0 8px 0 #291d3b05; }

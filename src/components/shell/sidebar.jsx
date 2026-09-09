@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
-import { InkarpLogo } from '@/components/brand/inkarp-logo'
 import { ModeBadge } from '@/components/shell/mode-badge'
+import { ProductSwitcher } from '@/components/shell/product-switcher'
 import { SidebarNav } from '@/components/shell/sidebar-nav'
 
 /** @typedef {import('@/lib/viewer').Viewer} Viewer */
@@ -24,28 +24,25 @@ export function Sidebar({ viewer }) {
       className="studio-sidebar fixed inset-y-0 left-0 z-30 hidden w-64 flex-col md:flex"
     >
       <div className="sidebar-topbar">
-        <div className="sidebar-card">
-          <InkarpLogo className="sidebar-logo" />
-        </div>
-        <button
-          type="button"
-          onClick={() => setCollapsed((value) => !value)}
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          aria-expanded={!collapsed}
-          aria-controls="sidebar-navigation"
-          className="sidebar-toggle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          <ToggleIcon className="size-4.5" aria-hidden="true" />
-        </button>
+        <ProductSwitcher />
       </div>
 
       <div id="sidebar-navigation" className="min-h-0 flex-1 overflow-y-auto">
-        <p className="studio-nav-label">YOUR WORKSPACE</p>
+        <div className="sidebar-nav-header">
+          <p className="studio-nav-label">YOUR WORKSPACE</p>
+          <button
+            type="button"
+            onClick={() => setCollapsed((value) => !value)}
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-expanded={!collapsed}
+            aria-controls="sidebar-navigation"
+            className="sidebar-toggle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <ToggleIcon className="size-4.5" aria-hidden="true" />
+          </button>
+        </div>
         <SidebarNav collapsed={collapsed} />
-      </div>
-
-      <div className="studio-sidebar-note" aria-hidden="true">
       </div>
 
       <div className="border-t border-hairline bg-surface/60 px-6 py-4">
