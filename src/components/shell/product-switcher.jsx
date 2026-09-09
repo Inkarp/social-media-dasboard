@@ -13,14 +13,17 @@ import { PRODUCTS } from '@/lib/products'
  */
 export function ProductSwitcher() {
   const [open, setOpen] = useState(false)
-  const rootRef = useRef(null)
+  const rootRef = useRef(/** @type {HTMLDivElement | null} */ (null))
 
   useEffect(() => {
     if (!open) return undefined
 
+    /** @param {PointerEvent} event */
     function handlePointerDown(event) {
-      if (rootRef.current && !rootRef.current.contains(event.target)) setOpen(false)
+      const target = event.target
+      if (rootRef.current && target instanceof Node && !rootRef.current.contains(target)) setOpen(false)
     }
+    /** @param {KeyboardEvent} event */
     function handleKeyDown(event) {
       if (event.key === 'Escape') setOpen(false)
     }
