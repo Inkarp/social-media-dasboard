@@ -27,5 +27,5 @@ jobs:
             fi
             npm install
             npm run build
-            pm2 restart inkarp-smd --update-env || pm2 start npm --name "inkarp-smd" -- run start
-            pm2 save
+            npx pm2 restart inkarp-smd --update-env || npx pm2 start npm --name "inkarp-smd" -- run start
+            npx pm2 save
