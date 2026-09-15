@@ -1,0 +1,31 @@
+name: Deploy Social Media Dashboard
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 72.60.98.245
+          username: deploy-smd
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            export PATH="/home/inkarp-smd/.nvm/versions/node/$(ls /home/inkarp-smd/.nvm/versions/node)/bin:$PATH"
+            export PM2_HOME="/home/deploy-smd/.pm2"
+            export PORT=3001
+            mkdir -p /home/inkarp-smd/htdocs/inkarp-smd.72.60.98.245.nip.io
+            cd /home/inkarp-smd/htdocs/inkarp-smd.72.60.98.245.nip.io
+            git config --global --add safe.directory /home/inkarp-smd/htdocs/inkarp-smd.72.60.98.245.nip.io
+            if [ -d .git ]; then
+              git pull origin main
+            else
+              git clone https://github.com/Inkarp/social-media-dasboard.git .
+            fi
+            npm install
+            npm run build
+            pm2 restart inkarp-smd --update-env || pm2 start npm --name "inkarp-smd" -- run start
+            pm2 save
